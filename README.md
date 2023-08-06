@@ -45,7 +45,7 @@ This repository contains all of the necessary files, data and directories for ru
 	* `source_data/csv_data`: This is the location of the CSV files needed to copy/insert into our database.
 	* `source_data/scripts/`: This directory will contain all sql scripts I used to complete the challenge.
 
-:grey_exclamation:  Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](WALKTHROUGH_DOCKER.md) :grey_exclamation: 
+:grey_exclamation:  Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](./walkthrough/WALKTHROUGH_DOCKER.md) :grey_exclamation: 
  
 ### SQL Code Challenge
 
@@ -84,7 +84,7 @@ This repository contains all of the necessary files, data and directories for ru
 	* Output the results in CSV format into `source_data/csv_output/country_n_capital.csv`.
 	* Drop the temp table.
 
-:grey_exclamation: Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](WALKTHROUGH_DOCKER.md) :grey_exclamation: 
+:grey_exclamation: Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](./walkthrough/WALKTHROUGH_DOCKER.md) :grey_exclamation: 
 
 :exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
