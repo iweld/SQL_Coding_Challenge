@@ -9,8 +9,6 @@
 
 **LinkedIn**: https://www.linkedin.com/in/jaime-shaker/ 
 
-This project was inspired by: [Braintree Analytics Code Challenge](https://github.com/AlexanderConnelly/BrainTree_SQL_Coding_Challenge_Data_Analyst)
-
 This project is an opportunity to flex your SQL skills and prepare for the role of a Data Analyst.  This project was inspired by the [Braintree Analytics Code Challenge](https://github.com/AlexanderConnelly/BrainTree_SQL_Coding_Challenge_Data_Analyst) and was created to strengthen your SQL knowledge.
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
@@ -27,7 +25,7 @@ I have created a [Walkthrough](walkthrough/WALKTHROUGH_DOCKER.md) if you would l
 
 The questions are listed below with the expected results and answers hidden if you choose to test your SQL skills.
 
-This repository contains all of the necessary files, data and directories for running a PostgresSQL server in a Docker Container.  The only prerequisite is that you should already have Docker Desktop installed and running on your computer.
+This repository contains all of the necessary files, datasets and directories for running a PostgresSQL server in a Docker Container.  The only prerequisite is that you should already have Docker Desktop installed and running on your computer.
 
  https://www.docker.com/products/docker-desktop/
  

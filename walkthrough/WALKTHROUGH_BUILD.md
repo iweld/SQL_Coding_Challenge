@@ -21,9 +21,9 @@ ETL is the process data engineers use to extract data from different sources, tr
 	* Transforming the data to make it usable.
 	* Loading the data to tables within our database
 
-Let's create a new file in [source_data/scripts/](../source_data/scripts/) called `build_tables.sql`.
+Let's create a new file in [source_data/scripts/](../source_data/scripts/) and name it `build_tables.sql`.
 
-Before we can transform the data, we must get it into the database.  Let's create a script that will consistantly build and rebuild our schema and tables.  We will use the country.csv to create the countries table.
+Before we can transform the data, we must get the data into the database.  Let's create a script that will consistantly build and rebuild our schema and tables.  We will use the `countries.csv` to create the countries table.
 
 ```sql
 -- We must insure that our data is properly organized.  Let's create a schema
@@ -36,6 +36,8 @@ DROP TABLE IF EXISTS import_data.countries;
 -- We will initially insert all the data as TEXT to ensure there aren't any errors during the COPY.
 -- We will also create a created_on field that will have the date that the table was created.
 CREATE TABLE import_data.countries (
+	-- Create an auto-incrementing, unique key for every row.  
+	-- This will also be used as our Primary Key.
 	country_id INT GENERATED ALWAYS AS IDENTITY,
 	country_name TEXT,
 	country_code_2 TEXT,
@@ -43,7 +45,7 @@ CREATE TABLE import_data.countries (
 	region TEXT,
 	sub_region TEXT,
 	intermediate_region TEXT,
-	created_on date
+	created_on date,
 	PRIMARY KEY (country_id)
 );
 -- We will use the COPY statment to extract the data from our CSV files.
@@ -58,8 +60,8 @@ COPY import_data.countries (
 -- PostgreSQL stores its data in /var/lib/postgresql/
 -- In the docker-compose.yaml file, we created a volume name 'source_data/' that our container can access.
 FROM '/var/lib/postgresql/source_data/csv_data/countries.csv'
--- The CSV files are comma seperated and include headers.
-WITH delimiter ',' header csv;
+-- The CSV files are comma separated and include headers.
+WITH DELIMITER ',' HEADER CSV;
 ```
 Execute the complete script and SUCCESS!  We have inserted the `countries.csv` into the `import_data.countries` table.
 
@@ -78,9 +80,9 @@ country_id|country_name   |country_code_2|country_code_3|region |sub_region     
 4|?algeria?      |dz            |dza           |africa |northern africa|                   |          |
 5|american samoa?|as            |asm           |oceania|polynesia      |                   |          |
 
-As you can see, some countries do not have an `immediate_region` fields and none of our entries have a `created_on` value yet.  We also notice that some of the country names have special characters and whitespace.
+As you can see, some countries do not have an `immediate_region` fields and none of our entries have a `created_on` value yet.  Also notice that some of the country names have special characters, upper/lower case characters and whitespace.
 
-Our only concern right now is to get the data into our database.  We will correct these issues in the next step.
+Our only concern right now is to get the data into our database.  We will correct these issues in the following step.
 
 Let's use the same process to add all of the CSV files in `source_data/csv_data/`
 * cities.csv
@@ -123,7 +125,7 @@ COPY import_data.countries (
 -- PostgreSQL stores its data in /var/lib/postgresql/
 -- In the docker-compose.yaml file, we created a volume name 'source_data/' that our container can access.
 FROM '/var/lib/postgresql/source_data/csv_data/countries.csv'
--- The CSV files are comma seperated and include headers.
+-- The CSV files are comma separated and include headers.
 WITH DELIMITER ',' HEADER CSV;
 
 -- Using the same process, lets create tables for all of our csv files.
@@ -203,7 +205,7 @@ COPY import_data.gdp (
 FROM '/var/lib/postgresql/source_data/csv_data/gdp.csv'
 WITH DELIMITER ',' HEADER CSV;
 ```
-Our data has now been successfully extracted from the CSV files and inserted/copied into our database.  We can now TRANSFORM our data into a usable resource.
+Execute the complete script and our data has now been successfully extracted from the CSV files and inserted/copied into our database.  We can now TRANSFORM our data into a usable resource.
 
  Go to [WALKTHROUGH_NORMALIZE](WALKTHROUGH_NORMALIZE.md)
 
