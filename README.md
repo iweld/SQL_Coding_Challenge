@@ -13,11 +13,11 @@ This project was inspired by: [Braintree Analytics Code Challenge](https://githu
 
 This project is an opportunity to flex your SQL skills and prepare for the role of a Data Analyst.  This project was inspired by the [Braintree Analytics Code Challenge](https://github.com/AlexanderConnelly/BrainTree_SQL_Coding_Challenge_Data_Analyst) and was created to strengthen your SQL knowledge.
 
-:grey_exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :grey_exclamation:
+:exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
 :exclamation: Note :exclamation:
 
-This is **NOT** an MS Excel/Google Sheets/Tableau/PowerBi exercise. All of the tools mentioned are important/necessary in Data Analytics, however, this project is meant to measure your technical abilities with SQL.
+This project is meant to measure/guage your technical abilities with SQL.
 
 * All work should be done in SQL.
 * Create an SQL database and tables using the CSV files located in [./csv_data/](source_data/csv_data/)
@@ -45,7 +45,7 @@ This repository contains all of the necessary files, data and directories for ru
 	* `source_data/csv_data`: This is the location of the CSV files needed to copy/insert into our database.
 	* `source_data/scripts/`: This directory will contain all sql scripts I used to complete the challenge.
 
-Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](WALKTHROUGH_DOCKER.md)
+:grey_exclamation:  Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](WALKTHROUGH_DOCKER.md) :grey_exclamation: 
  
 ### SQL Code Challenge
 
@@ -83,6 +83,8 @@ Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](WALKTHROU
 	* Concatenate country name and capital in parenthesis.
 	* Output the results in CSV format into `source_data/csv_output/country_n_capital.csv`.
 	* Drop the temp table.
+
+:grey_exclamation: Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](WALKTHROUGH_DOCKER.md) :grey_exclamation: 
 
 :exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 

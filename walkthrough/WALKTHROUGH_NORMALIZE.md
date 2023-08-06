@@ -47,6 +47,8 @@ Before we can insert our data into our new table. We must ensure that the data h
 * Remove special characters.
 * Convert all characters to lower case.
 
+We could create a `TEMP TABLE` but it seems to be an unecessary step for this project.
+
 ```sql
 -- We must insure that our data is properly organized.  Let's create a schema
 -- specificaly for our transformed, clean data.
@@ -124,6 +126,8 @@ algeria       |dz            |
 american samoa|as            |
 
 We can see that the data has been 'cleaned' and is now in a more usable form.  We also note that there are duplicate entries.   Before removing any duplicates, let's continue cleaning the data and adding our clean tables into our `normalize_table.sql` script. 
+
+Click the link to view the complete [normalize_table.sql](../source_data/scripts/normalize_tables.sql)
 
 Once all of your tables are cleaned and loaded, click the link below
 

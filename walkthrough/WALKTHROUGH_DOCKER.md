@@ -52,7 +52,7 @@ Alternatively, if you are using [psql](https://gist.github.com/Kartones/dd3ff5ec
 To stop the Docker container:
 * Using the command line, cd into the same directory as the `docker-compose.yaml` file and run the command...
 * `docker-compose down`
-* You can also use the Docker Desktop GUI to stop the container.
+* You can also use the `Docker Desktop GUI` to stop the container.
 
 The `docker-compose down` command will stop the container until the next time you start it back up using the command: 
 *  `docker-compose up -d`

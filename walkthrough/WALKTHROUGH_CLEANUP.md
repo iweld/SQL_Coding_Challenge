@@ -58,7 +58,7 @@ cy            |    3|
 rs            |    2|
 mh            |    2|
 
-From our results we can see that there are 14 `country_codes_2` with multiple entries.  Let's create another query that `deletes` all of the multiple entries. 
+According to our results, there are 14 `country_codes_2` with multiple entries.  Let's create another query that `deletes` all of the multiple entries. 
 
 ```sql
 -- Delete duplicate entries
@@ -102,7 +102,7 @@ HAVING
 country_code_2|count|
 --------------|-----|
 
-We can also take a peek at our clean_data_countries table and check if it removed the duplicate entries.  We could initally see that `Albania` has multiple entries.
+We can also take a peek at our `clean_data.countries` table and check if it removed the duplicate entries.  We could initally see that `Albania` had multiple entries.
 
 ```sql
 SELECT 
@@ -122,13 +122,13 @@ algeria       |dz            |
 american samoa|as            |
 andorra       |ad            |
 
-We can now see that the multiple entry for `Albania` has been deleted.  
+The multiple entries for `Albania` has been deleted.  
 
-This works for the `clean_data.countries` table because every country has one unique country_code_2.  The problem with using this method with the other tables is because many different countries share cities of the same name, currency type and languages.  To reduce the complexity of this challenge, the only table that has duplicate entries is the `clean_data.countries` table.
+This query works for the `clean_data.countries` table because every country has one unique `country_code_2`.  The problem with using this method with the other tables is that many different countries share cities of the same name, currency type and languages.  To reduce the complexity of this <i>fun</i> challenge, the only table that has duplicate entries is the `clean_data.countries` table.
 
-Now that are tables have been cleaned, we can actually begin answering the questions of the `SQL Coding Challenge`.  Before we do that, let's do a little clean up and `Drop` our import schema and the table associated with it as they are not needed anymore.
+Now that are tables have been cleaned, we can actually begin answering the questions of the `SQL Coding Challenge`.  Before we do that, let's do a little clean up and `Drop` our import schema and the tables associated with it as they are not needed anymore.
 
-If for whatever reason we needed to start over, we can easily run the build_tables.sql script.
+If for whatever reason we needed to start over, we can easily run the build_tables.sql script and regenerate the data.
 
 `DROP TABLE` removes tables from the database. To empty a table of rows without destroying the table, use `DELETE` or `TRUNCATE`.
 
@@ -140,6 +140,9 @@ DROP TABLE import_data.languages;
 DROP TABLE import_data.gdp;
 DROP SCHEMA import_data;
 ```
+
+####Foreign Keys
+
 All of our tables in the `cleaned_data` schema share a common field name `country_code_2`.  We also know that this field is `UNIQUE` in the `cleaned_data.countries` table because there can only be one country code per country.
 
 Using this information, we can make the `cleaned_data.countries` table be the parent table and all other tables can have a `FOREIGN KEY` relationship to it.
@@ -174,7 +177,7 @@ REFERENCES cleaned_data.countries (country_code_2);
 
 Once you have created a `FOREIGN KEY` constraint for all of our other tables, your `Entity Relationship Diagram` should look something like this.
 
-![alt text](images/ERD.PNG)
+![alt text](../images/ERD.PNG)
 
 We are now ready to complete the `SQL Coding Challenge`.
 
@@ -197,6 +200,8 @@ click the link below
 	* Concatenate country name and capital in parenthesis.
 	* Output the results in CSV format into `source_data/csv_output/country_n_capital.csv`.
 	* Drop the temp table.
+
+Go to [WALKTHROUGH_CODE_CHALLENGE](WALKTHROUGH_CODE_CHALLENGE.md)
 
 :exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 

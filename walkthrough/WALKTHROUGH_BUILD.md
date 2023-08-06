@@ -21,7 +21,7 @@ ETL is the process data engineers use to extract data from different sources, tr
 	* Transforming the data to make it usable.
 	* Loading the data to tables within our database
 
-Let's create a new file in [source_data/scripts/](source_data/scripts/) called `build_tables.sql`.
+Let's create a new file in [source_data/scripts/](../source_data/scripts/) called `build_tables.sql`.
 
 Before we can transform the data, we must get it into the database.  Let's create a script that will consistantly build and rebuild our schema and tables.  We will use the country.csv to create the countries table.
 
@@ -78,17 +78,17 @@ country_id|country_name   |country_code_2|country_code_3|region |sub_region     
 4|?algeria?      |dz            |dza           |africa |northern africa|                   |          |
 5|american samoa?|as            |asm           |oceania|polynesia      |                   |          |
 
-As you can see, some countries do not have an `immediate_region` fields and none of our entries have a `created_on` value yet.  We could also see that some of the country names have special characters and whitespace.
+As you can see, some countries do not have an `immediate_region` fields and none of our entries have a `created_on` value yet.  We also notice that some of the country names have special characters and whitespace.
 
-Our only concern right now is to get the data into our database.  We will correct these issure in the next step.
+Our only concern right now is to get the data into our database.  We will correct these issues in the next step.
 
-Let's use the same process to add all of the CSV files in `source_data_csv_data/`
+Let's use the same process to add all of the CSV files in `source_data/csv_data/`
 * cities.csv
 * currencies.csv
 * gdp.csv
 * languages.csv
 
-After adding all the necessary code, our build_tables.sql file should now look like...
+After adding all the necessary code, our build_tables.sql file should now look like this...
 
 ```sql
 -- We must insure that our data is properly organized.  Let's create a schema
