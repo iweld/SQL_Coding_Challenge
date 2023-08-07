@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS import_data.countries;
 -- We will initially insert all the data as TEXT to ensure there aren't any errors during the COPY.
 -- We will also create a created_on field that will have the date that the table was created.
 CREATE TABLE import_data.countries (
+	-- Create an auto-incrementing, unique key for every row.  
+	-- This will also be used as our Primary Key.
 	country_id INT GENERATED ALWAYS AS IDENTITY,
 	country_name TEXT,
 	country_code_2 TEXT,
@@ -30,7 +32,7 @@ COPY import_data.countries (
 -- PostgreSQL stores its data in /var/lib/postgresql/
 -- In the docker-compose.yaml file, we created a volume name 'source_data/' that our container can access.
 FROM '/var/lib/postgresql/source_data/csv_data/countries.csv'
--- The CSV files are comma seperated and include headers.
+-- The CSV files are comma separated and include headers.
 WITH DELIMITER ',' HEADER CSV;
 
 -- Using the same process, lets create tables for all of our csv files.

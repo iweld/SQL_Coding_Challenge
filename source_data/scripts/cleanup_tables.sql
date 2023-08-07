@@ -49,7 +49,6 @@ ADD CONSTRAINT
 UNIQUE (country_code_2);
 
 -- Alter all other tables and add a foreign key constraint and reference.
-
 -- Create Foreign Key relationship for cleaned_data.cities
 ALTER TABLE 
 	-- Table to be altered

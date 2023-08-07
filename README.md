@@ -20,6 +20,7 @@ This project is meant to measure/gauge your technical abilities with SQL.
 * All work should be done in SQL.
 * Create an SQL database and tables using the CSV files located in [./csv_data/](source_data/csv_data/)
 	* Do not alter the CSV files.
+* Some of these questions are intended purely as a measure of your SQL skills and not as actual questions that one would expect to answer from an employer.
 
 I have created a [Walkthrough](walkthrough/WALKTHROUGH_DOCKER.md) if you would like to follow along and complete this challenge with me. 
 
@@ -47,25 +48,8 @@ This repository contains all of the necessary files, datasets and directories fo
  
 ### SQL Code Challenge
 
-1.  ETL (Extract/Transform/Load)
-	* ETL is the process data engineers use to extract data from different sources, transform the data into a usable resource, and load that data into the systems that end-users can access and use to solve business problems.  
-		* Although this term is used on a much larger scale for data warehousing, on a much, much smaller scale, we are doing the same thing by:
-			* Extracting raw data from CSV's.
-			* Transforming the data to make it usable.
-			* Loading the data to tables within our database
-	* In Data Analysis, the analyst must ensure that the data is 'clean' before doing any analysis. 'Dirty' data can lead to unreliable, inaccurate and/or misleading results. 
-		* Garbage in = garbage out.
-	
-	* These are **some** of the steps that can be taken to properly prepare this dataset for analysis.
-
-		* Check for duplicate entries and remove them.
-		* Remove extra spaces and/or other invalid characters.
-		* Separate or combine values as needed.
-		* Correct incorrect spelling or inputted data.
-		* Check for null or empty values.
-
-	* Using the criteria above, create your new SQL tables with the properly formatted data.
-	* In the `countries` table, add the column `created_on` with the current date.
+1.   Using the CSV files located in `source_data/csv_data`, create your new SQL tables with the properly formatted data.
+		* In the `countries` table, add the column `created_on` with the current date.
 
 2. List the Top 5 populated cities along with the country name and subregion.  Order by population in descending order.
 

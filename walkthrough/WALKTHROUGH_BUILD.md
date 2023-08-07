@@ -21,6 +21,18 @@ ETL is the process data engineers use to extract data from different sources, tr
 	* Transforming the data to make it usable.
 	* Loading the data to tables within our database
 
+In Data Analysis, the analyst must ensure that the data is 'clean' before doing any analysis. 'Dirty' data can lead to unreliable, inaccurate and/or misleading results.
+
+* Garbage in = garbage out.
+
+These are some of the steps that can be taken to properly prepare this dataset for analysis.
+
+* Check for duplicate entries and remove them.
+* Remove extra spaces and/or other invalid characters.
+* Separate or combine values as needed.
+* Correct incorrect spelling or inputted data.
+* Check for null or empty values.
+
 Let's create a new file in [source_data/scripts/](../source_data/scripts/) and name it `build_tables.sql`.
 
 Before we can transform the data, we must get the data into the database.  Let's create a script that will consistantly build and rebuild our schema and tables.  We will use the `countries.csv` to create the countries table.
