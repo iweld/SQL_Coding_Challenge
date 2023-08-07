@@ -13,7 +13,7 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
-### :broom: Clean Up
+###  Clean Up 
 
 Removing duplicate entries is part of the Normalization process.  I've saved this process for the clean-up phase to reduce clutter in the `normalize_tables.sql` script.
 
@@ -141,7 +141,7 @@ DROP TABLE import_data.gdp;
 DROP SCHEMA import_data;
 ```
 
-With our databased cleaned of unnecessary tables and schema, we can now add `Foreign Key` relationships.
+With our database cleaned of any unnecessary tables and schema, we can now add `Foreign Key` relationships.
 
 Go to [WALKTHROUGH_RELATIONSHIPS](WALKTHROUGH_RELATIONSHIPS.md)
 
