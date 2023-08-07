@@ -4,7 +4,7 @@
 CREATE SCHEMA IF NOT EXISTS cleaned_data;
 -- Create countries table
 -- Drop this table everytime this script is run to ensure repeatability.
--- We are adding for near future when we add foreign key relationships.
+-- We are adding CASCADE for when we add foreign key relationships.
 DROP TABLE IF EXISTS cleaned_data.countries CASCADE;
 -- We must presuppose that the data in it's current state is unusable/unreliable.
 -- 
@@ -160,7 +160,7 @@ INSERT INTO cleaned_data.gdp (
 		gdp_id,
 		trim(lower(regexp_replace(i.country_code_2, '^\W+|\W+$', '', 'g')))::varchar,
 		fiscal_year::int,
-		-- Remove commas from value
+		-- Remove commas from numeric value
 		REPLACE(gdp_amount, ',', '')::float
 	FROM
 		import_data.gdp AS i

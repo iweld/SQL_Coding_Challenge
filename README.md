@@ -15,7 +15,7 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 :exclamation: Note :exclamation:
 
-This project is meant to measure/guage your technical abilities with SQL.
+This project is meant to measure/gauge your technical abilities with SQL.
 
 * All work should be done in SQL.
 * Create an SQL database and tables using the CSV files located in [./csv_data/](source_data/csv_data/)

@@ -15,9 +15,9 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 #### Clean Up
 
-Removing duplicate entries is part of the Normalization process.  I've saved this process for the clean up phase to reduce clutter in the `normalize_tables.sql` script.
+Removing duplicate entries is part of the Normalization process.  I've saved this process for the clean-up phase to reduce clutter in the `normalize_tables.sql` script.
 
-Create a new file in `source_data/scripts/` and name it `cleanup_tables.sql`.  In this scripts, we will first remove duplicate entries in our tables.  After inspecing our data, we can presume that every country must have a unique `country_code_2`.
+Create a new file in `source_data/scripts/` and name it `cleanup_tables.sql`.  In this script, we will first remove duplicate entries in our tables.  After inspecing our data, we can presume that every country must have a unique `country_code_2`.
 
 Let's create a query that checks for multiple entries of `country_code_2` in our `clean_data.countries` table.
 
@@ -32,7 +32,7 @@ SELECT
 FROM
 	cleaned_data.countries
 GROUP BY 
-	-- Using an aggregate function forces us to group all like names together.
+	-- Using an aggregate function forces us to group all exact country_codes together.
 	country_code_2
 HAVING 
 	-- Only select values that have a count greater than one (multiple entries).
@@ -102,7 +102,7 @@ HAVING
 country_code_2|count|
 --------------|-----|
 
-We can also take a peek at our `clean_data.countries` table and check if it removed the duplicate entries.  We could initally see that `Albania` had multiple entries.
+We have successfully deleted multiple entries in the `cleaned_data.countries` table.  We can also take a peek at our `clean_data.countries` table and check if it removed the duplicate entries.  Initally we saw that `Albania` had multiple entries.
 
 ```sql
 SELECT 
@@ -141,11 +141,11 @@ DROP TABLE import_data.gdp;
 DROP SCHEMA import_data;
 ```
 
-####Foreign Keys
+#### Foreign Keys
 
-All of our tables in the `cleaned_data` schema share a common field name `country_code_2`.  We also know that this field is `UNIQUE` in the `cleaned_data.countries` table because there can only be one country code per country.
+All of our tables in the `cleaned_data` schema share a common field named `country_code_2`.  We also know that this field is `UNIQUE` in the `cleaned_data.countries` table because there can only be one country code per country.
 
-Using this information, we can make the `cleaned_data.countries` table be the parent table and all other tables can have a `FOREIGN KEY` relationship to it.
+Using this information, we can make the `cleaned_data.countries` table the parent table and all other tables can have a [One-to-One](https://fmhelp.filemaker.com/help/18/fmp/en/index.html#page/FMP_Help/one-to-one-relationships.html) `FOREIGN KEY` relationship to it.
 
 First, lets `ALTER` the `cleaned_data.countries` table and add the `UNIQUE` constraint to the `country_code_2` field.
 
@@ -158,7 +158,7 @@ ADD CONSTRAINT
 UNIQUE (country_code_2);
 ```
 
-Let us now `ALTER` the child tables and add a `FOREIGN KEY` constraint.
+Now we can `ALTER` the child tables and add a `FOREIGN KEY` constraint.
 
 ```sql
 -- Alter all other tables and add a foreign key constraint and reference.
@@ -173,6 +173,30 @@ ADD CONSTRAINT
 FOREIGN KEY (country_code_2)
 	-- Which key to reference from parent table
 REFERENCES cleaned_data.countries (country_code_2);
+
+-- Create Foreign Key relationship for cleaned_data.currencies
+ALTER TABLE
+	cleaned_data.currencies
+ADD CONSTRAINT 
+	fk_country_currencies
+FOREIGN KEY (country_code_2)
+REFERENCES cleaned_data.countries (country_code_2);
+
+-- Create Foreign Key relationship for cleaned_data.languages
+ALTER TABLE 
+	cleaned_data.languages
+ADD CONSTRAINT 
+	fk_country_languages 
+FOREIGN KEY (country_code_2)
+REFERENCES cleaned_data.countries (country_code_2);
+
+-- Create Foreign Key relationship for cleaned_data.gdp
+ALTER TABLE 
+	cleaned_data.gdp
+ADD CONSTRAINT 
+	fk_country_gdp 
+FOREIGN KEY (country_code_2)
+REFERENCES cleaned_data.countries (country_code_2);
 ```
 
 Once you have created a `FOREIGN KEY` constraint for all of our other tables, your `Entity Relationship Diagram` should look something like this.
@@ -182,24 +206,6 @@ Once you have created a `FOREIGN KEY` constraint for all of our other tables, yo
 We are now ready to complete the `SQL Coding Challenge`.
 
 click the link below
-
- Go to [WALKTHROUGH_CLEANUP](WALKTHROUGH_CODE_CHALLENGE.md)
-
-
-2. List the Top 5 populated cities along with the country name and subregion.  Order by population in descending order.
-
-	* Repeat the query for question #2, but this time order the results alphabetically by the **last** letter of the city name.
-
-3. List the top 10 city names and population for city names that are Palindromes.  Order by the length of the city name in descending order.
-
-4.  List the percentage of the number of countries per region where spanish is an official language.
-
-5.  Rank countries by gpd and partition by region.  Show the Year-Over-Year gdp growth for the fourth ranked country in every region.
-
-6. Using a Temp Table, create a table with one column called `country_and_capital`.  Then...
-	* Concatenate country name and capital in parenthesis.
-	* Output the results in CSV format into `source_data/csv_output/country_n_capital.csv`.
-	* Drop the temp table.
 
 Go to [WALKTHROUGH_CODE_CHALLENGE](WALKTHROUGH_CODE_CHALLENGE.md)
 

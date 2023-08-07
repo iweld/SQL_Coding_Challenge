@@ -15,6 +15,7 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 #### SQL Code Challenge
 
+With our cleaned data in our tables
 
 2. List the Top 5 populated cities along with the country name and subregion.  Order by population in descending order.
 

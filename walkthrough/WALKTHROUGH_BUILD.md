@@ -17,7 +17,7 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 ETL is the process data engineers use to extract data from different sources, transform the data into a usable resource, and load that data into the systems that end-users can access and use to solve business problems.  
 * Although this term is used on a much larger scale for data warehousing, on a much smaller scale, we are doing the same thing by:
-	* Extracting raw data from CSV's.
+	* Extracting raw data from CSV files.
 	* Transforming the data to make it usable.
 	* Loading the data to tables within our database
 
@@ -65,7 +65,7 @@ WITH DELIMITER ',' HEADER CSV;
 ```
 Execute the complete script and SUCCESS!  We have inserted the `countries.csv` into the `import_data.countries` table.
 
-Let's test our new table.
+Let's test our new table and take a look at the first 5 rows of data.
 
 ```sql
 SELECT * FROM import_data.countries LIMIT 5;
@@ -80,9 +80,9 @@ country_id|country_name   |country_code_2|country_code_3|region |sub_region     
 4|?algeria?      |dz            |dza           |africa |northern africa|                   |          |
 5|american samoa?|as            |asm           |oceania|polynesia      |                   |          |
 
-As you can see, some countries do not have an `immediate_region` fields and none of our entries have a `created_on` value yet.  Also notice that some of the country names have special characters, upper/lower case characters and whitespace.
+As you can see, some countries do not have an `immediate_region` field and none of our entries have a `created_on` value yet.  Also notice that some of the country names have special characters, upper/lower case characters and whitespace.
 
-Our only concern right now is to get the data into our database.  We will correct these issues in the following step.
+This would definitely cause some problems later on, but our only concern right now is to get the data into our database.  We will correct these issues in the following steps.
 
 Let's use the same process to add all of the CSV files in `source_data/csv_data/`
 * cities.csv

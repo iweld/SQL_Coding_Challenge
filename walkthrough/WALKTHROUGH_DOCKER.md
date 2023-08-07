@@ -17,9 +17,9 @@ This repository contains all of the necessary files, data and directories for ru
 
  https://www.docker.com/products/docker-desktop/
 
- Once we have `Docker desktop` installed and running, to begin this project, we must have Docker download an Image of Postgres and start running the Postgres container.
+ Once we have `Docker Desktop` installed and running, we must have Docker download an Image of Postgres and start running the Postgres container.
 
- Using your terminal (Powershell/Bash/ect...) and cd (changed directory) to where this project is located.  To ensure you are in the correct directory, you can use the command
+ Using your terminal (Powershell/Bash/ect...) and cd (changed directory) to where this project is located.  To ensure you are in the correct directory, type this command into the terminal.
 
  `ls -al`
 
@@ -36,11 +36,13 @@ This repository contains all of the necessary files, data and directories for ru
 
 * The `-d` portion of the command allows the container to run in the background.
  * If this is the first time running this command, this will download the required Docker image and create a PostgreSQL container which may take a few minutes.  Once it is complete and running, your terminal should look something like this.
- * After the initial install, the next time you run   `docker-compose up -d`, the Docker container will fire right up as long as the image hasn't been deleted.
 
   ![alt text](../images/terminal_2.PNG)
 
-If you are using PGAdmin or DBeaver, create a connection to the now running  PostgreSQL server.
+ * After the initial install, the next time you run   `docker-compose up -d`, the Docker container will fire right up as long as the image hasn't been deleted.
+
+If you are using [PGAdmin](https://www.pgadmin.org/), [DBeaver](https://dbeaver.io/) or any other Database management tool, create a connection to the now running PostgreSQL server.
+* Host: `localhost`
 * Database Name: `sql_coding_challenge`
 * Username: `postgres`
 * Password: `postgres`
