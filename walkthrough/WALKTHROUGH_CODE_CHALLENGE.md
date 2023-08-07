@@ -13,7 +13,7 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
-#### SQL Code Challenge
+### SQL Code Challenge
 
 <strong>1.</strong> Using the CSV files located in `source_data/csv_data`, create your new SQL tables with the properly formatted data.
 

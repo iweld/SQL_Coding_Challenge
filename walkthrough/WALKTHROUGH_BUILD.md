@@ -13,7 +13,7 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
-#### ETL (Extract/Transform/Load)
+### ETL (Extract/Transform/Load)
 
 ETL is the process data engineers use to extract data from different sources, transform the data into a usable resource, and load that data into the systems that end-users can access and use to solve business problems.  
 * Although this term is used on a much larger scale for data warehousing, on a much smaller scale, we are doing the same thing by:
@@ -102,7 +102,7 @@ Let's use the same process to add all of the CSV files in `source_data/csv_data/
 * gdp.csv
 * languages.csv
 
-After adding all the necessary code, our build_tables.sql file should now look like this...
+After adding all the necessary code, our `build_tables.sql` file should now look like this...
 
 ```sql
 -- We must insure that our data is properly organized.  Let's create a schema

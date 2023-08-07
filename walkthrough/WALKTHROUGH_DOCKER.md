@@ -13,6 +13,8 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
+### Set Up
+
 This repository contains all of the necessary files, data and directories for running a PostgresSQL server in a Docker Container.  The only prerequisite is that you should already have Docker Desktop installed and running on your computer.
 
  https://www.docker.com/products/docker-desktop/
