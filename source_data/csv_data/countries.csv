@@ -107,7 +107,7 @@ hungary,hu,hun,europe,eastern europe,
 iceland,is,isl,europe,northern europe,
 india,in,ind,asia,southern asia,
 indonesia,id,idn,asia,south-eastern asia,
-iran (islamic republic of),ir,irn,asia,southern asia,
+iran,ir,irn,asia,southern asia,
 iraq,iq,irq,asia,western asia,
 ireland,ie,irl,europe,northern europe,
 Ireland,ie,irl,europe,northern europe,
@@ -205,7 +205,7 @@ samoa,ws,wsm,oceania,polynesia,
 san marino,sm,smr,europe,southern europe,
 sao tome and principe,st,stp,africa,sub-saharan africa,middle africa
 saudi Arabia,sa,sau,asia,western asia,
-s!enegal,sn,sen,africa,sub-saharan africa,western africa
+Senegal,sn,sen,africa,sub-saharan africa,western africa
 serbia,rs,srb,europe,southern europe,
 seychelles,sc,syc,africa,sub-saharan africa,eastern africa
 sierra leone,sl,sle,africa,sub-saharan africa,western africa
