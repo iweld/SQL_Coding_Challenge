@@ -98,7 +98,16 @@ AND
 ORDER BY 
 	length(ci.city_name) DESC, ci.city_name ASC;
 
-	
+/* Question 6.
+ * 
+ *
+ * 
+ */	
+
+
+
+
+
 
 
 

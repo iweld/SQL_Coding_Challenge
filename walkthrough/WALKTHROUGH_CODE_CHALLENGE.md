@@ -163,7 +163,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>5.</strong> List the country, city name, population and city name length for the city names that are palindromes in the Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of the city name in roman numerals.  Order by the length of the city name in descending order and alphabetically in ascending order.
+<strong>5.</strong> List the country, city name, population and city name length for the city names that are [palindromes](https://en.wikipedia.org/wiki/Palindrome) in the Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of the city name in roman numerals.  Order by the length of the city name in descending order and alphabetically in ascending order.
 
 <details>
   <summary>Click to expand expected results!</summary>
