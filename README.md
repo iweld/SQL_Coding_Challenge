@@ -1,9 +1,9 @@
 ## Shaker's SQL Code Challenge
 
-**Author**: Jaime M. Shaker
-**Email**: jaime.m.shaker@gmail.com
-**Website**: https://www.shaker.dev
-**LinkedIn**: https://www.linkedin.com/in/jaime-shaker/ 
+**Author**: Jaime M. Shaker <br />
+**Email**: jaime.m.shaker@gmail.com <br />
+**Website**: https://www.shaker.dev <br />
+**LinkedIn**: https://www.linkedin.com/in/jaime-shaker/  <br />
 
 This project is an opportunity to practice your SQL skills and prepare for the role of a Data Analyst.  This project was inspired by the [Braintree Analytics Code Challenge](https://github.com/AlexanderConnelly/BrainTree_SQL_Coding_Challenge_Data_Analyst) and was created to strengthen your SQL knowledge.
 
