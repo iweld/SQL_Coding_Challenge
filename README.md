@@ -13,7 +13,7 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
-:exclamation: Note :exclamation:
+**Note**
 
 This project is meant to measure/gauge your technical abilities with SQL.
 
@@ -393,7 +393,7 @@ WHERE
 </details>
 <br />
 
-<strong>9.</strong> Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
+<strong>9.</strong> Create a query that lists country name, the capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
 
 <details>
   <summary>Click to expand expected results!</summary>
