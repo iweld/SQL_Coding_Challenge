@@ -62,13 +62,6 @@ ADD CONSTRAINT
 FOREIGN KEY (country_code_2)
 REFERENCES cleaned_data.countries (country_code_2);
 
--- Create Foreign Key relationship for cleaned_data.gdp
-ALTER TABLE 
-	cleaned_data.gdp
-ADD CONSTRAINT 
-	fk_country_gdp 
-FOREIGN KEY (country_code_2)
-REFERENCES cleaned_data.countries (country_code_2);
 ```
 
 Once you execute the complete script and have created a `FOREIGN KEY` constraint for all of our other tables, your `Entity Relationship Diagram` should look something like this.

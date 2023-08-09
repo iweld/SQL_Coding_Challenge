@@ -139,38 +139,6 @@ INSERT INTO cleaned_data.languages (
 );
 
 
-/* Create cleaned_data.gdp table */
-DROP TABLE IF EXISTS cleaned_data.gdp;
-CREATE TABLE cleaned_data.gdp (
-	gdp_id int,
-	country_code_2 varchar(2) NOT NULL,
-	fiscal_year int,
-	gdp_amount float,
-	PRIMARY KEY (gdp_id)
-);
-
-INSERT INTO cleaned_data.gdp (
-	gdp_id,
-	country_code_2,
-	fiscal_year,
-	gdp_amount
-)
-(
-	SELECT 
-		gdp_id,
-		trim(lower(regexp_replace(i.country_code_2, '^\W+|\W+$', '', 'g')))::varchar,
-		fiscal_year::int,
-		-- Remove commas from numeric value
-		REPLACE(gdp_amount, ',', '')::float
-	FROM
-		import_data.gdp AS i
-);
-
-
-
-
-
-
 
 
 

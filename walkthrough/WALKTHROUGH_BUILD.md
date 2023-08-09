@@ -199,23 +199,6 @@ COPY import_data.languages (
 FROM '/var/lib/postgresql/source_data/csv_data/languages.csv'
 WITH DELIMITER ',' HEADER CSV;
 
-/* Create import.gdp table */
-DROP TABLE IF EXISTS import_data.gdp;
-CREATE TABLE import_data.gdp (
-	gdp_id INT GENERATED ALWAYS AS IDENTITY,
-	country_code_2 TEXT,
-	fiscal_year TEXT,
-	gdp_amount TEXT,
-	PRIMARY KEY (gdp_id)
-);
-
-COPY import_data.gdp (
-	country_code_2,
-	fiscal_year,
-	gdp_amount
-)
-FROM '/var/lib/postgresql/source_data/csv_data/gdp.csv'
-WITH DELIMITER ',' HEADER CSV;
 ```
 Execute the complete script and our data has now been successfully extracted from the CSV files and inserted/copied into our database.  We can now TRANSFORM our data into a usable resource.
 

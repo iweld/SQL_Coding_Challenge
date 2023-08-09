@@ -56,7 +56,6 @@ This repository contains all of the necessary files, datasets and directories fo
 	*  [countries.csv](./source_data/csv_data/countries.csv)
 	*  [cities.csv](./source_data/csv_data/cities.csv)
 	*  [currencies.csv](./source_data/csv_data/currencies.csv)
-	*  [gdp.csv](./source_data/csv_data/gdp.csv)
 	*  [languages.csv](./source_data/csv_data/languages.csv)
 
 * Add a numeric, auto-incrementing Primary Key to every table.

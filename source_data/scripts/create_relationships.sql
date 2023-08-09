@@ -34,11 +34,3 @@ ADD CONSTRAINT
 	fk_country_languages 
 FOREIGN KEY (country_code_2)
 REFERENCES cleaned_data.countries (country_code_2);
-
--- Create Foreign Key relationship for cleaned_data.gdp
-ALTER TABLE 
-	cleaned_data.gdp
-ADD CONSTRAINT 
-	fk_country_gdp 
-FOREIGN KEY (country_code_2)
-REFERENCES cleaned_data.countries (country_code_2);

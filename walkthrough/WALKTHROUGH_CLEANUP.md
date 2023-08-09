@@ -137,7 +137,6 @@ DROP TABLE import_data.countries;
 DROP TABLE import_data.cities;
 DROP TABLE import_data.currencies;
 DROP TABLE import_data.languages;
-DROP TABLE import_data.gdp;
 DROP SCHEMA import_data;
 ```
 

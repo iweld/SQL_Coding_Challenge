@@ -15,8 +15,6 @@ This project is an opportunity to flex your SQL skills and prepare for the role 
 
 ### SQL Code Challenge
 
-
-
 <strong>1.</strong> Using the CSV files located in `source_data/csv_data`, create your new SQL tables with the properly formatted data.
 
 * Add a numeric, auto-incrementing Primary Key to every table.
@@ -207,9 +205,109 @@ ORDER BY
 </details>
 <br />
 
-<strong>6.</strong> List the percentage of the number of countries per region where spanish is an official language.
+<strong>6.</strong> List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number.  Order by country name in alphabetical order.
 
-<strong>7.</strong> Rank countries by gpd and partition by region.  Show the Year-Over-Year gdp growth for the fourth ranked country in every region.
+<details>
+  <summary>Click to expand expected results!</summary>
+
+  ##### Expected Results:
+
+country_name|total_population|odd_or_even|
+------------|----------------|-----------|
+afghanistan | 10,327,017     |Odd        |
+kazakhstan  | 11,794,851     |Odd        |
+kyrgyzstan  |  3,139,850     |Even       |
+pakistan    | 64,214,630     |Even       |
+tajikistan  |  4,374,883     |Odd        |
+turkmenistan|  2,697,719     |Odd        |
+uzbekistan  | 11,569,471     |Odd        |
+
+</details>
+</p>
+
+<details>
+  <summary>Click to expand answer!</summary>
+
+  ##### Answer
+  ```sql
+SELECT
+	country_name,
+	to_char(sum(ci.population), '99G999G999') total_population,
+	CASE
+		WHEN (sum(ci.population) % 2) = 0
+			THEN 'Even'
+		ELSE 
+			'Odd'
+	END AS odd_or_even
+FROM
+	cleaned_data.countries AS co
+JOIN 
+	cleaned_data.cities AS ci
+ON 
+	co.country_code_2 = ci.country_code_2
+WHERE
+	country_name ILIKE '%stan'
+GROUP BY
+	country_name
+ORDER BY 
+	country_name;
+  ```
+</details>
+<br />
+
+<strong>7.</strong> List the third most populated city ranked by region WITHOUT using limit or offset.  List the region name, city name, population and order the results by region.
+
+<details>
+  <summary>Click to expand expected results!</summary>
+
+  ##### Expected Results:
+
+region  |city_name|third_largest_pop|
+--------|---------|-----------------|
+Africa  |Kinshasa | 12,836,000      |
+Americas|New York | 18,972,871      |
+Asia    |Delhi    | 32,226,000      |
+Europe  |Paris    | 11,060,000      |
+Oceania |Brisbane |  2,360,241      |
+
+</details>
+</p>
+
+<details>
+  <summary>Click to expand answer!</summary>
+
+  ##### Answer
+  ```sql
+WITH get_city_rank_cte AS (
+	SELECT
+		co.region,
+		ci.city_name,
+		ci.population AS third_largest_pop,
+		DENSE_RANK() OVER (PARTITION BY co.region ORDER BY ci.population DESC) AS rnk
+	FROM
+		cleaned_data.countries AS co
+	JOIN 
+		cleaned_data.cities AS ci
+	ON 
+		co.country_code_2 = ci.country_code_2
+	WHERE 
+		ci.population IS NOT NULL
+	GROUP BY
+		co.region,
+		ci.city_name,
+		ci.population
+)
+SELECT
+	initcap(region) AS region,
+	initcap(city_name) AS city_name,
+	to_char(third_largest_pop, '99G999G999') AS third_largest_pop
+FROM
+	get_city_rank_cte
+WHERE
+	rnk = 3;
+  ```
+</details>
+<br />
 
 <strong>8.</strong> Using a Temp Table, create a table with one column called `country_and_capital`.  Then...
 * Concatenate country name and capital in parenthesis.

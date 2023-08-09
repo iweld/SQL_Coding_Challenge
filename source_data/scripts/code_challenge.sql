@@ -100,10 +100,67 @@ ORDER BY
 
 /* Question 6.
  * 
- *
+ * List all of the countries that end in 'stan'.  Make your query case insensitive and list whether 
+ * the total population of the cities listed an odd or even number.
  * 
- */	
+ */
 
+SELECT
+	country_name,
+	to_char(sum(ci.population), '99G999G999') total_population,
+	CASE
+		WHEN (sum(ci.population) % 2) = 0
+			THEN 'Even'
+		ELSE 
+			'Odd'
+	END AS odd_or_even
+FROM
+	cleaned_data.countries AS co
+JOIN 
+	cleaned_data.cities AS ci
+ON 
+	co.country_code_2 = ci.country_code_2
+WHERE
+	country_name ILIKE '%stan'
+GROUP BY
+	country_name
+ORDER BY 
+	country_name;
+
+/* Question 7.
+ * 
+ * List the third most populated city by region WITHOUT using limit or offset.
+ * List the region name, city name and total population and order by region.
+ * 
+ */
+
+WITH get_city_rank_cte AS (
+	SELECT
+		co.region,
+		ci.city_name,
+		ci.population AS third_largest_pop,
+		DENSE_RANK() OVER (PARTITION BY co.region ORDER BY ci.population DESC) AS rnk
+	FROM
+		cleaned_data.countries AS co
+	JOIN 
+		cleaned_data.cities AS ci
+	ON 
+		co.country_code_2 = ci.country_code_2
+	WHERE 
+		ci.population IS NOT NULL
+	GROUP BY
+		co.region,
+		ci.city_name,
+		ci.population
+)
+SELECT
+	initcap(region) AS region,
+	initcap(city_name) AS city_name,
+	to_char(third_largest_pop, '99G999G999') AS third_largest_pop
+FROM
+	get_city_rank_cte
+WHERE
+	rnk = 3;
 
 
 
