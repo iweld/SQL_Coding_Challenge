@@ -5,6 +5,7 @@
 	Website: https://www.shaker.dev
 	LinkedIn: https://www.linkedin.com/in/jaime-shaker/
 	
+	File Name: code_challenge.sql
 */
 
 

@@ -1,3 +1,13 @@
+/*
+	SQL Code Challenge
+	Author: Jaime M. Shaker
+	Email: jaime.m.shaker@gmail.com or jaime@shaker.dev
+	Website: https://www.shaker.dev
+	LinkedIn: https://www.linkedin.com/in/jaime-shaker/
+	
+	File Name: build_tables.sql
+*/
+
 -- We must insure that our data is properly organized.  Let's create a schema
 -- specificaly for importing/copying data from our CSV files.
 CREATE SCHEMA IF NOT EXISTS import_data;
@@ -46,6 +56,7 @@ CREATE TABLE import_data.cities (
 	country_code_2 TEXT,
 	capital TEXT,
 	population TEXT,
+	insert_date TEXT,
 	PRIMARY KEY (city_id)
 );
 
@@ -55,7 +66,8 @@ COPY import_data.cities (
 	longitude,
 	country_code_2,
 	capital,
-	population
+	population,
+	insert_date
 )
 FROM '/var/lib/postgresql/source_data/csv_data/cities.csv'
 WITH DELIMITER ',' HEADER CSV;

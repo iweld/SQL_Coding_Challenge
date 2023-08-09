@@ -10,7 +10,7 @@ ag,east caribbean dollar,xcd
 ar,argentine peso,ars
 am,armenian dram,amd
 aw,aruban florin,awg
-au,australian dollar,aud
+au,australian $dollar,aud
 at,euro,eur
 az,azerbaijan manat,azn
 bs,bahamian dollar,bsd
@@ -64,7 +64,7 @@ dk,danish krone,dkk
 dj,djibouti franc,djf
 dm,east caribbean dollar,xcd
 do,dominican peso,dop
-ec,us dollar,usd
+ec,us $dollar,usd
 eg,egyptian pound,egp
 sv,el salvador colon,svc
 sv,us dollar,usd
@@ -99,7 +99,7 @@ ht,gourde,htg
 ht,us dollar,usd
 va,euro,eur
 hn,lempira,hnl
-hk,hong kong dollar,hkd
+hk,hong kong $dollar,hkd
 hu,forint,huf
 is,iceland krona,isk
 in,indian rupee,inr
@@ -134,7 +134,7 @@ lu,euro,eur
 mo,pataca,mop
 mk,denar,mkd
 mg,malagasy ariary,mga
-mw,malawi kwacha,mwk
+mw,malawi !kwacha,mwk
 my,malaysian ringgit,myr
 mv,rufiyaa,mvr
 ml,cfa franc bceao,xof
@@ -158,7 +158,7 @@ mm,kyat,mmk
 na,namibia dollar,nad
 na,rand,zar
 nr,australian dollar,aud
-np,nepalese rupee,npr
+np,nepalese $rupee,npr
 nl,euro,eur
 nc,cfp franc,xpf
 nz,new zealand dollar,nzd
@@ -184,7 +184,7 @@ pt,euro,eur
 pr,us dollar,usd
 qa,qatari rial,qar
 re,euro,eur
-ro,romanian leu,ron
+ro,roman?ian leu,ron
 ru,russian ruble,rub
 rw,rwanda franc,rwf
 bl,euro,eur
@@ -214,7 +214,7 @@ gs,no universal currency,
 ss,south sudanese pound,ssp
 es,euro,eur
 lk,sri lanka rupee,lkr
-sd,sudanese pound,sdg
+sd,sudanese ?pound,sdg
 sr,surinam dollar,srd
 se,swedish krona,sek
 ch,swiss franc,chf
@@ -247,7 +247,7 @@ vu,vatu,vuv
 ve,bolivar soberano,ves
 ve,bolivar soberano,ved
 vn,dong,vnd
-vg,us dollar,usd
+vg,us d$ollar,usd
 vi,us dollar,usd
 wf,cfp franc,xpf
 ye,yemeni rial,yer

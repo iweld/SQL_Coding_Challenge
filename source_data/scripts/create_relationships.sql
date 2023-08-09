@@ -1,3 +1,13 @@
+/*
+	SQL Code Challenge
+	Author: Jaime M. Shaker
+	Email: jaime.m.shaker@gmail.com or jaime@shaker.dev
+	Website: https://www.shaker.dev
+	LinkedIn: https://www.linkedin.com/in/jaime-shaker/
+	
+	File Name: create_relationships.sql
+*/
+
 -- Alter cleaned_data.countries and add the UNIQUE constraint to country_code_2
 
 ALTER TABLE 
@@ -34,3 +44,4 @@ ADD CONSTRAINT
 	fk_country_languages 
 FOREIGN KEY (country_code_2)
 REFERENCES cleaned_data.countries (country_code_2);
+

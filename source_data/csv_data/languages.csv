@@ -1,7 +1,7 @@
 language,country_code_2
 pashto,af
 persian,af
-uzbek,af
+u?zbek,af
 albanian,aL
 english,al
 arabic,dz
@@ -33,7 +33,7 @@ chakma,bD
 english,bd
 english,bb
 spanish,bb
-belarusian,by
+be?larusian,by
 russian,by
 dutch,be
 english,be
@@ -216,7 +216,7 @@ english,gd
 spanish,gd
 french,gp
 spanish,gp
-english,gu
+e!nglish,gu
 spanish,gt
 fulah,gw
 portuguese,gw
@@ -228,7 +228,7 @@ spanish,gy
 french,ht
 spanish,ht
 spanish,hn
-cantonese,hk
+can#tonese,hk
 chinese,hk
 chinese,hk
 english,hk
@@ -359,7 +359,7 @@ fulah,mr
 english,mu
 french,mu
 morisyen,mu
-french,yt
+f#rench,yt
 english,mx
 spanish,mx
 english,fm
@@ -390,7 +390,7 @@ dutch,nl
 english,nl
 low german,nl
 western frisian,nl
-french,nc
+fre$nch,nc
 english,nz
 maori,nz
 spanish,ni
@@ -446,7 +446,7 @@ romanian,ro
 bashkir,ru
 chechen,ru
 chuvash,ru
-english,ru
+engli$sh,ru
 erzya,ru
 ossetic,ru
 russian,ru
@@ -492,7 +492,7 @@ southern sotho,za
 swati,za
 tsonga,za
 tswana,za
-venda,za
+ve!nda,za
 xhosa,za
 zulu,za
 english,kr
@@ -521,7 +521,7 @@ french,pm
 spanish,pm
 english,vc
 spanish,vc
-arabic,sd
+ara$bic,sd
 english,sd
 dutch,sR
 spanish,sr
@@ -550,7 +550,7 @@ langi,tz
 machame,tz
 makonde,tz
 masai,tz
-rombo,tz
+ro$mbo,tz
 rwa,tz
 sangu,tz
 shambala,tz
@@ -578,7 +578,7 @@ english,vi
 spanish,vi
 chiga,ug
 english,ug
-ganda,ug
+g!anda,ug
 nyankole,ug
 soga,ug
 swahili,ug
@@ -604,6 +604,6 @@ vietnamese,vn
 french,wF
 arabic,ye
 bemba,zm
-english,zm
+en!glish,zm
 english,zw
 shona,zw

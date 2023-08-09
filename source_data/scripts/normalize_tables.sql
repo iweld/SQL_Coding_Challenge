@@ -1,3 +1,12 @@
+/*
+	SQL Code Challenge
+	Author: Jaime M. Shaker
+	Email: jaime.m.shaker@gmail.com or jaime@shaker.dev
+	Website: https://www.shaker.dev
+	LinkedIn: https://www.linkedin.com/in/jaime-shaker/
+	
+	File Name: normalize_tables.sql
+*/
 
 -- We must insure that our data is properly organized.  Let's create a schema
 -- specificaly for our transformed, clean data.
@@ -41,13 +50,13 @@ INSERT INTO cleaned_data.countries (
 		-- regex_replace() function removes any special characters with a simple regex-expression.
 		-- trim() function removes white space from either end of the string.
 		-- lower() function converts all characters to lowercase.
-		trim(lower(regexp_replace(i.country_name, '^\W+|\W+$', '', 'g'))),
+		trim(lower(regexp_replace(i.country_name, '[^\w\s^.]', '', 'gi'))),
 		-- Properly cast type from TEXT into new table
-		trim(lower(regexp_replace(i.country_code_2, '^\W+|\W+$', '', 'g')))::varchar,
-		trim(lower(regexp_replace(i.country_code_3, '^\W+|\W+$', '', 'g')))::varchar,
-		trim(lower(regexp_replace(i.region, '^\W+|\W+$', '', 'g'))),
-		trim(lower(regexp_replace(i.sub_region, '^\W+|\W+$', '', 'g'))),
-		trim(lower(regexp_replace(i.intermediate_region, '^\W+|\W+$', '', 'g'))),
+		trim(lower(regexp_replace(i.country_code_2, '[^\w\s^.]', '', 'gi')))::varchar,
+		trim(lower(regexp_replace(i.country_code_3, '[^\w\s^.]', '', 'gi')))::varchar,
+		trim(lower(regexp_replace(i.region, '[^\w\s^.]', '', 'gi'))),
+		trim(lower(regexp_replace(i.sub_region, '[^\w\s^.]', '', 'gi'))),
+		trim(lower(regexp_replace(i.intermediate_region, '[^\w\s^.]', '', 'gi'))),
 		-- Use the built-in function current_date to insert current date into created_on field.
 		current_date
 	FROM 
@@ -64,6 +73,7 @@ CREATE TABLE cleaned_data.cities (
 	country_code_2 varchar(2) NOT NULL,
 	capital boolean,
 	population int,
+	insert_date date,
 	PRIMARY KEY (city_id)
 );
 
@@ -74,17 +84,19 @@ INSERT INTO cleaned_data.cities (
 	longitude,
 	country_code_2,
 	capital,
-	population
+	population,
+	insert_date
 )
 (
 	SELECT
 		i.city_id,
-		trim(lower(regexp_replace(i.city_name, '^\W+|\W+$', '', 'g'))),
+		trim(lower(regexp_replace(i.city_name, '[^\w\s^.]', '', 'gi'))),
 		i.longitude::float,
 		i.latitude::float,
-		trim(lower(regexp_replace(i.country_code_2, '^\W+|\W+$', '', 'g')))::varchar,
+		trim(lower(regexp_replace(i.country_code_2, '[^\w\s^.]', '', 'gi')))::varchar,
 		i.capital::boolean,
-		i.population::int
+		i.population::int,
+		i.insert_date::date
 	FROM 
 		import_data.cities AS i
 );
@@ -108,9 +120,9 @@ INSERT INTO cleaned_data.currencies (
 (
 	SELECT 
 		currency_id,
-		trim(lower(regexp_replace(i.country_code_2, '^\W+|\W+$', '', 'g')))::varchar,
-		trim(lower(regexp_replace(i.currency_name, '^\W+|\W+$', '', 'g'))),
-		trim(lower(regexp_replace(i.currency_code, '^\W+|\W+$', '', 'g')))
+		trim(lower(regexp_replace(i.country_code_2, '[^\w\s^.]', '', 'gi')))::varchar,
+		trim(lower(regexp_replace(i.currency_name, '[^\w\s^.]', '', 'gi'))),
+		trim(lower(regexp_replace(i.currency_code, '[^\w\s^.]', '', 'gi')))
 	FROM
 		import_data.currencies AS i
 );
@@ -132,14 +144,11 @@ INSERT INTO cleaned_data.languages (
 (
 	SELECT 
 		language_id,
-		trim(lower(regexp_replace(i.language, '^\W+|\W+$', '', 'g'))),
-		trim(lower(regexp_replace(i.country_code_2, '^\W+|\W+$', '', 'g')))::varchar
+		trim(lower(regexp_replace(i.language, '[^\w\s^.]', '', 'gi'))),
+		trim(lower(regexp_replace(i.country_code_2, '[^\w\s^.]', '', 'gi')))::varchar
 	FROM
 		import_data.languages AS i
 );
-
-
-
 
 
 

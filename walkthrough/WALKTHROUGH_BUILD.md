@@ -1,12 +1,8 @@
-## Shaker's SQL Analytics Code Challenge
-### PostgreSQL Project
+## Shaker's SQL Code Challenge
 
 **Author**: Jaime M. Shaker
-
 **Email**: jaime.m.shaker@gmail.com
-
 **Website**: https://www.shaker.dev
-
 **LinkedIn**: https://www.linkedin.com/in/jaime-shaker/ 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
@@ -14,10 +10,12 @@
 ### ETL (Extract/Transform/Load)
 
 ETL is the process data engineers use to extract data from different sources, transform the data into a usable resource, and load that data into the systems that end-users can access and use to solve business problems.  
-* Although this term is used on a much larger scale for data warehousing, on a much smaller scale, we are doing the same thing by:
+* Although this term is used on a much larger scale for data warehousing, on a much, much smaller scale, we are doing the same thing by:
 	* Extracting raw data from CSV files.
 	* Transforming the data to make it usable.
-	* Loading the data to tables within our database
+	* Loading the data into tables within our database
+
+Also known as `Data Wrangling`.
 
 In Data Analysis, the analyst must ensure that the data is 'clean' before doing any analysis. 'Dirty' data can lead to unreliable, inaccurate and/or misleading results.
 
@@ -82,17 +80,17 @@ SELECT * FROM import_data.countries LIMIT 5;
 ```
 **Results**
 
-country_id|country_name   |country_code_2|country_code_3|region |sub_region     |intermediate_region|created_on|
-----------|---------------|--------------|--------------|-------|---------------|-------------------|----------|
-1|!afghANistan   |af?           |afg           |asia   |southern asia  |                   |          |
-2|  albania      |aL            |alb           |europe |southern europe|                   |          |
-3|Albania        |AL            |alb           |europe |southern europe|                   |          |
-4|?algeria?      |dz            |dza           |africa |northern africa|                   |          |
-5|american samoa?|as            |asm           |oceania|polynesia      |                   |          |
+country_id|country_name    |country_code_2|country_code_3|region  |sub_region       |intermediate_region|created_on|
+----------|----------------|--------------|--------------|--------|-----------------|-------------------|----------|
+1|!afg!hANistan   |af?           |afg           |asia    |$southern asia   |                   |          |
+2|  alba$nia      |aL            |alb           |europe! |southern *europe |                   |          |
+3|Alb?ania        |AL            |alb           |eur#ope |$southern e#urope|                   |          |
+4|?algeria?       |d!z           |dza           |africa  |northern africa  |                   |          |
+5|americ#an samoa?|as            |as!m          |0oceania|polyne$sia       |                   |          |
 
 As you can see, some countries do not have an `immediate_region` field and none of our entries have a `created_on` value yet.  Also notice that some of the country names have special characters, upper/lower case characters and whitespace.
 
-This would definitely cause some problems later on, but our only concern right now is to get the data into our database.  We will correct these issues in the following steps.
+This will definitely cause some problems if not corrected, however, right now our only concern is to get the data into our database. 
 
 Let's use the same process to add all of the CSV files in `source_data/csv_data/`
 * cities.csv
@@ -103,6 +101,16 @@ Let's use the same process to add all of the CSV files in `source_data/csv_data/
 After adding all the necessary code, our `build_tables.sql` file should now look like this...
 
 ```sql
+/*
+	SQL Code Challenge
+	Author: Jaime M. Shaker
+	Email: jaime.m.shaker@gmail.com or jaime@shaker.dev
+	Website: https://www.shaker.dev
+	LinkedIn: https://www.linkedin.com/in/jaime-shaker/
+	
+	File Name: build_tables.sql
+*/
+
 -- We must insure that our data is properly organized.  Let's create a schema
 -- specificaly for importing/copying data from our CSV files.
 CREATE SCHEMA IF NOT EXISTS import_data;
@@ -113,6 +121,8 @@ DROP TABLE IF EXISTS import_data.countries;
 -- We will initially insert all the data as TEXT to ensure there aren't any errors during the COPY.
 -- We will also create a created_on field that will have the date that the table was created.
 CREATE TABLE import_data.countries (
+	-- Create an auto-incrementing, unique key for every row.  
+	-- This will also be used as our Primary Key.
 	country_id INT GENERATED ALWAYS AS IDENTITY,
 	country_name TEXT,
 	country_code_2 TEXT,
@@ -149,6 +159,7 @@ CREATE TABLE import_data.cities (
 	country_code_2 TEXT,
 	capital TEXT,
 	population TEXT,
+	insert_date TEXT,
 	PRIMARY KEY (city_id)
 );
 
@@ -158,7 +169,8 @@ COPY import_data.cities (
 	longitude,
 	country_code_2,
 	capital,
-	population
+	population,
+	insert_date
 )
 FROM '/var/lib/postgresql/source_data/csv_data/cities.csv'
 WITH DELIMITER ',' HEADER CSV;
@@ -196,9 +208,10 @@ COPY import_data.languages (
 )
 FROM '/var/lib/postgresql/source_data/csv_data/languages.csv'
 WITH DELIMITER ',' HEADER CSV;
-
 ```
-Execute the complete script and our data has now been successfully extracted from the CSV files and inserted/copied into our database.  We can now TRANSFORM our data into a usable resource.
+Execute the complete script and our data has now been successfully extracted from the CSV files and inserted/copied into our database.  This script can be repeated over and over and it will always give the same results. 
+
+We can now TRANSFORM our data into a usable resource.
 
  Go to [WALKTHROUGH_NORMALIZE](WALKTHROUGH_NORMALIZE.md)
 

@@ -1,12 +1,8 @@
-## Shaker's SQL Analytics Code Challenge
-### PostgreSQL Project
+## Shaker's SQL Code Challenge
 
 **Author**: Jaime M. Shaker
-
 **Email**: jaime.m.shaker@gmail.com
-
 **Website**: https://www.shaker.dev
-
 **LinkedIn**: https://www.linkedin.com/in/jaime-shaker/ 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
@@ -35,11 +31,11 @@ This repository contains all of the necessary files, data and directories for ru
  `docker-compose up -d`
 
 * The `-d` portion of the command allows the container to run in the background.
- * If this is the first time running this command, this will download the required Docker image and create a PostgreSQL container which may take a few minutes.  Once it is complete and running, your terminal should look something like this.
+ * If this is the first time running this command, this command will download the required Docker image and create a PostgreSQL container which may take a few minutes to complete.  Once it is complete and running, your terminal should look something like this.
 
   ![alt text](../images/terminal_2.PNG)
 
- * After the initial install, the next time you run   `docker-compose up -d`, the Docker container will fire right up as long as the image hasn't been deleted.
+ * After the initial install, the next time you run the   `docker-compose up -d` command, the Docker container will fire right up as long as the image hasn't been deleted.
 
 If you are using [PGAdmin](https://www.pgadmin.org/), [DBeaver](https://dbeaver.io/) or any other Database management tool, create a connection to the now running PostgreSQL server.
 * Host: `localhost`
@@ -53,7 +49,7 @@ Alternatively, if you are using [psql](https://gist.github.com/Kartones/dd3ff5ec
 
 To stop the Docker container:
 * Using the command line, cd into the same directory as the `docker-compose.yaml` file and run the command...
-* `docker-compose down`
+	* `docker-compose down`
 * You can also use the `Docker Desktop GUI` to stop the container.
 
 The `docker-compose down` command will stop the container until the next time you start it back up using the command: 

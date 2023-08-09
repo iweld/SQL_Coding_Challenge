@@ -1,12 +1,8 @@
-## Shaker's SQL Analytics Code Challenge
-### PostgreSQL Project
+## Shaker's SQL Code Challenge
 
 **Author**: Jaime M. Shaker
-
 **Email**: jaime.m.shaker@gmail.com
-
 **Website**: https://www.shaker.dev
-
 **LinkedIn**: https://www.linkedin.com/in/jaime-shaker/ 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
@@ -17,20 +13,27 @@ All of our tables in the `cleaned_data` schema share a common field named `count
 
 Using this information, we can make the `cleaned_data.countries` table the parent table and all other tables can have a [One-to-One](https://fmhelp.filemaker.com/help/18/fmp/en/index.html#page/FMP_Help/one-to-one-relationships.html) `FOREIGN KEY` relationship to it.
 
-First, create a new script and name it `create_relationships.sql`.  Create a query to `ALTER` the `cleaned_data.countries` table and add the `UNIQUE` constraint to the `country_code_2` field.
+First, create a new script and name it `create_relationships.sql`.  Create a query to `ALTER` the `cleaned_data.countries` table and add the `UNIQUE` constraint to the `country_code_2` field.  Then we can `ALTER` the child tables and add a `FOREIGN KEY` constraint.
 
 ```sql
+/*
+	SQL Code Challenge
+	Author: Jaime M. Shaker
+	Email: jaime.m.shaker@gmail.com or jaime@shaker.dev
+	Website: https://www.shaker.dev
+	LinkedIn: https://www.linkedin.com/in/jaime-shaker/
+	
+	File Name: create_relationships.sql
+*/
+
 -- Alter cleaned_data.countries and add the UNIQUE constraint to country_code_2
+
 ALTER TABLE 
 	cleaned_data.countries 
 ADD CONSTRAINT 
 	unique_country_code_2 
 UNIQUE (country_code_2);
-```
 
-Now we can `ALTER` the child tables and add a `FOREIGN KEY` constraint.
-
-```sql
 -- Alter all other tables and add a foreign key constraint and reference.
 -- Create Foreign Key relationship for cleaned_data.cities
 ALTER TABLE 

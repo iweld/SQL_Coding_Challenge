@@ -1,12 +1,8 @@
-## Shaker's SQL Analytics Code Challenge
-### PostgreSQL Project
+## Shaker's SQL Code Challenge
 
 **Author**: Jaime M. Shaker
-
 **Email**: jaime.m.shaker@gmail.com
-
 **Website**: https://www.shaker.dev
-
 **LinkedIn**: https://www.linkedin.com/in/jaime-shaker/ 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
