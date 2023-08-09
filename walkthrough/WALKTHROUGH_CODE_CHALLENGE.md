@@ -309,10 +309,115 @@ WHERE
 </details>
 <br />
 
-<strong>8.</strong> Using a Temp Table, create a table with one column called `country_and_capital`.  Then...
-* Concatenate country name and capital in parenthesis.
-* Output the results in CSV format into `source_data/csv_output/country_n_capital.csv`.
-* Drop the temp table.
+<strong>8.</strong> List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
+
+<details>
+  <summary>Click to expand expected results!</summary>
+
+  ##### Expected Results:
+
+country_name        |
+--------------------|
+saudi arabia        |
+syrian arab republic|
+united arab emirates|
+yemen               |
+
+</details>
+</p>
+
+<details>
+  <summary>Click to expand answer!</summary>
+
+  ##### Answer
+  ```sql
+WITH get_ntile_cte AS (
+	SELECT 
+		country_name,
+		NTILE(3) OVER (ORDER BY country_name) AS nt
+	FROM
+		cleaned_data.countries AS co
+	JOIN 
+		cleaned_data.languages AS l
+	ON
+		co.country_code_2 = l.country_code_2
+	WHERE
+		sub_region = 'western asia'
+	AND 
+		l.language = 'arabic'
+)
+SELECT
+	country_name
+FROM
+	get_ntile_cte
+WHERE
+	nt = 3;
+  ```
+</details>
+<br />
+
+<strong>9.</strong> Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
+
+<details>
+  <summary>Click to expand expected results!</summary>
+
+  ##### Expected Results:
+
+country_name|city_name|population|language_array                              |currency_array |
+------------|---------|----------|--------------------------------------------|---------------|
+algeria     |algiers  |   3415811|{french,arabic,kabyle}                      |algerian dinar |
+egypt       |cairo    |  20296000|{arabic}                                    |egyptian pound |
+libya       |tripoli  |   1293016|{arabic}                                    |libyan dinar   |
+morocco     |rabat    |    572717|{arabic,tachelhit,moroccan tamazight,french}|moroccan dirham|
+sudan       |khartoum |   7869000|{arabic,english}                            |sudanese pound |
+tunisia     |tunis    |   1056247|{french,arabic}                             |tunisian dinar |
+
+</details>
+</p>
+
+<details>
+  <summary>Click to expand answer!</summary>
+
+  ##### Answer
+  ```sql
+WITH get_row_values AS (
+	SELECT
+		co.country_name,
+		ci.city_name,
+		ci.population,
+		array_agg(l.LANGUAGE) AS language_array,
+		cu.currency_name AS currency_array
+	FROM
+		cleaned_data.countries AS co
+	JOIN
+		cleaned_data.cities AS ci
+	ON 
+		co.country_code_2 = ci.country_code_2
+	JOIN
+		cleaned_data.languages AS l
+	ON 
+		co.country_code_2 = l.country_code_2
+	JOIN
+		cleaned_data.currencies AS cu
+	ON 
+		co.country_code_2 = cu.country_code_2
+	WHERE
+		sub_region = 'northern africa'
+	AND
+		ci.capital = TRUE
+	GROUP BY
+		co.country_name,
+		ci.city_name,
+		ci.population,
+		cu.currency_name
+)
+SELECT
+	*
+FROM
+	get_row_values;
+  ```
+</details>
+<br />
 
 :exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
