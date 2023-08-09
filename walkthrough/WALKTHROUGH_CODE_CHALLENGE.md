@@ -9,8 +9,6 @@
 
 **LinkedIn**: https://www.linkedin.com/in/jaime-shaker/ 
 
-This project is an opportunity to flex your SQL skills and prepare for the role of a Data Analyst.  This project was inspired by the [Braintree Analytics Code Challenge](https://github.com/AlexanderConnelly/BrainTree_SQL_Coding_Challenge_Data_Analyst) and was created to strengthen your SQL knowledge.
-
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
 ### SQL Code Challenge
