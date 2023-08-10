@@ -360,6 +360,15 @@ tunisia     |tunis    |   1056247|{french,arabic}                             |t
 
 */
 
+
+/* Question 10.
+ * 
+ *  Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022. List 
+ * how many vowels and consanants are present in the city name and concatnate their percentage to the their respective 
+ * count in parenthesis.
+ * 
+ */
+
 WITH get_letter_count AS (
 	SELECT
 		ci.city_name,
@@ -375,7 +384,6 @@ WITH get_letter_count AS (
 get_letter_diff AS (
 	SELECT
 		city_name,
-		string_length,
 		(string_length - length(no_vowels)) AS vowels,
 		round(100 * (string_length - length(no_vowels)) / string_length::NUMERIC, 2) AS vowel_perc,
 		string_length - (string_length - length(no_vowels)) AS consanants,
@@ -389,11 +397,26 @@ SELECT
 	consanants || ' (' || consanants_perc || '%)' AS consanants_count_perc
 FROM
 	get_letter_diff
+ORDER BY 
+	vowels;
 	
+/*
+
+city_name      |vowel_count_perc|consanants_count_perc|
+---------------+----------------+---------------------+
+standish       |2 (25.00%)      |6 (75%)              |
+grand forks    |2 (18.18%)      |9 (81.82%)           |
+camano         |3 (50.00%)      |3 (50%)              |
+cedar hills    |3 (27.27%)      |8 (72.73%)           |
+gladstone      |3 (33.33%)      |6 (66.67%)           |
+whitehall      |3 (33.33%)      |6 (66.67%)           |
+homewood       |4 (50.00%)      |4 (50%)              |
+willowbrook    |4 (36.36%)      |7 (63.64%)           |
+port salerno   |4 (33.33%)      |8 (66.67%)           |
+vadnais heights|5 (33.33%)      |10 (66.67%)          |
+jeffersonville |5 (35.71%)      |9 (64.29%)           |	
 	
-	
-	
-	
+*/
 	
 	
 	
