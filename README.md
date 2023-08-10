@@ -45,15 +45,11 @@ This repository contains all of the necessary files, datasets and directories fo
 <h1 name="questions"></h1>### SQL Code Challenge 
 <strong>1.</strong> Using the CSV files located in `source_data/csv_data`, create your new SQL tables with the properly formatted data.
 
-* /source_data/csv_data/
-	*  [countries.csv](./source_data/csv_data/countries.csv)
-	*  [cities.csv](./source_data/csv_data/cities.csv)
-	*  [currencies.csv](./source_data/csv_data/currencies.csv)
-	*  [languages.csv](./source_data/csv_data/languages.csv)
-
 * Add a numeric, auto-incrementing Primary Key to every table.
 * In the `countries` table, add the column `created_on` with the current date.
 * Create a one-to-one relationship with the countries table as the parent table.
+
+:exclamation: This question has already been completed with the ETL process. :exclamation:
 
 <strong>2.</strong> List all of the regions and the total number of countries in each region.  Order by country count in descending order and capitalize the region name.
 
@@ -62,7 +58,7 @@ This repository contains all of the necessary files, datasets and directories fo
 
   ##### Expected Results:
 
-  region   |country_count|
+region   |country_count|
 ---------|-------------|
 Africa   |           59|
 Americas |           57|
@@ -143,28 +139,29 @@ ORDER BY
 <br />
 
 
-<strong>4.</strong> Repeat the query for question #3, but this time, order the results alphabetically by the **second** letter of the city name in ascending order and the number of cities in descending order.
+<strong>4.</strong> List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the LAST letter of the country name and the number of cities.
 
 <details>
   <summary>Click to expand expected results!</summary>
 
   ##### Expected Results:
 
-country_name  |city_count|
---------------|----------|
-LATVIA        |        39|
-FAROE ISLANDS |        29|
-ICELAND       |        12|
-DENMARK       |        75|
-JERSEY        |         1|
-FINLAND       |       142|
-LITHUANIA     |        61|
-UNITED KINGDOM|      1305|
-NORWAY        |       127|
-IRELAND       |        64|
-ESTONIA       |        20|
-ISLE OF MAN   |         2|
-SWEDEN        |       148|
+country_name          |city_count|
+----------------------|----------|
+Andorra               |         5|
+Albania               |        11|
+Bosnia And Herzegovina|        15|
+Croatia               |        22|
+North Macedonia       |        28|
+Malta                 |        32|
+Serbia                |        58|
+Slovenia              |        74|
+Greece                |        64|
+Portugal              |       109|
+Spain                 |       302|
+San Marino            |         2|
+Montenegro            |        12|
+Italy                 |       542|
 
 </details>
 </p>
@@ -175,7 +172,7 @@ SWEDEN        |       148|
   ##### Answer
   ```sql
 SELECT 
-	upper(co.country_name) AS country_name,
+	initcap(co.country_name) AS country_name,
 	count(*) AS city_count
 FROM
 	cleaned_data.countries AS co
@@ -184,11 +181,13 @@ JOIN
 ON 
 	co.country_code_2 = ci.country_code_2
 WHERE
-	co.sub_region = 'northern europe'
+	co.sub_region = 'southern europe'
+AND
+	EXTRACT('year' FROM ci.insert_date) = 2021
 GROUP BY 
 	co.country_name
 ORDER BY 
-	length(co.country_name), co.country_name;
+	substring(co.country_name,length(co.country_name),1), city_count;
   ```
 </details>
 <br />
@@ -237,7 +236,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>6.</strong> List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number.  Order by country name in alphabetical order.
+<strong>6.</strong> List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  Order by whether it's odd or even in ascending order and country name in alphabetical order.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -246,13 +245,13 @@ ORDER BY
 
 country_name|total_population|odd_or_even|
 ------------|----------------|-----------|
-afghanistan | 10,327,017     |Odd        |
-kazakhstan  | 11,794,851     |Odd        |
-kyrgyzstan  |  3,139,850     |Even       |
-pakistan    | 64,214,630     |Even       |
-tajikistan  |  4,374,883     |Odd        |
-turkmenistan|  2,697,719     |Odd        |
-uzbekistan  | 11,569,471     |Odd        |
+Afghanistan |  6,006,530     |Even       |
+Kazakhstan  |  4,298,264     |Even       |
+Kyrgyzstan  |  1,017,644     |Even       |
+Pakistan    | 26,344,480     |Even       |
+Tajikistan  |  2,720,953     |Odd        |
+Turkmenistan|    419,607     |Odd        |
+Uzbekistan  |  3,035,547     |Odd        |
 
 </details>
 </p>
@@ -263,7 +262,7 @@ uzbekistan  | 11,569,471     |Odd        |
   ##### Answer
   ```sql
 SELECT
-	country_name,
+	initcap(country_name) AS country_name,
 	to_char(sum(ci.population), '99G999G999') total_population,
 	CASE
 		WHEN (sum(ci.population) % 2) = 0
@@ -278,11 +277,13 @@ JOIN
 ON 
 	co.country_code_2 = ci.country_code_2
 WHERE
-	country_name ILIKE '%stan'
+	co.country_name ILIKE '%stan'
+AND 
+	EXTRACT('year' FROM ci.insert_date) = 2022
 GROUP BY
-	country_name
+	co.country_name
 ORDER BY 
-	country_name;
+	odd_or_even, country_name;
   ```
 </details>
 <br />
@@ -388,7 +389,7 @@ WHERE
 </details>
 <br />
 
-<strong>9.</strong> Create a query that lists country name, the capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
+<strong>9.</strong> Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
 
 <details>
   <summary>Click to expand expected results!</summary>

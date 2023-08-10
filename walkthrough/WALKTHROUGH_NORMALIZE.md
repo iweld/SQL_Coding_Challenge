@@ -1,9 +1,9 @@
 ## Shaker's SQL Code Challenge
 
-**Author**: Jaime M. Shaker
-**Email**: jaime.m.shaker@gmail.com
-**Website**: https://www.shaker.dev
-**LinkedIn**: https://www.linkedin.com/in/jaime-shaker/ 
+**Author**: Jaime M. Shaker <br />
+**Email**: jaime.m.shaker@gmail.com <br />
+**Website**: https://www.shaker.dev <br />
+**LinkedIn**: https://www.linkedin.com/in/jaime-shaker/  <br />
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 

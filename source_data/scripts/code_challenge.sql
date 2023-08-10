@@ -83,14 +83,14 @@ UNITED KINGDOM|      1305|
 	
 /* Question 4.
  * 
- * Repeat the query for question #3, but this time, order the results alphabetically by 
- * the **second** letter of the city name in ascending order and the number of cities 
- * in descending order.
+ * List all of the countries and the total number of cities in the Southern Europe sub-region 
+ * that were inserted in 2022.  Capitalize the country names and order alphabetically by the 
+ * LAST letter of the country name in descending order.
  * 
  */ 
 
 SELECT 
-	upper(co.country_name) AS country_name,
+	initcap(co.country_name) AS country_name,
 	count(*) AS city_count
 FROM
 	cleaned_data.countries AS co
@@ -99,29 +99,32 @@ JOIN
 ON 
 	co.country_code_2 = ci.country_code_2
 WHERE
-	co.sub_region = 'northern europe'
+	co.sub_region = 'southern europe'
+AND
+	EXTRACT('year' FROM ci.insert_date) = 2021
 GROUP BY 
 	co.country_name
 ORDER BY 
-	substring(co.country_name,2,1) ASC, count(*) DESC;
+	substring(co.country_name,length(co.country_name),1), city_count;
 
 /*
 
-country_name  |city_count|
---------------+----------+
-LATVIA        |        39|
-FAROE ISLANDS |        29|
-ICELAND       |        12|
-DENMARK       |        75|
-JERSEY        |         1|
-FINLAND       |       142|
-LITHUANIA     |        61|
-UNITED KINGDOM|      1305|
-NORWAY        |       127|
-IRELAND       |        64|
-ESTONIA       |        20|
-ISLE OF MAN   |         2|
-SWEDEN        |       148|
+country_name          |city_count|
+----------------------+----------+
+Andorra               |         5|
+Albania               |        11|
+Bosnia And Herzegovina|        15|
+Croatia               |        22|
+North Macedonia       |        28|
+Malta                 |        32|
+Serbia                |        58|
+Slovenia              |        74|
+Greece                |        64|
+Portugal              |       109|
+Spain                 |       302|
+San Marino            |         2|
+Montenegro            |        12|
+Italy                 |       542|
 
 */
 
@@ -168,13 +171,14 @@ Turkey              |Tut      |  10,161  |            III     |
 
 /* Question 6.
  * 
- * List all of the countries that end in 'stan'.  Make your query case insensitive and list whether 
- * the total population of the cities listed is an odd or even number.
+ * List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether 
+ * the total population of the cities listed is an odd or even number.  Order by whether it's odd or even 
+ * and country name in alphabetical order.
  * 
  */
 
 SELECT
-	country_name,
+	initcap(country_name) AS country_name,
 	to_char(sum(ci.population), '99G999G999') total_population,
 	CASE
 		WHEN (sum(ci.population) % 2) = 0
@@ -189,23 +193,25 @@ JOIN
 ON 
 	co.country_code_2 = ci.country_code_2
 WHERE
-	country_name ILIKE '%stan'
+	co.country_name ILIKE '%stan'
+AND 
+	EXTRACT('year' FROM ci.insert_date) = 2022
 GROUP BY
-	country_name
+	co.country_name
 ORDER BY 
-	country_name;
+	odd_or_even, country_name;
 
 /*
 
 country_name|total_population|odd_or_even|
 ------------+----------------+-----------+
-afghanistan | 10,327,017     |Odd        |
-kazakhstan  | 11,794,851     |Odd        |
-kyrgyzstan  |  3,139,850     |Even       |
-pakistan    | 64,214,630     |Even       |
-tajikistan  |  4,374,883     |Odd        |
-turkmenistan|  2,697,719     |Odd        |
-uzbekistan  | 11,569,471     |Odd        |
+Afghanistan |  6,006,530     |Even       |
+Kazakhstan  |  4,298,264     |Even       |
+Kyrgyzstan  |  1,017,644     |Even       |
+Pakistan    | 26,344,480     |Even       |
+Tajikistan  |  2,720,953     |Odd        |
+Turkmenistan|    419,607     |Odd        |
+Uzbekistan  |  3,035,547     |Odd        |
 
 */
 
@@ -258,8 +264,7 @@ Oceania |Brisbane |  2,360,241      |
 
 /* Question 8.
  * 
- * List the third most populated city by region WITHOUT using limit or offset.
- * List the region name, city name and total population and order by region.
+ * List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
  * 
  */
 
