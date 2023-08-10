@@ -452,14 +452,14 @@ FROM
 </details>
 <br />
 
-<strong>10.</strong> Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022.  List how many vowels and consanants are present in the city name and concatnate their percentage to the their respective count in parenthesis.  
+<strong>10.</strong> Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022.  List how many vowels and consonants are present in the city name and concatnate their percentage to the their respective count in parenthesis.  
 
 <details>
   <summary>Click to expand expected results!</summary>
 
   ##### Expected Results:
 
-city_name      |vowel_count_perc|consanants_count_perc|
+city_name      |vowel_count_perc|consonants_count_perc|
 ---------------|----------------|---------------------|
 standish       |2 (25.00%)      |6 (75%)              |
 grand forks    |2 (18.18%)      |9 (81.82%)           |
@@ -498,15 +498,15 @@ get_letter_diff AS (
 		city_name,
 		(string_length - length(no_vowels)) AS vowels,
 		round(100 * (string_length - length(no_vowels)) / string_length::NUMERIC, 2) AS vowel_perc,
-		string_length - (string_length - length(no_vowels)) AS consanants,
-		round( 100 * (string_length - (string_length - length(no_vowels)))::NUMERIC / string_length, 2)::float AS consanants_perc
+		string_length - (string_length - length(no_vowels)) AS consonants,
+		round( 100 * (string_length - (string_length - length(no_vowels)))::NUMERIC / string_length, 2)::float AS consonants_perc
 	FROM
 		get_letter_count
 )
 SELECT 
 	city_name,
 	vowels || ' (' || vowel_perc || '%)' AS vowel_count_perc,
-	consanants || ' (' || consanants_perc || '%)' AS consanants_count_perc
+	consonants || ' (' || consononts_perc || '%)' AS consonants_count_perc
 FROM
 	get_letter_diff;
   ```
