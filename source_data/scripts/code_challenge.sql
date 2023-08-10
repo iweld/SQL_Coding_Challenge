@@ -360,3 +360,46 @@ tunisia     |tunis    |   1056247|{french,arabic}                             |t
 
 */
 
+WITH get_letter_count AS (
+	SELECT
+		ci.city_name,
+		length(ci.city_name) string_length,
+		regexp_replace(ci.city_name, '[aeiou]', '', 'gi') AS no_vowels
+	FROM
+		cleaned_data.cities AS ci
+	WHERE
+		ci.insert_date = '2022-04-28'
+	AND
+		country_code_2 in ('us')
+),
+get_letter_diff AS (
+	SELECT
+		city_name,
+		string_length,
+		(string_length - length(no_vowels)) AS vowels,
+		round(100 * (string_length - length(no_vowels)) / string_length::NUMERIC, 2) AS vowel_perc,
+		string_length - (string_length - length(no_vowels)) AS consanants,
+		round( 100 * (string_length - (string_length - length(no_vowels)))::NUMERIC / string_length, 2)::float AS consanants_perc
+	FROM
+		get_letter_count
+)
+SELECT 
+	city_name,
+	vowels || ' (' || vowel_perc || '%)' AS vowel_count_perc,
+	consanants || ' (' || consanants_perc || '%)' AS consanants_count_perc
+FROM
+	get_letter_diff
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+

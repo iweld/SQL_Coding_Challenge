@@ -42,7 +42,7 @@ This repository contains all of the necessary files, datasets and directories fo
 
 :grey_exclamation:  Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](./walkthrough/WALKTHROUGH_DOCKER.md) :grey_exclamation: 
  
-<h1 name="questions"></h1>### SQL Code Challenge 
+### SQL Code Challenge 
 <strong>1.</strong> Using the CSV files located in `source_data/csv_data`, create your new SQL tables with the properly formatted data.
 
 * Add a numeric, auto-incrementing Primary Key to every table.
@@ -448,6 +448,35 @@ SELECT
 	*
 FROM
 	get_row_values;
+  ```
+</details>
+<br />
+
+<strong>9.</strong> Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
+
+<details>
+  <summary>Click to expand expected results!</summary>
+
+  ##### Expected Results:
+
+country_name|city_name|population|language_array                              |currency_array |
+------------|---------|----------|--------------------------------------------|---------------|
+algeria     |algiers  |   3415811|{french,arabic,kabyle}                      |algerian dinar |
+egypt       |cairo    |  20296000|{arabic}                                    |egyptian pound |
+libya       |tripoli  |   1293016|{arabic}                                    |libyan dinar   |
+morocco     |rabat    |    572717|{arabic,tachelhit,moroccan tamazight,french}|moroccan dirham|
+sudan       |khartoum |   7869000|{arabic,english}                            |sudanese pound |
+tunisia     |tunis    |   1056247|{french,arabic}                             |tunisian dinar |
+
+</details>
+</p>
+
+<details>
+  <summary>Click to expand answer!</summary>
+
+  ##### Answer
+  ```sql
+
   ```
 </details>
 <br />
