@@ -11,7 +11,7 @@
 	this project.
 */
 
-
+-- Drop import_data tables and schema.
 DROP TABLE IF EXISTS import_data.countries;
 DROP TABLE IF EXISTS import_data.cities;
 DROP TABLE IF EXISTS import_data.currencies;
@@ -38,6 +38,7 @@ ALTER TABLE IF EXISTS
 DROP CONSTRAINT IF EXISTS
 	fk_country_languages;
 
+-- Drop cleaned_data tables and schema.
 DROP TABLE IF EXISTS cleaned_data.countries;
 DROP TABLE IF EXISTS cleaned_data.cities;
 DROP TABLE IF EXISTS cleaned_data.currencies;
