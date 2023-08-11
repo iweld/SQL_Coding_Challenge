@@ -379,7 +379,7 @@ WITH get_letter_count AS (
 	WHERE
 		ci.insert_date = '2022-04-28'
 	AND
-		country_code_2 in ('us')
+		ci.country_code_2 in ('us')
 ),
 get_letter_diff AS (
 	SELECT
@@ -417,12 +417,28 @@ vadnais heights|5 (33.33%)      |10 (66.67%)          |
 jeffersonville |5 (35.71%)      |9 (64.29%)           |	
 	
 */
+
+
+
 	
+
 	
-	
-	
-	
-	
-	
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 
