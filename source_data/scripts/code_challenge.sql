@@ -269,7 +269,8 @@ Oceania |Brisbane |  2,360,241      |
  */
 
 WITH get_ntile_cte AS (
-	SELECT 
+	SELECT
+		ROW_NUMBER() OVER (ORDER BY country_name) AS rn,
 		country_name,
 		NTILE(3) OVER (ORDER BY country_name) AS nt
 	FROM
@@ -284,6 +285,7 @@ WITH get_ntile_cte AS (
 		l.language = 'arabic'
 )
 SELECT
+	rn AS row_number,
 	country_name
 FROM
 	get_ntile_cte
@@ -293,12 +295,12 @@ WHERE
 
 /*
 
-country_name        |
---------------------+
-saudi arabia        |
-syrian arab republic|
-united arab emirates|
-yemen               |
+row_number|country_name        |
+----------+--------------------+
+         9|saudi arabia        |
+        10|syrian arab republic|
+        11|united arab emirates|
+        12|yemen               |
 
 */
 
@@ -420,7 +422,7 @@ jeffersonville |5 (35.71%)      |9 (64.29%)           |
 
 /* Question 11.
  * 
- * List the most consecutive dates and city names for cities in Canada that where inserted
+ * List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted
  * in April 2022.  
  * 
  */
