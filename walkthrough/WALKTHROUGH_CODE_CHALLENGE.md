@@ -54,7 +54,59 @@ ORDER BY
 </details>
 <br />
 
-<strong>3.</strong> List all of the countries and the total number of cities in the Northern Europe sub-region.  List the country names in uppercase and order the list by the length of the country name and alphabetically in ascending order.
+<strong>3.</strong> List all of the sub-regions and the total number of cities in each sub-region.  Order by sub-region name alphabetically.
+
+<details>
+  <summary>Click to expand expected results!</summary>
+
+  ##### Expected Results:
+
+sub_region                     |city_count|
+-------------------------------|----------|
+Australia And New Zealand      |       329|
+Central Asia                   |       560|
+Eastern Asia                   |      3164|
+Eastern Europe                 |      2959|
+Latin America And The Caribbean|      7204|
+Melanesia                      |        60|
+Micronesia                     |        15|
+Northern Africa                |      1152|
+Northern America               |      5844|
+Northern Europe                |      2025|
+Polynesia                      |        22|
+Southeastern Asia              |      2627|
+Southern Asia                  |      6848|
+Southern Europe                |      3238|
+Subsaharan Africa              |      3223|
+Western Asia                   |      1400|
+Western Europe                 |      3952|
+
+</details>
+</p>
+
+<details>
+  <summary>Click to expand answer!</summary>
+
+  ##### Answer
+  ```sql
+SELECT 
+	initcap(co.sub_region) AS sub_region,
+	count(*) AS city_count
+FROM
+	cleaned_data.countries AS co
+JOIN 
+	cleaned_data.cities AS ci
+ON
+	co.country_code_2 = ci.country_code_2
+GROUP BY
+	sub_region
+ORDER BY 
+	sub_region;
+  ```
+</details>
+<br />
+
+<strong>4.</strong> List all of the countries and the total number of cities in the Northern Europe sub-region.  List the country names in uppercase and order the list by the length of the country name and alphabetically in ascending order.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -105,7 +157,7 @@ ORDER BY
 <br />
 
 
-<strong>4.</strong> List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the LAST letter of the country name and the number of cities.
+<strong>5.</strong> List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the LAST letter of the country name and the number of cities.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -158,7 +210,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>5.</strong> List the country, city name, population and city name length for the city names that are [palindromes](https://en.wikipedia.org/wiki/Palindrome) in the Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of the city name in roman numerals.  Order by the length of the city name in descending order and alphabetically in ascending order.
+<strong>6.</strong> List the country, city name, population and city name length for the city names that are [palindromes](https://en.wikipedia.org/wiki/Palindrome) in the Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of the city name in roman numerals.  Order by the length of the city name in descending order and alphabetically in ascending order.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -202,7 +254,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>6.</strong> List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  Order by whether it's odd or even in ascending order and country name in alphabetical order.
+<strong>7.</strong> List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  Order by whether it's odd or even in ascending order and country name in alphabetical order.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -254,7 +306,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>7.</strong> List the third most populated city ranked by region WITHOUT using limit or offset.  List the region name, city name, population and order the results by region.
+<strong>8.</strong> List the third most populated city ranked by region WITHOUT using limit or offset.  List the region name, city name, population and order the results by region.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -308,7 +360,7 @@ WHERE
 </details>
 <br />
 
-<strong>8.</strong> List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
+<strong>9.</strong> List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -355,7 +407,7 @@ WHERE
 </details>
 <br />
 
-<strong>9.</strong> Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
+<strong>10.</strong> Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -418,7 +470,7 @@ FROM
 </details>
 <br />
 
-<strong>10.</strong> Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022.  List how many vowels and consonants are present in the city name and concatnate their percentage to the their respective count in parenthesis.  
+<strong>11.</strong> Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022.  List how many vowels and consonants are present in the city name and concatnate their percentage to the their respective count in parenthesis.  
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -481,7 +533,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>11.</strong> List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
+<strong>12.</strong> List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -549,6 +601,84 @@ WHERE
 	rnk = 1
 ORDER BY 
 	insert_date;
+  ```
+</details>
+<br />
+
+<strong>13.</strong> List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
+
+<details>
+  <summary>Click to expand expected results!</summary>
+
+  ##### Expected Results:
+
+month_year|cities_inserted|running_total|month_over_month|
+----------|---------------|-------------|----------------|
+Jan-2021  | 1,471         |  1,471      |                |
+Feb-2021  | 1,291         |  2,762      |+87.76%         |
+Mar-2021  | 1,485         |  4,247      |+53.77%         |
+Apr-2021  | 1,508         |  5,755      |+35.51%         |
+May-2021  | 1,509         |  7,264      |+26.22%         |
+Jun-2021  | 1,395         |  8,659      |+19.20%         |
+Jul-2021  | 1,394         | 10,053      |+16.10%         |
+Aug-2021  | 1,481         | 11,534      |+14.73%         |
+Sep-2021  | 1,452         | 12,986      |+12.59%         |
+Oct-2021  | 1,446         | 14,432      |+11.14%         |
+Nov-2021  | 1,378         | 15,810      |+9.55%          |
+Dec-2021  | 1,472         | 17,282      |+9.31%          |
+
+</details>
+</p>
+
+<details>
+  <summary>Click to expand answer!</summary>
+
+  ##### Answer
+  ```sql
+CREATE VIEW year_2021_growth AS (
+	WITH get_month_count AS (
+		SELECT
+			date_trunc('month', insert_date) as single_month,
+		  	count(*) AS monthly_count
+		FROM 
+			cleaned_data.cities
+		WHERE 
+			EXTRACT('year' FROM insert_date) = 2021
+		GROUP BY 
+			single_month
+		ORDER BY 
+			single_month
+	),
+	get_running_total AS (
+		SELECT
+			single_month::date,
+		  	monthly_count,
+		  	sum(monthly_count) OVER (ORDER BY single_month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS total_num_cities
+		FROM
+			get_month_count
+	),
+	get_month_over_month AS (
+		SELECT
+			single_month,
+			monthly_count,
+			total_num_cities,
+			round(100.0 * ((total_num_cities - Lag(total_num_cities, 1) OVER (ORDER BY single_month)) / Lag(total_num_cities, 1) OVER (ORDER BY single_month))::NUMERIC, 2) AS month_over_month
+		FROM
+			get_running_total
+	)
+	SELECT
+		to_char(single_month, 'Mon-YYYY') AS month_year,
+		to_char(monthly_count, '9G999') AS cities_inserted,
+		to_char(total_num_cities, '99G999') AS running_total,
+		'+' || month_over_month || '%' AS month_over_month
+	FROM
+		get_month_over_month
+);
+
+SELECT 
+	*
+FROM 
+	year_2021_growth;
   ```
 </details>
 <br />
