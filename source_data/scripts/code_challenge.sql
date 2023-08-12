@@ -363,7 +363,7 @@ tunisia     |tunis    |   1056247|{french,arabic}                             |t
 
 /* Question 10.
  * 
- *  Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022. List 
+ * Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022. List 
  * how many vowels and consonants are present in the city name and concatnate their percentage to the their respective 
  * count in parenthesis.
  * 
@@ -418,15 +418,70 @@ jeffersonville |5 (35.71%)      |9 (64.29%)           |
 	
 */
 
+/* Question 11.
+ * 
+ * List the most consecutive dates and city names for cities in Canada that where inserted
+ * in April 2022.  
+ * 
+ */
 
-
+WITH get_dates AS (
+	SELECT
+		DISTINCT ON (insert_date) insert_date AS insert_date,
+		city_name
+	FROM
+		cleaned_data.cities
+	WHERE
+		country_code_2 = 'ca'
+	AND
+		insert_date BETWEEN '2022-04-01' AND '2022-04-30'
+	ORDER BY
+		insert_date
+),
+get_diff AS (
+	SELECT
+		city_name,
+		insert_date,
+		EXTRACT('day' FROM insert_date) - ROW_NUMBER() OVER (ORDER BY insert_date) AS diff
+	FROM
+		get_dates
+),
+get_diff_count AS (
+	SELECT
+		city_name,
+		insert_date,
+		count(*) OVER (PARTITION BY diff) AS diff_count
+	FROM
+		get_diff
+),
+get_rank AS (
+	SELECT
+		DENSE_RANK() OVER (ORDER BY diff_count desc) AS rnk,
+		insert_date,
+		city_name
+	FROM
+		get_diff_count
+)
+SELECT
+	insert_date AS most_consecutive_dates,
+	initcap(city_name) AS city_name
+FROM
+	get_rank
+WHERE
+	rnk = 1
+ORDER BY 
+	insert_date;
 	
-
-	
-
-
+/*
+ 
+most_consecutive_dates|city_name   |
+----------------------+------------+
+            2022-04-22|South Dundas|
+            2022-04-23|La Prairie  |
+            2022-04-24|Elliot Lake |
+            2022-04-25|Lachute     |
 		
-		
+*/		
 		
 		
 		

@@ -513,6 +513,78 @@ FROM
 </details>
 <br />
 
+<strong>11.</strong> List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
+
+<details>
+  <summary>Click to expand expected results!</summary>
+
+  ##### Expected Results:
+
+most_consecutive_dates|city_name   |
+----------------------|------------|
+2022-04-22|South Dundas|
+2022-04-23|La Prairie  |
+2022-04-24|Elliot Lake |
+2022-04-25|Lachute     |
+
+</details>
+</p>
+
+<details>
+  <summary>Click to expand answer!</summary>
+
+  ##### Answer
+  ```sql
+WITH get_dates AS (
+	SELECT
+		DISTINCT ON (insert_date) insert_date AS insert_date,
+		city_name
+	FROM
+		cleaned_data.cities
+	WHERE
+		country_code_2 = 'ca'
+	AND
+		insert_date BETWEEN '2022-04-01' AND '2022-04-30'
+	ORDER BY
+		insert_date
+),
+get_diff AS (
+	SELECT
+		city_name,
+		insert_date,
+		EXTRACT('day' FROM insert_date) - ROW_NUMBER() OVER (ORDER BY insert_date) AS diff
+	FROM
+		get_dates
+),
+get_diff_count AS (
+	SELECT
+		city_name,
+		insert_date,
+		count(*) OVER (PARTITION BY diff) AS diff_count
+	FROM
+		get_diff
+),
+get_rank AS (
+	SELECT
+		DENSE_RANK() OVER (ORDER BY diff_count desc) AS rnk,
+		insert_date,
+		city_name
+	FROM
+		get_diff_count
+)
+SELECT
+	insert_date AS most_consecutive_dates,
+	initcap(city_name) AS city_name
+FROM
+	get_rank
+WHERE
+	rnk = 1
+ORDER BY 
+	insert_date;
+  ```
+</details>
+<br />
+
 :grey_exclamation: Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](./walkthrough/WALKTHROUGH_DOCKER.md) :grey_exclamation: 
 
 :exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
