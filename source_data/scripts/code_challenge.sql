@@ -16,11 +16,13 @@
  */
 
 SELECT 
+	-- initcap() capitalizes the first letter of every word in a string.
 	initcap(region) AS region,
 	count(*) AS country_count
 FROM
 	cleaned_data.countries
 GROUP BY
+	-- Aggregate functions 'count()' require you to group all column fields.
 	region
 ORDER BY 
 	country_count DESC;
@@ -46,6 +48,7 @@ Antartica|            1|
  */
 
 SELECT 
+	-- upper() will return your string in uppercase.
 	upper(co.country_name) AS country_name,
 	count(*) AS city_count
 FROM
@@ -59,6 +62,7 @@ WHERE
 GROUP BY 
 	co.country_name
 ORDER BY 
+	-- length() returns the number or characters in a string including spaces.  
 	length(co.country_name), co.country_name;
 
 /*
@@ -101,10 +105,12 @@ ON
 WHERE
 	co.sub_region = 'southern europe'
 AND
+	-- extract() & date_part() functions allow you to breakdown dates and timestamps to individual years, month, days, hours.....
 	EXTRACT('year' FROM ci.insert_date) = 2021
 GROUP BY 
 	co.country_name
 ORDER BY 
+	-- substring() function returns a specific portion of a string.
 	substring(co.country_name,length(co.country_name),1), city_count;
 
 /*
@@ -141,6 +147,7 @@ Italy                 |       542|
 SELECT 
 	initcap(co.country_name) AS country_name,
 	initcap(ci.city_name) AS city_name,
+	-- to_char() takes non-string data types and returns them as strings.
 	to_char(ci.population, '999G999') AS population,
 	to_char(length(ci.city_name), 'RN') AS roman_numeral_length
 FROM
@@ -272,6 +279,7 @@ WITH get_ntile_cte AS (
 	SELECT
 		ROW_NUMBER() OVER (ORDER BY country_name) AS rn,
 		country_name,
+		-- ntile() window functions returns groups of data section into 'buckets'.
 		NTILE(3) OVER (ORDER BY country_name) AS nt
 	FROM
 		cleaned_data.countries AS co
@@ -318,6 +326,7 @@ WITH get_row_values AS (
 		co.country_name,
 		ci.city_name,
 		ci.population,
+		-- array_agg() aggregates multiple values and returns them in 'array' format.
 		array_agg(l.LANGUAGE) AS language_array,
 		cu.currency_name AS currency_array
 	FROM
@@ -375,6 +384,7 @@ WITH get_letter_count AS (
 	SELECT
 		ci.city_name,
 		length(ci.city_name) string_length,
+		-- regexp_replace() returns a vlue that has been manipulated by a regular expression.
 		length(regexp_replace(ci.city_name, '[aeiou]', '', 'gi')) AS consonant_count
 	FROM
 		cleaned_data.cities AS ci
