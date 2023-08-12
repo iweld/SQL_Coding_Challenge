@@ -42,6 +42,53 @@ Antartica|            1|
 
 /* Question 3. 
  * 
+ * List all of the sub-regions and the total number of cities in each sub-region.
+ * Order by sub-region name alphabetically.
+ * 
+ */
+
+SELECT 
+	-- initcap() capitalizes the first letter of every word in a string.
+	initcap(co.sub_region) AS sub_region,
+	count(*) AS city_count
+FROM
+	cleaned_data.countries AS co
+JOIN 
+	cleaned_data.cities AS ci
+ON
+	co.country_code_2 = ci.country_code_2
+GROUP BY
+	-- Aggregate functions 'count()' require you to group all column fields.
+	sub_region
+ORDER BY 
+	sub_region;
+
+/*
+
+sub_region                     |city_count|
+-------------------------------+----------+
+Australia And New Zealand      |       329|
+Central Asia                   |       560|
+Eastern Asia                   |      3164|
+Eastern Europe                 |      2959|
+Latin America And The Caribbean|      7204|
+Melanesia                      |        60|
+Micronesia                     |        15|
+Northern Africa                |      1152|
+Northern America               |      5844|
+Northern Europe                |      2025|
+Polynesia                      |        22|
+Southeastern Asia              |      2627|
+Southern Asia                  |      6848|
+Southern Europe                |      3238|
+Subsaharan Africa              |      3223|
+Western Asia                   |      1400|
+Western Europe                 |      3952|
+
+*/
+
+/* Question 4. 
+ * 
  * List all of the countries and the total number of cities in the Northern Europe sub-region.  
  * List the country names in uppercase and order the list by the length of the country name in ascending order.
  * 
@@ -85,7 +132,7 @@ UNITED KINGDOM|      1305|
 
 */
 	
-/* Question 4.
+/* Question 5.
  * 
  * List all of the countries and the total number of cities in the Southern Europe sub-region 
  * that were inserted in 2022.  Capitalize the country names and order alphabetically by the 
@@ -135,7 +182,7 @@ Italy                 |       542|
 */
 
 
-/* Question 5.
+/* Question 6.
  * 
  * List the country, city name, population and city name length for the city names that are palindromes in the 
  * Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of 
@@ -176,7 +223,7 @@ Turkey              |Tut      |  10,161  |            III     |
 */
 
 
-/* Question 6.
+/* Question 7.
  * 
  * List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether 
  * the total population of the cities listed is an odd or even number.  Order by whether it's odd or even 
@@ -222,7 +269,7 @@ Uzbekistan  |  3,035,547     |Odd        |
 
 */
 
-/* Question 7.
+/* Question 8.
  * 
  * List the third most populated city by region WITHOUT using limit or offset.
  * List the region name, city name and total population and order by region.
@@ -269,7 +316,7 @@ Oceania |Brisbane |  2,360,241      |
 
 */
 
-/* Question 8.
+/* Question 9.
  * 
  * List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
  * 
@@ -312,7 +359,7 @@ row_number|country_name        |
 
 */
 
-/* Question 9.
+/* Question 10.
  * 
  *  Create a query that lists country name, capital name, population, languages spoken 
  * 	and currency name for countries in the Northen Africa sub-region.  There can be multiple 
@@ -372,7 +419,7 @@ tunisia     |tunis    |   1056247|{french,arabic}                             |t
 */
 
 
-/* Question 10.
+/* Question 11.
  * 
  * Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022. List 
  * how many vowels and consonants are present in the city name and concatnate their percentage to the their respective 
@@ -430,7 +477,7 @@ jeffersonville |5 (35.71%)      |9 (64.29%)           |
 	
 */
 
-/* Question 11.
+/* Question 12.
  * 
  * List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted
  * in April 2022.  
@@ -493,14 +540,84 @@ most_consecutive_dates|city_name   |
             2022-04-24|Elliot Lake |
             2022-04-25|Lachute     |
 		
+*/	
+
+/* Question 13.
+ * 
+ * Create a view that lists the month-year, the number
+ * of cities inserted for that month, a running total and the month over
+ * month percentage grown for 2021.
+ * 
+ * Format the cities count and the running total with the thousands separator
+ * and format the month over month growth with a plus symbol and percentage symbol.
+ * 
+ * Example: Feb-2021  | 1,000         |  2,000      |+60.00%         | 
+ * 
+ */
+
+CREATE VIEW year_2021_growth AS (
+	WITH get_month_count AS (
+		SELECT
+			date_trunc('month', insert_date) as single_month,
+		  	count(*) AS monthly_count
+		FROM 
+			cleaned_data.cities
+		WHERE 
+			EXTRACT('year' FROM insert_date) = 2021
+		GROUP BY 
+			single_month
+		ORDER BY 
+			single_month
+	),
+	get_running_total AS (
+		SELECT
+			single_month::date,
+		  	monthly_count,
+		  	sum(monthly_count) OVER (ORDER BY single_month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS total_num_cities
+		FROM
+			get_month_count
+	),
+	get_month_over_month AS (
+		SELECT
+			single_month,
+			monthly_count,
+			total_num_cities,
+			round(100.0 * ((total_num_cities - Lag(total_num_cities, 1) OVER (ORDER BY single_month)) / Lag(total_num_cities, 1) OVER (ORDER BY single_month))::NUMERIC, 2) AS month_over_month
+		FROM
+			get_running_total
+	)
+	SELECT
+		to_char(single_month, 'Mon-YYYY') AS month_year,
+		to_char(monthly_count, '9G999') AS cities_inserted,
+		to_char(total_num_cities, '99G999') AS running_total,
+		'+' || month_over_month || '%' AS month_over_month
+	FROM
+		get_month_over_month
+);
+
+SELECT 
+	*
+FROM 
+	year_2021_growth;
+
+/*
+		
+month_year|cities_inserted|running_total|month_over_month|
+----------+---------------+-------------+----------------+
+Jan-2021  | 1,471         |  1,471      |                |
+Feb-2021  | 1,291         |  2,762      |+87.76%         |
+Mar-2021  | 1,485         |  4,247      |+53.77%         |
+Apr-2021  | 1,508         |  5,755      |+35.51%         |
+May-2021  | 1,509         |  7,264      |+26.22%         |
+Jun-2021  | 1,395         |  8,659      |+19.20%         |
+Jul-2021  | 1,394         | 10,053      |+16.10%         |
+Aug-2021  | 1,481         | 11,534      |+14.73%         |
+Sep-2021  | 1,452         | 12,986      |+12.59%         |
+Oct-2021  | 1,446         | 14,432      |+11.14%         |
+Nov-2021  | 1,378         | 15,810      |+9.55%          |
+Dec-2021  | 1,472         | 17,282      |+9.31%          |		
+		
 */		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
