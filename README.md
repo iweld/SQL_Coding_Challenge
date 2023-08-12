@@ -17,7 +17,7 @@ This project is meant to measure/gauge/practice your technical abilities with SQ
 * Do not alter the CSV files.
 * Most, if not all of these questions are intended purely as a measure of your SQL skills and not as actual questions that one would expect to answer from an employer.
 
-I have created a [Walkthrough](walkthrough/WALKTHROUGH_DOCKER.md) if you would like to follow along and complete this challenge with me. 
+An SQL Code Challenge [Walkthrough](walkthrough/WALKTHROUGH_DOCKER.md) has been created if you would like to follow along in a step by step fashion. 
 
 The questions are listed below with the expected results and answers hidden so you can cross reference your answers.
 
@@ -48,8 +48,6 @@ This repository contains all of the necessary files, datasets and directories fo
 * Add a numeric, auto-incrementing Primary Key to every table.
 * In the `countries` table, add the column `created_on` with the current date.
 * Create a one-to-one relationship with the countries table as the parent table.
-
-:exclamation: This question has already been completed with the ETL process. :exclamation:
 
 <strong>2.</strong> List all of the regions and the total number of countries in each region.  Order by country count in descending order and capitalize the region name.
 
