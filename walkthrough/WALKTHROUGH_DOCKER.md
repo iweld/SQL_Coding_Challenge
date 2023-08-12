@@ -23,7 +23,7 @@ This repository contains all of the necessary files, data and directories for ru
 
  ![alt text](../images/terminal_1.PNG)
 
- As mentioned before, in the same directory as the `docker-compose.yaml` file, create an empty directory/file folder named '`db`'. This is where the PostgreSQL container will store internal data and keep your data persistent.
+ As mentioned before, in the same directory as the `docker-compose.yaml` file, create an empty directory/file folder named '`db`' (Note the red arrow in image). This is where the PostgreSQL container will store internal data and keep your data persistent.
  * This directory's path is in the `.gitignore` file which is why it is not included in this repository.
 
  Once you are in the same directory as the `docker-compose.yaml` file, run this command to start the Docker container.
