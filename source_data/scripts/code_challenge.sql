@@ -48,7 +48,6 @@ Antartica|            1|
  */
 
 SELECT 
-	-- initcap() capitalizes the first letter of every word in a string.
 	initcap(co.sub_region) AS sub_region,
 	count(*) AS city_count
 FROM
@@ -58,7 +57,6 @@ JOIN
 ON
 	co.country_code_2 = ci.country_code_2
 GROUP BY
-	-- Aggregate functions 'count()' require you to group all column fields.
 	sub_region
 ORDER BY 
 	sub_region;

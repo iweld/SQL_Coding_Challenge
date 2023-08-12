@@ -5,7 +5,7 @@
 **Website**: https://www.shaker.dev <br />
 **LinkedIn**: https://www.linkedin.com/in/jaime-shaker/  <br />
 
-This project is an opportunity to practice your SQL skills and prepare for the role of a Data Analyst.  This project was inspired by the [Braintree Analytics Code Challenge](https://github.com/AlexanderConnelly/BrainTree_SQL_Coding_Challenge_Data_Analyst) and was created to strengthen your SQL knowledge.
+This project is an opportunity to practice your SQL skills and prepare for the role of a Data Analyst.  This project was inspired by the [Braintree Analytics Code Challenge](https://github.com/AlexanderConnelly/BrainTree_SQL_Coding_Challenge_Data_Analyst) and was created to strengthen/sharpen your SQL knowledge.
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
@@ -715,7 +715,7 @@ FROM
 </details>
 <br />
 
-:grey_exclamation: Start here if you want to follow along my  [SQL Challenge WALKTHROUGH](./walkthrough/WALKTHROUGH_DOCKER.md) :grey_exclamation: 
+:grey_exclamation: Start here if you want to follow along with the  [SQL Challenge WALKTHROUGH](./walkthrough/WALKTHROUGH_DOCKER.md) :grey_exclamation: 
 
 :exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 

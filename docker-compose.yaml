@@ -1,22 +1,38 @@
 version: '3.8'
 services:
+  #  This service can be named anything but we'll call it the image it's running
   postgres:
+    # This will get the lastest official PostgreSQL image from DockerHub
     image: postgres
+    # The container chosen is the name of the project
     container_name: sql_coding_challenge
     restart: always
+    # This is the name of the env file. This file is hidden and has evironmental variables. 
+    # All values are hard-coded so the file has been commented out.
+    # env_file:
+    #  - .env
     environment:
+      # The database name
       POSTGRES_DB: sql_coding_challenge
+      # PostgreSQL Username
       POSTGRES_USER: postgres
+      # PostgreSQL Password
       POSTGRES_PASSWORD: postgres
+      # The location where PostgreSQL stores its data (Do not change unless you know what your doing)
       PGDATA: /var/lib/postgresql/data/pgdata
+    # Default ports that PostgreSQL uses
     ports:
       - "5432:5432"
     volumes:
       -
+        # We bind the db directory in our project file to where PostgreSQL stores its data 
+        # to keep data stored persistent when PostgreSQL restarts
         type: bind
         source: ./db
         target: /var/lib/postgresql/data
       -
+        # We bind our source data file so that the PostgreSQL container can access files and
+        # scripts without having to copy them into the container
         type: bind
         source: ./source_data
         target: /var/lib/postgresql/source_data

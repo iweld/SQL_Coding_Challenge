@@ -9,7 +9,10 @@
 
 ### SQL Code Challenge
 
-<strong>1.</strong> Using the CSV files located in `source_data/csv_data`, create your new SQL tables with the properly formatted data.
+:warning: To start over with an empty table, run the the `drop_all_tables.sql` script. :warning:
+
+<strong>1.  Create the Tables and Relations.</strong>  
+Using the CSV files located in `source_data/csv_data`, create your new SQL tables with the properly formatted data.
 
 * Add a numeric, auto-incrementing Primary Key to every table.
 * In the `countries` table, add the column `created_on` with the current date.
@@ -17,7 +20,8 @@
 
 :exclamation: This question has already been completed with the ETL process. :exclamation:
 
-<strong>2.</strong> List all of the regions and the total number of countries in each region.  Order by country count in descending order and capitalize the region name.
+<strong>2.  List Regions and Country Count</strong> 
+List all of the regions and the total number of countries in each region.  Order by country count in descending order and capitalize the region name.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -54,7 +58,8 @@ ORDER BY
 </details>
 <br />
 
-<strong>3.</strong> List all of the sub-regions and the total number of cities in each sub-region.  Order by sub-region name alphabetically.
+<strong>3. List Sub-Regions and City Count</strong> 
+List all of the sub-regions and the total number of cities in each sub-region.  Order by sub-region name alphabetically.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -106,7 +111,8 @@ ORDER BY
 </details>
 <br />
 
-<strong>4.</strong> List all of the countries and the total number of cities in the Northern Europe sub-region.  List the country names in uppercase and order the list by the length of the country name and alphabetically in ascending order.
+<strong>4. List Specific Sub-Region and Change Formatting</strong> 
+List all of the countries and the total number of cities in the Northern Europe sub-region.  List the country names in uppercase and order the list by the length of the country name and alphabetically in ascending order.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -157,7 +163,8 @@ ORDER BY
 <br />
 
 
-<strong>5.</strong> List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the LAST letter of the country name and the number of cities.
+<strong>5. List Specific Countries by Year</strong>
+ List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the LAST letter of the country name and the number of cities.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -210,7 +217,8 @@ ORDER BY
 </details>
 <br />
 
-<strong>6.</strong> List the country, city name, population and city name length for the city names that are [palindromes](https://en.wikipedia.org/wiki/Palindrome) in the Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of the city name in roman numerals.  Order by the length of the city name in descending order and alphabetically in ascending order.
+<strong>6. Reversable Names</strong> 
+List the country, city name, population and city name length for the city names that are [palindromes](https://en.wikipedia.org/wiki/Palindrome) in the Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of the city name in roman numerals.  Order by the length of the city name in descending order and alphabetically in ascending order.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -254,7 +262,8 @@ ORDER BY
 </details>
 <br />
 
-<strong>7.</strong> List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  Order by whether it's odd or even in ascending order and country name in alphabetical order.
+<strong>7. Search with Wildcard and Case</strong> 
+List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  Order by whether it's odd or even in ascending order and country name in alphabetical order.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -306,7 +315,8 @@ ORDER BY
 </details>
 <br />
 
-<strong>8.</strong> List the third most populated city ranked by region WITHOUT using limit or offset.  List the region name, city name, population and order the results by region.
+<strong>8. Ranking Regions</strong> 
+List the third most populated city ranked by region WITHOUT using limit or offset.  List the region name, city name, population and order the results by region.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -360,7 +370,8 @@ WHERE
 </details>
 <br />
 
-<strong>9.</strong> List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
+<strong>9. Using Buckets</strong> 
+List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -407,7 +418,8 @@ WHERE
 </details>
 <br />
 
-<strong>10.</strong> Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
+<strong>10. Using Arrays</strong> 
+Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -470,7 +482,8 @@ FROM
 </details>
 <br />
 
-<strong>11.</strong> Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022.  List how many vowels and consonants are present in the city name and concatnate their percentage to the their respective count in parenthesis.  
+<strong>11. Using Case and Percentages</strong> 
+Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022.  List how many vowels and consonants are present in the city name and concatnate their percentage to the their respective count in parenthesis.  
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -533,7 +546,8 @@ ORDER BY
 </details>
 <br />
 
-<strong>12.</strong> List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
+<strong>12. Most Consecutive Days</strong> 
+List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -605,7 +619,8 @@ ORDER BY
 </details>
 <br />
 
-<strong>13.</strong> List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
+<strong>13. Month over Month in View</strong> 
+List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -682,6 +697,8 @@ FROM
   ```
 </details>
 <br />
+
+:warning: To start over with an empty table, run the the `drop_all_tables.sql` script. :warning:
 
 :exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
