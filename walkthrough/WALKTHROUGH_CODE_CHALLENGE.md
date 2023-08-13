@@ -815,7 +815,7 @@ CALL cleaned_data.sproc_output();
 
 :warning: To start over with an empty table, run the the `drop_all_tables.sql` script. :warning:
 
-:exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
+:exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
 
 

@@ -59,7 +59,7 @@ Now that we have our PostgreSQL server up and running, click the link below and 
 
  Go to [WALKTHROUGH_BUILD](WALKTHROUGH_BUILD.md)
 
-:exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
+:exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
 
 

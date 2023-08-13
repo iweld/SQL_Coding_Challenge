@@ -216,7 +216,7 @@ We can now TRANSFORM our data into a usable resource.
  Go to [WALKTHROUGH_NORMALIZE](WALKTHROUGH_NORMALIZE.md)
 
 
-:exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
+:exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
 
 

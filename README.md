@@ -845,7 +845,7 @@ CALL cleaned_data.sproc_output();
 
 :grey_exclamation: Start here if you want to follow along with the  [SQL Challenge WALKTHROUGH](./walkthrough/WALKTHROUGH_DOCKER.md) :grey_exclamation: 
 
-:exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
+:exclamation: If you found this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
 
 

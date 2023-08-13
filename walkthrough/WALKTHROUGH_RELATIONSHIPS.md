@@ -75,7 +75,7 @@ click the link below
 
 Go to [WALKTHROUGH_CODE_CHALLENGE](WALKTHROUGH_CODE_CHALLENGE.md)
 
-:exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
+:exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
 
 

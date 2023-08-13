@@ -291,7 +291,7 @@ Once all of your tables loaded with our cleaned data, click the link below
 
  Go to [WALKTHROUGH_CLEANUP](WALKTHROUGH_CLEANUP.md)
 
-:exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
+:exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
 
 

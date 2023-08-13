@@ -186,7 +186,7 @@ With our database cleaned of any unnecessary tables and schema, we can now add `
 
 Go to [WALKTHROUGH_RELATIONSHIPS](WALKTHROUGH_RELATIONSHIPS.md)
 
-:exclamation: If you found the repository helpful, please consider giving it a :star:. Thanks! :exclamation:
+:exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
 
 
