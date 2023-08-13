@@ -11,8 +11,8 @@
 
 :warning: To start over with an empty table, run the the `drop_all_tables.sql` script. :warning:
 
-<strong>1.  Create the Tables and Relations.</strong>    
-Using the CSV files located in `source_data/csv_data`, create your new SQL tables with the properly formatted data.
+<strong>1.  Create Database, Tables and Relations.</strong>   
+Using the CSV files located in `source_data/csv_data`, create your new SQL database and tables with the properly formatted data.
 
 * Add a numeric, auto-incrementing Primary Key to every table.
 * In the `countries` table, add the column `created_on` with the current date.
@@ -111,7 +111,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>4. List Specific Sub-Region and Change Formatting</strong>  
+<strong>4. Specific Sub-Region and String Functions</strong>  
 List all of the countries and the total number of cities in the Northern Europe sub-region.  List the country names in uppercase and order the list by the length of the country name and alphabetically in ascending order.
 
 <details>
@@ -164,7 +164,7 @@ ORDER BY
 
 
 <strong>5. List Specific Countries by Year</strong>  
- List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the LAST letter of the country name and the number of cities.
+ List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the **LAST** letter of the country name and the number of cities.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -304,7 +304,7 @@ ORDER BY
 <br />
 
 <strong>8. Search with Wildcard and Case</strong>  
-List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  Order by whether it's odd or even in ascending order and country name in alphabetical order.
+List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  Order by whether the population value is odd or even in ascending order and country name in alphabetical order.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -412,7 +412,7 @@ WHERE
 <br />
 
 <strong>10. Using Buckets</strong>  
-List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
+List the bottom third of all countries in the Western Asia sub-region that speak Arabic.  Include the row number and country name.  Order by row number.
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -467,7 +467,7 @@ Create a query that lists country name, capital name, population, languages spok
 
   ##### Expected Results:
 
-country_name|city_name|population|language_array                              |currency_array |
+country_name|city_name|population|languages                                   |currencies     |
 ------------|---------|----------|--------------------------------------------|---------------|
 algeria     |algiers  |   3415811|{french,arabic,kabyle}                      |algerian dinar |
 egypt       |cairo    |  20296000|{arabic}                                    |egyptian pound |
@@ -489,8 +489,9 @@ WITH get_row_values AS (
 		co.country_name,
 		ci.city_name,
 		ci.population,
-		array_agg(l.LANGUAGE) AS language_array,
-		cu.currency_name AS currency_array
+		-- array_agg() aggregates multiple values and returns them in 'array' format.
+		array_agg(l.LANGUAGE) AS languages,
+		cu.currency_name AS currencies
 	FROM
 		cleaned_data.countries AS co
 	JOIN
@@ -661,7 +662,7 @@ ORDER BY
 <br />
 
 <strong>14. Month over Month in View</strong>  
-Create a view that lists the month-year, the number of cities inserted for that month, a running total and the month over month percentage grown for 2021.
+Create a view that lists the month-year, the number of cities inserted for that month, a running city count total and the month over month percentage growth for 2021.
 
 Format the cities count and the running total with the thousands separator and format the month over month growth with a plus symbol and percentage symbol
 
@@ -748,8 +749,7 @@ FROM
 <br />
 
 <strong>15. Stored Procedure to CSV</strong>  
-Create and call a stored procedure that lists a unique row id number, insert date, county name, city name, population and languages 
-spoken for countries in the Latin America and the Caribbean sub-region that were insert on either '2022-04-09', '2022-04-28' or '2022-08-11'.
+Create and call a stored procedure that lists a unique row id number, insert date, county name, city name, population and languages spoken for countries in the Latin America and the Caribbean sub-region that were insert on either '2022-04-09', '2022-04-28' or '2022-08-11'.
 
  Order by the insert date and output the results (including headers) to a CSV file located in [/source_data/csv_output/](../source_data/csv_output/) . 
 

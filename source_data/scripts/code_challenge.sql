@@ -11,7 +11,8 @@
 
 /* Question 2. 
  * 
- * List all of the regions and the total number of countries in each region.
+ * List all of the regions and the total number of countries in each region.  
+ * Order by country count in descending order and capitalize the region name.
  * 
  */
 
@@ -42,7 +43,7 @@ Antartica|            1|
 
 /* Question 3. 
  * 
- * List all of the sub-regions and the total number of cities in each sub-region.
+ * List all of the sub-regions and the total number of cities in each sub-region.  
  * Order by sub-region name alphabetically.
  * 
  */
@@ -88,7 +89,8 @@ Western Europe                 |      3952|
 /* Question 4. 
  * 
  * List all of the countries and the total number of cities in the Northern Europe sub-region.  
- * List the country names in uppercase and order the list by the length of the country name in ascending order.
+ * List the country names in uppercase and order the list by the length of the country name and 
+ * alphabetically in ascending order.
  * 
  */
 
@@ -132,9 +134,8 @@ UNITED KINGDOM|      1305|
 	
 /* Question 5.
  * 
- * List all of the countries and the total number of cities in the Southern Europe sub-region 
- * that were inserted in 2022.  Capitalize the country names and order alphabetically by the 
- * LAST letter of the country name in descending order.
+ *  List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  
+ * 	Capitalize the country names and order alphabetically by the **LAST** letter of the country name and the number of cities.
  * 
  */ 
 
@@ -181,8 +182,8 @@ Italy                 |       542|
 
 /* Question 6.
  * 
- * List all of the countries in the region of Asia that did 
- * NOT have a city with an inserted date from June 2021 through Sept 2021.
+ * List all of the countries in the region of Asia that did **NOT** have a city 
+ * with an inserted date from June 2021 through Sept 2021.
  * 
  */ 
 
@@ -255,9 +256,9 @@ Turkey              |Tut      |  10,161  |            III     |
 
 /* Question 8.
  * 
- * List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether 
- * the total population of the cities listed is an odd or even number.  Order by whether it's odd or even 
- * and country name in alphabetical order.
+ * List all of the countries that end in 'stan'.  Make your query case-insensitive and list 
+ * whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  
+ * Order by whether the population value is odd or even in ascending order and country name in alphabetical order.
  * 
  */
 
@@ -301,8 +302,8 @@ Uzbekistan  |  3,035,547     |Odd        |
 
 /* Question 9.
  * 
- * List the third most populated city by region WITHOUT using limit or offset.
- * List the region name, city name and total population and order by region.
+ * List the third most populated city ranked by region WITHOUT using limit or offset.  
+ * List the region name, city name, population and order the results by region.
  * 
  */
 
@@ -348,7 +349,8 @@ Oceania |Brisbane |  2,360,241      |
 
 /* Question 10.
  * 
- * List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
+ * List the bottom third of all countries in the Western Asia sub-region that speak Arabic.  
+ * Include the row number and country name.  Order by row number.
  * 
  */
 
@@ -391,10 +393,9 @@ row_number|country_name        |
 
 /* Question 11.
  * 
- *  Create a query that lists country name, capital name, population, languages spoken 
- * 	and currency name for countries in the Northen Africa sub-region.  There can be multiple 
- * 	currency names and languages spoken per country.  Add multiple values for the same 
- * 	field into an array.
+ *  Create a query that lists country name, capital name, population, languages spoken and currency name for countries 
+ * 	in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  
+ * 	Add multiple values for the same field into an array.
  * 
  */
 
@@ -404,8 +405,8 @@ WITH get_row_values AS (
 		ci.city_name,
 		ci.population,
 		-- array_agg() aggregates multiple values and returns them in 'array' format.
-		array_agg(l.LANGUAGE) AS language_array,
-		cu.currency_name AS currency_array
+		array_agg(l.LANGUAGE) AS languages,
+		cu.currency_name AS currencies
 	FROM
 		cleaned_data.countries AS co
 	JOIN
@@ -437,7 +438,7 @@ FROM
 
 /*
 
-country_name|city_name|population|language_array                              |currency_array |
+country_name|city_name|population|languages                                   |currencies     |
 ------------+---------+----------+--------------------------------------------+---------------+
 algeria     |algiers  |   3415811|{french,arabic,kabyle}                      |algerian dinar |
 egypt       |cairo    |  20296000|{arabic}                                    |egyptian pound |
@@ -574,9 +575,8 @@ most_consecutive_dates|city_name   |
 
 /* Question 14.
  * 
- * Create a view that lists the month-year, the number
- * of cities inserted for that month, a running total and the month over
- * month percentage grown for 2021.
+ * Create a view that lists the month-year, the number of cities inserted for that month, 
+ * a running city count total and the month over month percentage growth for 2021.
  * 
  * Format the cities count and the running total with the thousands separator
  * and format the month over month growth with a plus symbol and percentage symbol.
@@ -652,10 +652,9 @@ Dec-2021  | 1,472         | 17,282      |+9.31%          |
 
 /* Question 15.
  * 
- * Create and call a stored procedure that lists a unique row id number, insert date,
- * county name, city name, population and languages spoken for countries in the 
- * Latin America and the Caribbean sub-region that were insert on either '2022-04-09', '2022-04-28' or
- * '2022-08-11'.
+ * Create and call a stored procedure that lists a unique row id number, insert date, county name, city name, population 
+ * and languages spoken for countries in the Latin America and the Caribbean sub-region that were insert on 
+ * either '2022-04-09', '2022-04-28' or '2022-08-11'.
  * 
  * Order by the insert date and output the results (including headers) to a CSV file located in /source_data/csv_output/. 
  * 
