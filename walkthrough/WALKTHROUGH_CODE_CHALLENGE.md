@@ -620,7 +620,14 @@ ORDER BY
 <br />
 
 <strong>13. Month over Month in View</strong> 
-List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
+Create a view that lists the month-year, the number of cities inserted for that month, a running total and the month over month percentage grown for 2021.
+
+Format the cities count and the running total with the thousands separator and format the month over month growth with a plus symbol and percentage symbol
+
+Example: 
+month_year|cities_inserted|running_total|month_over_month|
+----------|---------------|-------------|----------------|
+Feb-2021  | 1,291         |  2,762      |+87.76%         |
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -650,7 +657,8 @@ Dec-2021  | 1,472         | 17,282      |+9.31%          |
 
   ##### Answer
   ```sql
-CREATE VIEW year_2021_growth AS (
+DROP VIEW IF EXISTS cleaned_data.year_2021_growth;
+CREATE VIEW cleaned_data.year_2021_growth AS (
 	WITH get_month_count AS (
 		SELECT
 			date_trunc('month', insert_date) as single_month,
@@ -685,7 +693,7 @@ CREATE VIEW year_2021_growth AS (
 		to_char(single_month, 'Mon-YYYY') AS month_year,
 		to_char(monthly_count, '9G999') AS cities_inserted,
 		to_char(total_num_cities, '99G999') AS running_total,
-		'+' || month_over_month || '%' AS month_over_month
+		to_char(month_over_month, 'sg99.99') || '%' AS month_over_month
 	FROM
 		get_month_over_month
 );
@@ -693,7 +701,73 @@ CREATE VIEW year_2021_growth AS (
 SELECT 
 	*
 FROM 
-	year_2021_growth;
+	cleaned_data.year_2021_growth;
+  ```
+</details>
+<br />
+
+<strong>14. Stored Procedure to CSV</strong> 
+Create and call a stored procedure that lists a unique row id number, insert date, county name, city name, population and languages 
+spoken for countries in the Latin America and the Caribbean sub-region that were insert on either '2022-04-09', '2022-04-28' or '2022-08-11'.
+
+ Order by the insert date and output the results (including headers) to a CSV file located in [/source_data/csv_output/](../source_data/csv_output/) . 
+
+<details>
+  <summary>Click to expand expected results!</summary>
+
+  ##### Expected Results:
+
+Results located in [/source_data/csv_output/output.csv](../source_data/csv_output/output.csv)
+
+</details>
+</p>
+
+<details>
+  <summary>Click to expand answer!</summary>
+
+  ##### Answer
+  ```sql
+CREATE OR REPLACE PROCEDURE cleaned_data.sproc_output ()
+LANGUAGE plpgsql
+AS 
+$sproc$
+	BEGIN
+		COPY (
+			SELECT
+				ROW_NUMBER() OVER (ORDER BY ci.insert_date) AS row_id,
+				ci.insert_date,
+				co.country_name,
+				ci.city_name,
+				ci.population,
+				array_agg(la.language) AS languages
+			FROM
+				cleaned_data.cities AS ci
+			JOIN
+				cleaned_data.countries AS co
+			ON 
+				co.country_code_2 = ci.country_code_2
+			LEFT JOIN
+				cleaned_data.languages AS la
+			ON 
+				co.country_code_2 = la.country_code_2
+			WHERE
+				co.sub_region = 'latin america and the caribbean'
+			AND
+				ci.insert_date IN ('2022-04-09', '2022-04-28', '2022-08-11')
+			GROUP BY 
+				ci.insert_date,
+				co.country_name,
+				ci.city_name,
+				ci.population
+			ORDER BY
+				ci.insert_date
+			)
+		TO '/var/lib/postgresql/source_data/csv_output/output.csv' DELIMITER ',' CSV HEADER;
+	END
+$sproc$;
+
+-- Call the stored procedure
+CALL cleaned_data.sproc_output();
   ```
 </details>
 <br />

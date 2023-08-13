@@ -668,6 +668,7 @@ $sproc$
 	END
 $sproc$;
 
+-- Call the stored procedure
 CALL cleaned_data.sproc_output();
 
 /*
