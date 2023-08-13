@@ -14,7 +14,7 @@ Removing duplicate entries is part of the Normalization process.  I've this proc
 
 Create a new file in `source_data/scripts/` and name it `cleanup_tables.sql`.  In this script, we will first remove duplicate entries in our tables.  
 
-After inspecing our data, we see that every country must have a unique `country_code_2`.
+After inspecting our data, we see that every country must have a unique `country_code_2`.
 
 Let's create a query that checks for multiple entries of `country_code_2` in our `clean_data.countries` table.
 
@@ -170,7 +170,7 @@ AND
 	clean_data_1.country_code_2 = clean_data_2.country_code_2;
 ```
 
-With our database cleaned of any unnecessary tables and schema, we can now add `Foreign Key` relationships.
+With our table data cleaned, we can clean-up our database before progressing..
 
 Go to [WALKTHROUGH_CLEANUP](WALKTHROUGH_CLEANUP.md)
 
