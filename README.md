@@ -17,7 +17,7 @@ This project is meant to measure/gauge/practice your technical abilities with SQ
 * Do not alter the CSV files.
 * Most, if not all of these questions are intended purely as a measure of your SQL skills and not as actual questions that one would expect to answer from an employer.
 
-An SQL Code Challenge [Walkthrough](walkthrough/WALKTHROUGH_DOCKER.md) has been created if you would like to follow along in a step by step fashion. 
+An SQL Code Challenge [Walkthrough](walkthrough/WALKTHROUGH_1_DOCKER.md) has been created if you would like to follow along in a step by step fashion. 
 
 The questions are listed below with the expected results and answers hidden so you can cross reference your answers.
 
