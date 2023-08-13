@@ -52,7 +52,7 @@ Using the CSV files located in `source_data/csv_data`, create your new SQL table
 
 :exclamation: This question has already been completed with the ETL process. :exclamation:
 
-<strong>2.  List Regions and Country Count</strong> 
+<strong>2.  List Regions and Country Count</strong>  
 List all of the regions and the total number of countries in each region.  Order by country count in descending order and capitalize the region name.
 
 <details>
@@ -90,7 +90,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>3. List Sub-Regions and City Count</strong> 
+<strong>3. List Sub-Regions and City Count</strong>  
 List all of the sub-regions and the total number of cities in each sub-region.  Order by sub-region name alphabetically.
 
 <details>
@@ -195,7 +195,7 @@ ORDER BY
 <br />
 
 
-<strong>5. List Specific Countries by Year</strong>
+<strong>5. List Specific Countries by Year</strong> 
  List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the LAST letter of the country name and the number of cities.
 
 <details>
@@ -249,7 +249,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>6. List Anti-Join</strong>
+<strong>6. List Anti-Join</strong> 
 List all of the countries in the region of Asia that did **NOT** have a city with an inserted date from June 2021 through Sept 2021.
 
 <details>
@@ -335,7 +335,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>8. Search with Wildcard and Case</strong> 
+<strong>8. Search with Wildcard and Case</strong>  
 List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  Order by whether it's odd or even in ascending order and country name in alphabetical order.
 
 <details>
@@ -443,7 +443,7 @@ WHERE
 </details>
 <br />
 
-<strong>10. Using Buckets</strong> 
+<strong>10. Using Buckets</strong>  
 List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
 
 <details>
@@ -491,7 +491,7 @@ WHERE
 </details>
 <br />
 
-<strong>11. Using Arrays</strong> 
+<strong>11. Using Arrays</strong>  
 Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
 
 <details>
@@ -555,7 +555,7 @@ FROM
 </details>
 <br />
 
-<strong>12. Using Case and Percentages</strong> 
+<strong>12. Using Case and Percentages</strong>  
 Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022.  List how many vowels and consonants are present in the city name and concatnate their percentage to the their respective count in parenthesis.  
 
 <details>
@@ -619,7 +619,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>13. Most Consecutive Days</strong> 
+<strong>13. Most Consecutive Days</strong>  
 List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
 
 <details>
