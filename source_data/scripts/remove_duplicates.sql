@@ -5,7 +5,7 @@
 	Website: https://www.shaker.dev
 	LinkedIn: https://www.linkedin.com/in/jaime-shaker/
 	
-	File Name: cleanup_tables.sql
+	File Name: remove_duplicates.sql
 */
 
 -- Remove Duplicate Entries
@@ -39,11 +39,3 @@ WHERE
 AND 
 	-- This statement ensures that both values are identical.
 	clean_data_1.country_code_2 = clean_data_2.country_code_2;
-	
--- Drop All import_data Tables and Schema
-
-DROP TABLE import_data.countries;
-DROP TABLE import_data.cities;
-DROP TABLE import_data.currencies;
-DROP TABLE import_data.languages;
-DROP SCHEMA import_data;

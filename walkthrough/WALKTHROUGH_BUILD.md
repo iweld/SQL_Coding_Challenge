@@ -95,7 +95,6 @@ This will definitely cause some problems if not corrected, however, right now ou
 Let's use the same process to add all of the CSV files in `source_data/csv_data/`
 * cities.csv
 * currencies.csv
-* gdp.csv
 * languages.csv
 
 After adding all the necessary code, our `build_tables.sql` file should now look like this...
