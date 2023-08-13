@@ -289,7 +289,7 @@ Click the link to view the complete [normalize_table.sql](../source_data/scripts
 
 Once all of your tables loaded with our cleaned data, click the link below
 
- Go to [WALKTHROUGH_REMOVE_DUPLICATES](WALKTHROUGH_REMOVE_DUPLICATES.md)
+ Go to [WALKTHROUGH_REMOVE_DUPLICATES](WALKTHROUGH_4_REMOVE_DUPLICATES.md)
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 

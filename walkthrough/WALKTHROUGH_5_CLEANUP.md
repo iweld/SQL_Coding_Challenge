@@ -40,7 +40,7 @@ DROP SCHEMA import_data CASCADE;
 
 With our database cleaned of any unnecessary tables and schema, we can now add `Foreign Key` relationships.
 
-Go to [WALKTHROUGH_RELATIONSHIPS](WALKTHROUGH_RELATIONSHIPS.md)
+Go to [WALKTHROUGH_RELATIONSHIPS](WALKTHROUGH_6_RELATIONSHIPS.md)
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 

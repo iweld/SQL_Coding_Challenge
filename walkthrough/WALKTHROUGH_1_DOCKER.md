@@ -57,7 +57,7 @@ The `docker-compose down` command will stop the container until the next time yo
  
 Now that we have our PostgreSQL server up and running, click the link below and let's start creating tables and inserting data.
 
- Go to [WALKTHROUGH_BUILD](WALKTHROUGH_BUILD.md)
+ Go to [WALKTHROUGH_BUILD](WALKTHROUGH_2_BUILD.md)
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 

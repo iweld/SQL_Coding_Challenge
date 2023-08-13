@@ -212,7 +212,7 @@ Execute the complete script and our data has now been successfully extracted fro
 
 We can now TRANSFORM our data into a usable resource.
 
- Go to [WALKTHROUGH_NORMALIZE](WALKTHROUGH_NORMALIZE.md)
+ Go to [WALKTHROUGH_NORMALIZE](WALKTHROUGH_3_NORMALIZE.md)
 
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:

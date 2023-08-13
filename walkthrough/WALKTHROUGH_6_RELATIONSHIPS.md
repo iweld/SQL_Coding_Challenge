@@ -73,7 +73,7 @@ We are now ready to complete the `SQL Coding Challenge`.
 
 click the link below
 
-Go to [WALKTHROUGH_CODE_CHALLENGE](WALKTHROUGH_CODE_CHALLENGE.md)
+Go to [WALKTHROUGH_CODE_CHALLENGE](WALKTHROUGH_7_CODE_CHALLENGE.md)
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 

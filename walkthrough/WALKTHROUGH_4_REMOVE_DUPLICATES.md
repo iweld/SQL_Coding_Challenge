@@ -172,7 +172,7 @@ AND
 
 With our table data cleaned and free of duplicate entries, we can clean-up our database before progressing..
 
-Go to [WALKTHROUGH_CLEANUP](WALKTHROUGH_CLEANUP.md)
+Go to [WALKTHROUGH_CLEANUP](WALKTHROUGH_5_CLEANUP.md)
 
 :exclamation: If you find this repository helpful, please consider giving it a :star:. Thanks! :exclamation:
 
