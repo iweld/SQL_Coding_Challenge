@@ -179,8 +179,40 @@ Italy                 |       542|
 
 */
 
-
 /* Question 6.
+ * 
+ * List all of the countries in the region of Asia that did 
+ * NOT have a city with an inserted date from June 2021 through Sept 2021.
+ * 
+ */ 
+
+SELECT 
+	DISTINCT initcap(co.country_name) AS country_name
+FROM
+	cleaned_data.countries AS co
+LEFT JOIN 
+	cleaned_data.cities AS ci
+ON 
+	co.country_code_2 = ci.country_code_2
+AND
+	ci.insert_date BETWEEN '2021-06-01' AND '2021-10-01'
+WHERE
+	co.region = 'asia'
+AND 
+	ci.country_code_2 IS NULL;
+
+/*
+
+country_name     |
+-----------------+
+Brunei Darussalam|
+Kuwait           |
+Macao            |
+Singapore        |
+
+*/
+
+/* Question 7.
  * 
  * List the country, city name, population and city name length for the city names that are palindromes in the 
  * Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of 
@@ -221,7 +253,7 @@ Turkey              |Tut      |  10,161  |            III     |
 */
 
 
-/* Question 7.
+/* Question 8.
  * 
  * List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether 
  * the total population of the cities listed is an odd or even number.  Order by whether it's odd or even 
@@ -267,7 +299,7 @@ Uzbekistan  |  3,035,547     |Odd        |
 
 */
 
-/* Question 8.
+/* Question 9.
  * 
  * List the third most populated city by region WITHOUT using limit or offset.
  * List the region name, city name and total population and order by region.
@@ -314,7 +346,7 @@ Oceania |Brisbane |  2,360,241      |
 
 */
 
-/* Question 9.
+/* Question 10.
  * 
  * List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
  * 
@@ -357,7 +389,7 @@ row_number|country_name        |
 
 */
 
-/* Question 10.
+/* Question 11.
  * 
  *  Create a query that lists country name, capital name, population, languages spoken 
  * 	and currency name for countries in the Northen Africa sub-region.  There can be multiple 
@@ -417,7 +449,7 @@ tunisia     |tunis    |   1056247|{french,arabic}                             |t
 */
 
 
-/* Question 11.
+/* Question 12.
  * 
  * Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022. List 
  * how many vowels and consonants are present in the city name and concatnate their percentage to the their respective 
@@ -475,7 +507,7 @@ jeffersonville |5 (35.71%)      |9 (64.29%)           |
 	
 */
 
-/* Question 12.
+/* Question 13.
  * 
  * List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted
  * in April 2022.  
@@ -540,7 +572,7 @@ most_consecutive_dates|city_name   |
 		
 */	
 
-/* Question 13.
+/* Question 14.
  * 
  * Create a view that lists the month-year, the number
  * of cities inserted for that month, a running total and the month over
@@ -618,7 +650,7 @@ Dec-2021  | 1,472         | 17,282      |+9.31%          |
 		
 */		
 
-/* Question 14.
+/* Question 15.
  * 
  * Create and call a stored procedure that lists a unique row id number, insert date,
  * county name, city name, population and languages spoken for countries in the 
