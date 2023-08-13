@@ -1,0 +1,27 @@
+row_id,insert_date,country_name,city_name,population,languages
+1,2022-04-09,argentina,santa maria,9526,"{english,spanish}"
+2,2022-04-09,brazil,clevelandia,16450,"{spanish,english,portuguese}"
+3,2022-04-09,brazil,conceicao do rio verde,12949,"{english,portuguese,spanish}"
+4,2022-04-09,brazil,curaca,35208,"{english,portuguese,spanish}"
+5,2022-04-09,brazil,japoata,12938,"{spanish,english,portuguese}"
+6,2022-04-09,haiti,petite riviere de nippes,29815,"{spanish,french}"
+7,2022-04-09,peru,puerto pimentel,15552,"{quechua,spanish}"
+8,2022-04-28,argentina,ciudad general belgrano,92957,"{english,spanish}"
+9,2022-04-28,brazil,caete,40750,"{portuguese,spanish,english}"
+10,2022-04-28,brazil,catanduva,119480,"{spanish,english,portuguese}"
+11,2022-04-28,brazil,colider,32120,"{english,spanish,portuguese}"
+12,2022-04-28,brazil,miracema do tocantins,20684,"{spanish,english,portuguese}"
+13,2022-04-28,brazil,presidente medici,18571,"{spanish,english,portuguese}"
+14,2022-04-28,colombia,coyaima,28443,"{spanish,english}"
+15,2022-04-28,colombia,manati,13456,"{spanish,english}"
+16,2022-04-28,dominican republic,licey al medio,25539,{spanish}
+17,2022-04-28,mexico,amatitan,15344,"{spanish,english}"
+18,2022-04-28,mexico,san juan zitlaltepec,19600,"{spanish,english}"
+19,2022-04-28,mexico,teopisca,20044,"{english,spanish}"
+20,2022-08-11,brazil,charqueadas,35320,"{portuguese,spanish,english}"
+21,2022-08-11,brazil,chopinzinho,19679,"{portuguese,english,spanish}"
+22,2022-08-11,brazil,jaguarao,27931,"{portuguese,spanish,english}"
+23,2022-08-11,ecuador,vinces,30241,"{spanish,quechua}"
+24,2022-08-11,guatemala,el palmar,31706,{spanish}
+25,2022-08-11,nicaragua,villanueva,25660,{spanish}
+26,2022-08-11,puerto rico,guaynabo,70542,"{english,spanish}"

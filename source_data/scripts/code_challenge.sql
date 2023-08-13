@@ -553,7 +553,8 @@ most_consecutive_dates|city_name   |
  * 
  */
 
-CREATE VIEW year_2021_growth AS (
+DROP VIEW IF EXISTS cleaned_data.year_2021_growth;
+CREATE VIEW cleaned_data.year_2021_growth AS (
 	WITH get_month_count AS (
 		SELECT
 			date_trunc('month', insert_date) as single_month,
@@ -588,7 +589,7 @@ CREATE VIEW year_2021_growth AS (
 		to_char(single_month, 'Mon-YYYY') AS month_year,
 		to_char(monthly_count, '9G999') AS cities_inserted,
 		to_char(total_num_cities, '99G999') AS running_total,
-		'+' || month_over_month || '%' AS month_over_month
+		to_char(month_over_month, 'sg99.99') || '%' AS month_over_month
 	FROM
 		get_month_over_month
 );
@@ -596,7 +597,7 @@ CREATE VIEW year_2021_growth AS (
 SELECT 
 	*
 FROM 
-	year_2021_growth;
+	cleaned_data.year_2021_growth;
 
 /*
 		
@@ -616,11 +617,91 @@ Nov-2021  | 1,378         | 15,810      |+9.55%          |
 Dec-2021  | 1,472         | 17,282      |+9.31%          |		
 		
 */		
+
+/* Question 14.
+ * 
+ * Create and call a stored procedure that lists a unique row id number, insert date,
+ * county name, city name, population and languages spoken for countries in the 
+ * Latin America and the Caribbean sub-region that were insert on either '2022-04-09', '2022-04-28' or
+ * '2022-08-11'.
+ * 
+ * Order by the insert date and output the results (including headers) to a CSV file located in /source_data/csv_output/. 
+ * 
+ */
+
+CREATE OR REPLACE PROCEDURE cleaned_data.sproc_output ()
+LANGUAGE plpgsql
+AS 
+$sproc$
+	BEGIN
+		COPY (
+			SELECT
+				ROW_NUMBER() OVER (ORDER BY ci.insert_date) AS row_id,
+				ci.insert_date,
+				co.country_name,
+				ci.city_name,
+				ci.population,
+				array_agg(la.language) AS languages
+			FROM
+				cleaned_data.cities AS ci
+			JOIN
+				cleaned_data.countries AS co
+			ON 
+				co.country_code_2 = ci.country_code_2
+			LEFT JOIN
+				cleaned_data.languages AS la
+			ON 
+				co.country_code_2 = la.country_code_2
+			WHERE
+				co.sub_region = 'latin america and the caribbean'
+			AND
+				ci.insert_date IN ('2022-04-09', '2022-04-28', '2022-08-11')
+			GROUP BY 
+				ci.insert_date,
+				co.country_name,
+				ci.city_name,
+				ci.population
+			ORDER BY
+				ci.insert_date
+			)
+		TO '/var/lib/postgresql/source_data/csv_output/output.csv' DELIMITER ',' CSV HEADER;
+	END
+$sproc$;
+
+CALL cleaned_data.sproc_output();
+
+/*
+ 
+Results located in /source_data/csv_output/output.csv
+
+row_id,insert_date,country_name,city_name,population,languages
+1,2022-04-09,argentina,santa maria,9526,"{english,spanish}"
+2,2022-04-09,brazil,clevelandia,16450,"{spanish,english,portuguese}"
+3,2022-04-09,brazil,conceicao do rio verde,12949,"{english,portuguese,spanish}"
+4,2022-04-09,brazil,curaca,35208,"{english,portuguese,spanish}"
+5,2022-04-09,brazil,japoata,12938,"{spanish,english,portuguese}"
+6,2022-04-09,haiti,petite riviere de nippes,29815,"{spanish,french}"
+7,2022-04-09,peru,puerto pimentel,15552,"{quechua,spanish}"
+8,2022-04-28,argentina,ciudad general belgrano,92957,"{english,spanish}"
+9,2022-04-28,brazil,caete,40750,"{portuguese,spanish,english}"
+10,2022-04-28,brazil,catanduva,119480,"{spanish,english,portuguese}"
+11,2022-04-28,brazil,colider,32120,"{english,spanish,portuguese}"
+12,2022-04-28,brazil,miracema do tocantins,20684,"{spanish,english,portuguese}"
+13,2022-04-28,brazil,presidente medici,18571,"{spanish,english,portuguese}"
+14,2022-04-28,colombia,coyaima,28443,"{spanish,english}"
+15,2022-04-28,colombia,manati,13456,"{spanish,english}"
+16,2022-04-28,dominican republic,licey al medio,25539,{spanish}
+17,2022-04-28,mexico,amatitan,15344,"{spanish,english}"
+18,2022-04-28,mexico,san juan zitlaltepec,19600,"{spanish,english}"
+19,2022-04-28,mexico,teopisca,20044,"{english,spanish}"
+20,2022-08-11,brazil,charqueadas,35320,"{portuguese,spanish,english}"
+21,2022-08-11,brazil,chopinzinho,19679,"{portuguese,english,spanish}"
+22,2022-08-11,brazil,jaguarao,27931,"{portuguese,spanish,english}"
+23,2022-08-11,ecuador,vinces,30241,"{spanish,quechua}"
+24,2022-08-11,guatemala,el palmar,31706,{spanish}
+25,2022-08-11,nicaragua,villanueva,25660,{spanish}
+26,2022-08-11,puerto rico,guaynabo,70542,"{english,spanish}"		
 		
-		
-		
-		
-		
-		
+*/		
 	
 
