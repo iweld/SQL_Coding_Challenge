@@ -143,7 +143,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>4. List Specific Sub-Region and Change Formatting</strong> 
+<strong>4. List Specific Sub-Region and Change Formatting</strong>  
 List all of the countries and the total number of cities in the Northern Europe sub-region.  List the country names in uppercase and order the list by the length of the country name and alphabetically in ascending order.
 
 <details>
@@ -195,7 +195,7 @@ ORDER BY
 <br />
 
 
-<strong>5. List Specific Countries by Year</strong> 
+<strong>5. List Specific Countries by Year</strong>  
  List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the LAST letter of the country name and the number of cities.
 
 <details>
@@ -249,7 +249,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>6. List Anti-Join</strong> 
+<strong>6. List Anti-Join</strong>  
 List all of the countries in the region of Asia that did **NOT** have a city with an inserted date from June 2021 through Sept 2021.
 
 <details>
@@ -290,7 +290,7 @@ AND
 </details>
 <br />
 
-<strong>7. Reversable Names</strong> 
+<strong>7. Reversable Names</strong>  
 List the country, city name, population and city name length for the city names that are [palindromes](https://en.wikipedia.org/wiki/Palindrome) in the Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of the city name in roman numerals.  Order by the length of the city name in descending order and alphabetically in ascending order.
 
 <details>
@@ -388,7 +388,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>9. Ranking Regions</strong> 
+<strong>9. Ranking Regions</strong>  
 List the third most populated city ranked by region WITHOUT using limit or offset.  List the region name, city name, population and order the results by region.
 
 <details>
@@ -692,7 +692,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>14. Month over Month in View</strong> 
+<strong>14. Month over Month in View</strong>  
 Create a view that lists the month-year, the number of cities inserted for that month, a running total and the month over month percentage grown for 2021.
 
 Format the cities count and the running total with the thousands separator and format the month over month growth with a plus symbol and percentage symbol
@@ -779,7 +779,7 @@ FROM
 </details>
 <br />
 
-<strong>15. Stored Procedure to CSV</strong> 
+<strong>15. Stored Procedure to CSV</strong>  
 Create and call a stored procedure that lists a unique row id number, insert date, county name, city name, population and languages 
 spoken for countries in the Latin America and the Caribbean sub-region that were insert on either '2022-04-09', '2022-04-28' or '2022-08-11'.
 

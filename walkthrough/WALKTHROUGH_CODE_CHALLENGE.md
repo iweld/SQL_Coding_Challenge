@@ -11,7 +11,7 @@
 
 :warning: To start over with an empty table, run the the `drop_all_tables.sql` script. :warning:
 
-<strong>1.  Create the Tables and Relations.</strong>  
+<strong>1.  Create the Tables and Relations.</strong>    
 Using the CSV files located in `source_data/csv_data`, create your new SQL tables with the properly formatted data.
 
 * Add a numeric, auto-incrementing Primary Key to every table.
@@ -20,7 +20,7 @@ Using the CSV files located in `source_data/csv_data`, create your new SQL table
 
 :exclamation: This question has already been completed with the ETL process. :exclamation:
 
-<strong>2.  List Regions and Country Count</strong> 
+<strong>2.  List Regions and Country Count</strong>  
 List all of the regions and the total number of countries in each region.  Order by country count in descending order and capitalize the region name.
 
 <details>
@@ -58,7 +58,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>3. List Sub-Regions and City Count</strong> 
+<strong>3. List Sub-Regions and City Count</strong>  
 List all of the sub-regions and the total number of cities in each sub-region.  Order by sub-region name alphabetically.
 
 <details>
@@ -111,7 +111,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>4. List Specific Sub-Region and Change Formatting</strong> 
+<strong>4. List Specific Sub-Region and Change Formatting</strong>  
 List all of the countries and the total number of cities in the Northern Europe sub-region.  List the country names in uppercase and order the list by the length of the country name and alphabetically in ascending order.
 
 <details>
@@ -163,7 +163,7 @@ ORDER BY
 <br />
 
 
-<strong>5. List Specific Countries by Year</strong>
+<strong>5. List Specific Countries by Year</strong>  
  List all of the countries and the total number of cities in the Southern Europe sub-region that were inserted in 2021.  Capitalize the country names and order alphabetically by the LAST letter of the country name and the number of cities.
 
 <details>
@@ -217,7 +217,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>6. List Anti-Join</strong>
+<strong>6. List Anti-Join</strong>  
 List all of the countries in the region of Asia that did **NOT** have a city with an inserted date from June 2021 through Sept 2021.
 
 <details>
@@ -258,7 +258,7 @@ AND
 </details>
 <br />
 
-<strong>7. Reversable Names</strong> 
+<strong>7. Reversable Names</strong>  
 List the country, city name, population and city name length for the city names that are [palindromes](https://en.wikipedia.org/wiki/Palindrome) in the Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of the city name in roman numerals.  Order by the length of the city name in descending order and alphabetically in ascending order.
 
 <details>
@@ -303,7 +303,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>8. Search with Wildcard and Case</strong> 
+<strong>8. Search with Wildcard and Case</strong>  
 List all of the countries that end in 'stan'.  Make your query case-insensitive and list whether the total population of the cities listed is an odd or even number for cities inserted in 2022.  Order by whether it's odd or even in ascending order and country name in alphabetical order.
 
 <details>
@@ -356,7 +356,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>9. Ranking Regions</strong> 
+<strong>9. Ranking Regions</strong>  
 List the third most populated city ranked by region WITHOUT using limit or offset.  List the region name, city name, population and order the results by region.
 
 <details>
@@ -411,7 +411,7 @@ WHERE
 </details>
 <br />
 
-<strong>10. Using Buckets</strong> 
+<strong>10. Using Buckets</strong>  
 List the bottom third of all countries in the Western Asia sub-region that speak Arabic.
 
 <details>
@@ -459,7 +459,7 @@ WHERE
 </details>
 <br />
 
-<strong>11. Using Arrays</strong> 
+<strong>11. Using Arrays</strong>  
 Create a query that lists country name, capital name, population, languages spoken and currency name for countries in the Northen Africa sub-region.  There can be multiple currency names and languages spoken per country.  Add multiple values for the same field into an array.
 
 <details>
@@ -523,7 +523,7 @@ FROM
 </details>
 <br />
 
-<strong>12. Using Case and Percentages</strong> 
+<strong>12. Using Case and Percentages</strong>  
 Produce a query that returns the city names for cities in the U.S. that were inserted on April, 28th 2022.  List how many vowels and consonants are present in the city name and concatnate their percentage to the their respective count in parenthesis.  
 
 <details>
@@ -587,7 +587,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>13. Most Consecutive Days</strong> 
+<strong>13. Most Consecutive Days</strong>  
 List the most consecutive inserted dates and the capitalized city names for cities in Canada that where inserted in April 2022.  
 
 <details>
@@ -660,7 +660,7 @@ ORDER BY
 </details>
 <br />
 
-<strong>14. Month over Month in View</strong> 
+<strong>14. Month over Month in View</strong>  
 Create a view that lists the month-year, the number of cities inserted for that month, a running total and the month over month percentage grown for 2021.
 
 Format the cities count and the running total with the thousands separator and format the month over month growth with a plus symbol and percentage symbol
@@ -747,7 +747,7 @@ FROM
 </details>
 <br />
 
-<strong>15. Stored Procedure to CSV</strong> 
+<strong>15. Stored Procedure to CSV</strong>  
 Create and call a stored procedure that lists a unique row id number, insert date, county name, city name, population and languages 
 spoken for countries in the Latin America and the Caribbean sub-region that were insert on either '2022-04-09', '2022-04-28' or '2022-08-11'.
 
