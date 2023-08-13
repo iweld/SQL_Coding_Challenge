@@ -10,13 +10,13 @@
 
 ###  Clean Up 
 
-Now that are tables have been cleaned, we can actually begin answering the questions of the `SQL Coding Challenge`.  Before we do that, let's do a little more clean up and `Drop` our import schema and the tables associated with it as they are not needed anymore.
+Now that are tables have been cleaned, we can actually begin answering the questions of the `SQL Coding Challenge`.  Before we do that, let's do a little clean up and `Drop` our import schema and the tables associated with it as they are not needed anymore.
 
-If for whatever reason we needed to start over, we can easily run the `build_tables.sql`  and then the `normalize_table.sql` scripts and regenerate the data consistently.
+If for whatever reason you needed to start over, you can easily rerun the `build_tables.sql`  and then the `normalize_table.sql` scripts and regenerate the data consistently.
 
 `DROP TABLE` removes tables from the database. To empty a table of rows without destroying the table, use `DELETE` or `TRUNCATE`.
 
-The complete `cleaned_data.cleanup_tables.sql` script should look like...
+The complete `cleanup_db.sql` script should look like...
 
 ```sql
 /*

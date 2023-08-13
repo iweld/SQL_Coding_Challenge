@@ -10,9 +10,9 @@
 
 ###  Removing Duplicates 
 
-Removing duplicate entries is part of the Normalization process.  I've this process in its own file to reduce clutter in the `normalize_tables.sql` script.
+Removing duplicate entries is part of the Normalization process.  I've placed this process in its own file to reduce clutter in the `normalize_tables.sql` script.
 
-Create a new file in `source_data/scripts/` and name it `cleanup_tables.sql`.  In this script, we will first remove duplicate entries in our tables.  
+Create a new file in `source_data/scripts/` and name it `remove_duplicates.sql`.  In this script, we remove duplicate entries in our tables.  
 
 After inspecting our data, we see that every country must have a unique `country_code_2`.
 
@@ -122,7 +122,7 @@ The multiple entries for `Albania` have been deleted.
 
 This query works for the `clean_data.countries` table because every country has one unique `country_code_2`.  The problem with using this method with the other tables is that many different countries share cities of the same name, currency type and languages.  The other tables would have to seach for a combination of the table fields.  To reduce clutter, the only table that has duplicate entries is the `clean_data.countries` table.
 
-If for whatever reason we needed to start over, we can easily run the `build_tables.sql`  and then the `normalize_table.sql` scripts and regenerate the data consistently.
+If for whatever reason you needed to start over, you can easily rerun the `build_tables.sql`  and then the `normalize_table.sql` scripts and regenerate the data consistently.
 
 The complete `remove_duplicates.sql` script should look like...
 
@@ -170,7 +170,7 @@ AND
 	clean_data_1.country_code_2 = clean_data_2.country_code_2;
 ```
 
-With our table data cleaned, we can clean-up our database before progressing..
+With our table data cleaned and free of duplicate entries, we can clean-up our database before progressing..
 
 Go to [WALKTHROUGH_CLEANUP](WALKTHROUGH_CLEANUP.md)
 
