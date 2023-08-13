@@ -43,4 +43,4 @@ DROP TABLE IF EXISTS cleaned_data.countries;
 DROP TABLE IF EXISTS cleaned_data.cities;
 DROP TABLE IF EXISTS cleaned_data.currencies;
 DROP TABLE IF EXISTS cleaned_data.languages;
-DROP SCHEMA IF EXISTS cleaned_data;
+DROP SCHEMA IF EXISTS cleaned_data CASCADE;
