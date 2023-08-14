@@ -46,11 +46,13 @@ Antartica|            1|
   ##### Answer
   ```sql
 SELECT 
+	-- initcap() capitalizes the first letter of every word in a string.
 	initcap(region) AS region,
 	count(*) AS country_count
 FROM
 	cleaned_data.countries
 GROUP BY
+	-- Aggregate functions 'count()' require you to group all column fields.
 	region
 ORDER BY 
 	country_count DESC;
@@ -144,6 +146,7 @@ UNITED KINGDOM|      1305|
   ##### Answer
   ```sql
 SELECT 
+	-- upper() returns your string in uppercase.
 	upper(co.country_name) AS country_name,
 	count(*) AS city_count
 FROM
@@ -157,6 +160,7 @@ WHERE
 GROUP BY 
 	co.country_name
 ORDER BY 
+	-- length() returns the number or characters in a string including spaces.  
 	length(co.country_name), co.country_name;
   ```
 </details>

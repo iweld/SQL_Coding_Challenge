@@ -95,7 +95,7 @@ Western Europe                 |      3952|
  */
 
 SELECT 
-	-- upper() will return your string in uppercase.
+	-- upper() returns your string in uppercase.
 	upper(co.country_name) AS country_name,
 	count(*) AS city_count
 FROM
@@ -188,9 +188,13 @@ Italy                 |       542|
  */ 
 
 SELECT 
+	-- Distinct will only return unique values
 	DISTINCT initcap(co.country_name) AS country_name
 FROM
 	cleaned_data.countries AS co
+-- Left join will return all matching values from the left table (cleaned_data.countries) and
+-- only the matching values from the right table (cleaned_tables.cities) resulting in NULLS where
+-- there are no matches in the left table.
 LEFT JOIN 
 	cleaned_data.cities AS ci
 ON 
@@ -199,6 +203,7 @@ AND
 	ci.insert_date BETWEEN '2021-06-01' AND '2021-10-01'
 WHERE
 	co.region = 'asia'
+-- Only return values that did NOT have a match with the countries table.
 AND 
 	ci.country_code_2 IS NULL;
 
