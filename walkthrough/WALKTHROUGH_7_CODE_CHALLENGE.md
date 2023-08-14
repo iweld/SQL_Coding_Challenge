@@ -212,10 +212,12 @@ ON
 WHERE
 	co.sub_region = 'southern europe'
 AND
+	-- extract() & date_part() functions allow you to breakdown dates and timestamps to individual years, month, days, hours.....
 	EXTRACT('year' FROM ci.insert_date) = 2021
 GROUP BY 
 	co.country_name
 ORDER BY 
+	-- substring() function returns a specific portion of a string.
 	substring(co.country_name,length(co.country_name),1), city_count;
   ```
 </details>
@@ -245,9 +247,13 @@ Singapore        |
   ##### Answer
   ```sql
 SELECT 
+	-- Distinct will only return unique values
 	DISTINCT initcap(co.country_name) AS country_name
 FROM
 	cleaned_data.countries AS co
+-- Left join will return all matching values from the left table (cleaned_data.countries) and
+-- only the matching values from the right table (cleaned_tables.cities) resulting in NULLS where
+-- there are no matches in the left table.
 LEFT JOIN 
 	cleaned_data.cities AS ci
 ON 
@@ -256,6 +262,7 @@ AND
 	ci.insert_date BETWEEN '2021-06-01' AND '2021-10-01'
 WHERE
 	co.region = 'asia'
+-- Only return values that did NOT have a match with the countries table.
 AND 
 	ci.country_code_2 IS NULL;
   ```
@@ -289,6 +296,7 @@ Turkey              |Tut      |  10,161  |            III     |
 SELECT 
 	initcap(co.country_name) AS country_name,
 	initcap(ci.city_name) AS city_name,
+	-- to_char() takes non-string data types and returns them as strings.
 	to_char(ci.population, '999G999') AS population,
 	to_char(length(ci.city_name), 'RN') AS roman_numeral_length
 FROM
