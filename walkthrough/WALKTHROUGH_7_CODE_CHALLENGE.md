@@ -447,8 +447,10 @@ yemen               |
   ##### Answer
   ```sql
 WITH get_ntile_cte AS (
-	SELECT 
+	SELECT
+		ROW_NUMBER() OVER (ORDER BY country_name) AS rn,
 		country_name,
+		-- ntile() window functions returns groups of data section into 'buckets'.
 		NTILE(3) OVER (ORDER BY country_name) AS nt
 	FROM
 		cleaned_data.countries AS co
@@ -462,6 +464,7 @@ WITH get_ntile_cte AS (
 		l.language = 'arabic'
 )
 SELECT
+	rn AS row_number,
 	country_name
 FROM
 	get_ntile_cte
