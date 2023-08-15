@@ -46,7 +46,7 @@ First, let's connect to our Docker/PostgreSQL container by opening up another co
 
  `start_fresh.sh`
 
- This will be our Bash script that will execute the psql code.  Inside of the `start_fresh.sh` your script should look like this.
+ This is the Bash script that will execute the psql code.  Inside of the `start_fresh.sh`,  script should look like this.
 
  ```bash
  #!/bin/bash
