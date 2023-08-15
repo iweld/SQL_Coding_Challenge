@@ -377,7 +377,7 @@ WITH get_ntile_cte AS (
 		l.language = 'arabic'
 )
 SELECT
-	rn AS row_number,
+	rn AS row_id,
 	country_name
 FROM
 	get_ntile_cte
@@ -387,12 +387,12 @@ WHERE
 
 /*
 
-row_number|country_name        |
-----------+--------------------+
-         9|saudi arabia        |
-        10|syrian arab republic|
-        11|united arab emirates|
-        12|yemen               |
+row_id|country_name        |
+------+--------------------+
+     9|saudi arabia        |
+    10|syrian arab republic|
+    11|united arab emirates|
+    12|yemen               |
 
 */
 

@@ -449,8 +449,8 @@ List the bottom third of all countries in the Western Asia sub-region that speak
 
   ##### Expected Results:
 
-row_number|country_name        |
-----------|--------------------|
+row_id|country_name        |
+------|--------------------|
 9|saudi arabia        |
 10|syrian arab republic|
 11|united arab emirates|
