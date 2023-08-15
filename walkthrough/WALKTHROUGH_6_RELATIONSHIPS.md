@@ -69,6 +69,9 @@ Once you execute the complete script and have created a `FOREIGN KEY` constraint
 
 ![alt text](../images/ERD.PNG)
 
+:warning:**Bonus**:warning:
+* Automate this mini ETL process using a [Bash shell script](WALKTHROUGH_BONUS_BASH.md)!
+
 We are now ready to complete the `SQL Coding Challenge`.
 
 click the link below

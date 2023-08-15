@@ -149,12 +149,5 @@ INSERT INTO cleaned_data.languages (
 	FROM
 		import_data.languages AS i
 );
-
-SELECT 
-	country_name,
-	country_code_2
-FROM 
-	cleaned_data.countries 
-LIMIT 5;
 	
 
