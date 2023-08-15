@@ -449,12 +449,12 @@ List the bottom third of all countries in the Western Asia sub-region that speak
 
   ##### Expected Results:
 
-country_name        |
---------------------|
-saudi arabia        |
-syrian arab republic|
-united arab emirates|
-yemen               |
+row_number|country_name        |
+----------|--------------------|
+9|saudi arabia        |
+10|syrian arab republic|
+11|united arab emirates|
+12|yemen               |
 
 </details>
 </p>

@@ -431,12 +431,12 @@ List the bottom third of all countries in the Western Asia sub-region that speak
 
   ##### Expected Results:
 
-country_name        |
---------------------|
-saudi arabia        |
-syrian arab republic|
-united arab emirates|
-yemen               |
+row_number|country_name        |
+----------|--------------------|
+9|saudi arabia        |
+10|syrian arab republic|
+11|united arab emirates|
+12|yemen               |
 
 </details>
 </p>
@@ -684,7 +684,7 @@ Format the cities count and the running total with the thousands separator and f
 Example: 
 month_year|cities_inserted|running_total|month_over_month|
 ----------|---------------|-------------|----------------|
-Feb-2021  | 1,291         |  2,762      |+87.76%         |
+Feb-2021  | 1,291         |  2,762      ||87.76%         |
 
 <details>
   <summary>Click to expand expected results!</summary>
@@ -694,17 +694,17 @@ Feb-2021  | 1,291         |  2,762      |+87.76%         |
 month_year|cities_inserted|running_total|month_over_month|
 ----------|---------------|-------------|----------------|
 Jan-2021  | 1,471         |  1,471      |                |
-Feb-2021  | 1,291         |  2,762      |+87.76%         |
-Mar-2021  | 1,485         |  4,247      |+53.77%         |
-Apr-2021  | 1,508         |  5,755      |+35.51%         |
-May-2021  | 1,509         |  7,264      |+26.22%         |
-Jun-2021  | 1,395         |  8,659      |+19.20%         |
-Jul-2021  | 1,394         | 10,053      |+16.10%         |
-Aug-2021  | 1,481         | 11,534      |+14.73%         |
-Sep-2021  | 1,452         | 12,986      |+12.59%         |
-Oct-2021  | 1,446         | 14,432      |+11.14%         |
-Nov-2021  | 1,378         | 15,810      |+9.55%          |
-Dec-2021  | 1,472         | 17,282      |+9.31%          |
+Feb-2021  | 1,291         |  2,762      ||87.76%         |
+Mar-2021  | 1,485         |  4,247      ||53.77%         |
+Apr-2021  | 1,508         |  5,755      ||35.51%         |
+May-2021  | 1,509         |  7,264      ||26.22%         |
+Jun-2021  | 1,395         |  8,659      ||19.20%         |
+Jul-2021  | 1,394         | 10,053      ||16.10%         |
+Aug-2021  | 1,481         | 11,534      ||14.73%         |
+Sep-2021  | 1,452         | 12,986      ||12.59%         |
+Oct-2021  | 1,446         | 14,432      ||11.14%         |
+Nov-2021  | 1,378         | 15,810      ||9.55%          |
+Dec-2021  | 1,472         | 17,282      ||9.31%          |
 
 </details>
 </p>
