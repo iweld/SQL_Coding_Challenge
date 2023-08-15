@@ -10,6 +10,7 @@
 
 -- Remove Duplicate Entries
 -- Check for duplicate entries in clean_data.countries
+/*
 SELECT
 	-- Get the columns.
 	country_code_2,
@@ -23,6 +24,7 @@ GROUP BY
 HAVING 
 	-- Only select values that have a count greater than one (multiple entries).
 	count(*) > 1;
+*/
 	
 -- Delete duplicate entries
 
