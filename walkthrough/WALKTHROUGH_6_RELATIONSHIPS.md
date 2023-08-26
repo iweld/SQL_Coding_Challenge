@@ -11,7 +11,7 @@
 
 All of our tables in the `cleaned_data` schema share a common field named `country_code_2`.  We also know that this field is `UNIQUE` in the `cleaned_data.countries` table because there can only be one country code per country.
 
-Using this information, we can make the `cleaned_data.countries` table the parent table and all other tables can have a [One-to-One](https://fmhelp.filemaker.com/help/18/fmp/en/index.html#page/FMP_Help/one-to-one-relationships.html) `FOREIGN KEY` relationship to it.
+Using this information, we can make the `cleaned_data.countries` table the parent table and all other tables can have a [One-to-One](https://fmhelp.filemaker.com/help/18/fmp/en/index.html#page/FMP_Help/one-to-one-relationships.html) or a [One-to-Many](https://help.claris.com/archive/help/18/fmp/en/index.html#page/FMP_Help%2Fone-to-many-relationships.html%23)  `FOREIGN KEY` relationship to it.
 
 First, create a new script and name it `create_relationships.sql`.  Create a query to `ALTER` the `cleaned_data.countries` table and add the `UNIQUE` constraint to the `country_code_2` field.  Then we can `ALTER` the child tables and add a `FOREIGN KEY` constraint.
 
