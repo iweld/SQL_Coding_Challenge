@@ -201,24 +201,24 @@ Italy                 |       542|
   ##### Answer
   ```sql
 SELECT 
-	initcap(co.country_name) AS country_name,
+	initcap(t1.country_name) AS country_name,
 	count(*) AS city_count
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 WHERE
-	co.sub_region = 'southern europe'
+	t1.sub_region = 'southern europe'
 AND
 	-- extract() & date_part() functions allow you to breakdown dates and timestamps to individual years, month, days, hours.....
-	EXTRACT('year' FROM ci.insert_date) = 2021
+	EXTRACT('year' FROM t2.insert_date) = 2021
 GROUP BY 
-	co.country_name
+	t1.country_name
 ORDER BY 
 	-- substring() function returns a specific portion of a string.
-	substring(co.country_name,length(co.country_name),1), city_count;
+	substring(t1.country_name,length(t1.country_name),1), city_count;
   ```
 </details>
 <br />
