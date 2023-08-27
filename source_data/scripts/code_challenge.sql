@@ -314,22 +314,22 @@ Uzbekistan  |  3,035,547     |Odd        |
 
 WITH get_city_rank_cte AS (
 	SELECT
-		co.region,
-		ci.city_name,
-		ci.population AS third_largest_pop,
-		DENSE_RANK() OVER (PARTITION BY co.region ORDER BY ci.population DESC) AS rnk
+		t1.region,
+		t2.city_name,
+		t2.population AS third_largest_pop,
+		DENSE_RANK() OVER (PARTITION BY t1.region ORDER BY t2.population DESC) AS rnk
 	FROM
-		cleaned_data.countries AS co
+		cleaned_data.countries AS t1
 	JOIN 
-		cleaned_data.cities AS ci
+		cleaned_data.cities AS t2
 	ON 
-		co.country_code_2 = ci.country_code_2
+		t1.country_code_2 = t2.country_code_2
 	WHERE 
-		ci.population IS NOT NULL
+		t2.population IS NOT NULL
 	GROUP BY
-		co.region,
-		ci.city_name,
-		ci.population
+		t1.region,
+		t2.city_name,
+		t2.population
 )
 SELECT
 	initcap(region) AS region,
@@ -361,20 +361,20 @@ Oceania |Brisbane |  2,360,241      |
 
 WITH get_ntile_cte AS (
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY country_name) AS rn,
-		country_name,
+		ROW_NUMBER() OVER (ORDER BY t1.country_name) AS rn,
+		t1.country_name,
 		-- ntile() window functions returns groups of data section into 'buckets'.
-		NTILE(3) OVER (ORDER BY country_name) AS nt
+		NTILE(3) OVER (ORDER BY t1.country_name) AS nt
 	FROM
-		cleaned_data.countries AS co
+		cleaned_data.countries AS t1
 	JOIN 
-		cleaned_data.languages AS l
+		cleaned_data.languages AS t2
 	ON
-		co.country_code_2 = l.country_code_2
+		t1.country_code_2 = t2.country_code_2
 	WHERE
-		sub_region = 'western asia'
+		t1.sub_region = 'western asia'
 	AND 
-		l.language = 'arabic'
+		t2.language = 'arabic'
 )
 SELECT
 	rn AS row_id,
@@ -406,35 +406,35 @@ row_id|country_name        |
 
 WITH get_row_values AS (
 	SELECT
-		co.country_name,
-		ci.city_name,
-		ci.population,
+		t1.country_name,
+		t2.city_name,
+		t2.population,
 		-- array_agg() aggregates multiple values and returns them in 'array' format.
-		array_agg(l.LANGUAGE) AS languages,
-		cu.currency_name AS currencies
+		array_agg(t3.LANGUAGE) AS languages,
+		t4.currency_name AS currencies
 	FROM
-		cleaned_data.countries AS co
+		cleaned_data.countries AS t1
 	JOIN
-		cleaned_data.cities AS ci
+		cleaned_data.cities AS t2
 	ON 
-		co.country_code_2 = ci.country_code_2
+		t1.country_code_2 = t2.country_code_2
 	JOIN
-		cleaned_data.languages AS l
+		cleaned_data.languages AS t3
 	ON 
-		co.country_code_2 = l.country_code_2
+		t1.country_code_2 = t3.country_code_2
 	JOIN
-		cleaned_data.currencies AS cu
+		cleaned_data.currencies AS t4
 	ON 
-		co.country_code_2 = cu.country_code_2
+		t1.country_code_2 = t4.country_code_2
 	WHERE
-		sub_region = 'northern africa'
+		t1.sub_region = 'northern africa'
 	AND
-		ci.capital = TRUE
+		t2.capital = TRUE
 	GROUP BY
-		co.country_name,
-		ci.city_name,
-		ci.population,
-		cu.currency_name
+		t1.country_name,
+		t2.city_name,
+		t2.population,
+		t4.currency_name
 )
 SELECT
 	*
@@ -465,16 +465,16 @@ tunisia     |tunis    |   1056247|{french,arabic}                             |t
 
 WITH get_letter_count AS (
 	SELECT
-		ci.city_name,
-		length(ci.city_name) string_length,
+		t1.city_name,
+		length(t1.city_name) string_length,
 		-- regexp_replace() returns a vlue that has been manipulated by a regular expression.
-		length(regexp_replace(ci.city_name, '[aeiou]', '', 'gi')) AS consonant_count
+		length(regexp_replace(t1.city_name, '[aeiou]', '', 'gi')) AS consonant_count
 	FROM
-		cleaned_data.cities AS ci
+		cleaned_data.cities AS t1
 	WHERE
-		ci.insert_date = '2022-04-28'
+		t1.insert_date = '2022-04-28'
 	AND
-		ci.country_code_2 in ('us')
+		t1.country_code_2 in ('us')
 ),
 get_letter_diff AS (
 	SELECT
