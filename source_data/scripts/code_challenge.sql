@@ -520,7 +520,8 @@ jeffersonville |5 (35.71%)      |9 (64.29%)           |
  * 
  */
 
-WITH get_dates AS (
+DROP TABLE IF EXISTS get_dates;
+CREATE TEMP TABLE get_dates AS (
 	SELECT
 		DISTINCT ON (insert_date) insert_date AS insert_date,
 		city_name
@@ -532,24 +533,31 @@ WITH get_dates AS (
 		insert_date BETWEEN '2022-04-01' AND '2022-04-30'
 	ORDER BY
 		insert_date
-),
-get_diff AS (
+);
+
+DROP TABLE IF EXISTS get_diff;
+CREATE TEMP TABLE get_diff AS (
 	SELECT
 		city_name,
 		insert_date,
 		EXTRACT('day' FROM insert_date) - ROW_NUMBER() OVER (ORDER BY insert_date) AS diff
 	FROM
 		get_dates
-),
-get_diff_count AS (
+);
+
+
+DROP TABLE IF EXISTS get_diff_count;
+CREATE TEMP TABLE get_diff_count AS (
 	SELECT
 		city_name,
 		insert_date,
 		count(*) OVER (PARTITION BY diff) AS diff_count
 	FROM
 		get_diff
-),
-get_rank AS (
+);
+
+
+WITH get_rank AS (
 	SELECT
 		DENSE_RANK() OVER (ORDER BY diff_count desc) AS rnk,
 		insert_date,
@@ -672,33 +680,33 @@ $sproc$
 	BEGIN
 		COPY (
 			SELECT
-				ROW_NUMBER() OVER (ORDER BY ci.insert_date) AS row_id,
-				ci.insert_date,
-				co.country_name,
-				ci.city_name,
-				ci.population,
-				array_agg(la.language) AS languages
+				ROW_NUMBER() OVER (ORDER BY t1.insert_date) AS row_id,
+				t1.insert_date,
+				t2.country_name,
+				t1.city_name,
+				t1.population,
+				array_agg(t3.language) AS languages
 			FROM
-				cleaned_data.cities AS ci
+				cleaned_data.cities AS t1
 			JOIN
-				cleaned_data.countries AS co
+				cleaned_data.countries AS t2
 			ON 
-				co.country_code_2 = ci.country_code_2
+				t1.country_code_2 = t2.country_code_2
 			LEFT JOIN
-				cleaned_data.languages AS la
+				cleaned_data.languages AS t3
 			ON 
-				co.country_code_2 = la.country_code_2
+				t2.country_code_2 = t3.country_code_2
 			WHERE
-				co.sub_region = 'latin america and the caribbean'
+				t2.sub_region = 'latin america and the caribbean'
 			AND
-				ci.insert_date IN ('2022-04-09', '2022-04-28', '2022-08-11')
+				t1.insert_date IN ('2022-04-09', '2022-04-28', '2022-08-11')
 			GROUP BY 
-				ci.insert_date,
-				co.country_name,
-				ci.city_name,
-				ci.population
+				t1.insert_date,
+				t2.country_name,
+				t1.city_name,
+				t1.population
 			ORDER BY
-				ci.insert_date
+				t1.insert_date
 			)
 		TO '/var/lib/postgresql/source_data/csv_output/output.csv' DELIMITER ',' CSV HEADER;
 	END
