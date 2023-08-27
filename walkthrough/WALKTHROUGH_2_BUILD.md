@@ -1,4 +1,4 @@
-## Shaker's SQL Code Challenge
+## Basic/Intermediate SQL Code Challenge
 
 **Author**: Jaime M. Shaker <br />
 **Email**: jaime.m.shaker@gmail.com <br />

@@ -1,4 +1,4 @@
-## Shaker's SQL Analytics Code Challenge
+## Basic/Intermediate SQL Analytics Code Challenge
 
 **Author**: Jaime M. Shaker <br />
 **Email**: jaime.m.shaker@gmail.com <br />
