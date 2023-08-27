@@ -598,8 +598,8 @@ most_consecutive_dates|city_name   |
  * 
  */
 
-DROP VIEW IF EXISTS cleaned_data.year_2021_growth;
-CREATE VIEW cleaned_data.year_2021_growth AS (
+DROP VIEW IF EXISTS cleaned_data.view_2021_growth;
+CREATE VIEW cleaned_data.view_2021_growth AS (
 	WITH get_month_count AS (
 		SELECT
 			date_trunc('month', insert_date) as single_month,
@@ -642,7 +642,7 @@ CREATE VIEW cleaned_data.year_2021_growth AS (
 SELECT 
 	*
 FROM 
-	cleaned_data.year_2021_growth;
+	cleaned_data.view_2021_growth;
 
 /*
 		
