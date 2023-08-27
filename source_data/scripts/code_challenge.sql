@@ -49,18 +49,18 @@ Antartica|            1|
  */
 
 SELECT 
-	initcap(co.sub_region) AS sub_region,
+	initcap(t1.sub_region) AS sub_region,
 	count(*) AS city_count
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 GROUP BY
-	sub_region
+	t1.sub_region
 ORDER BY 
-	sub_region;
+	t1.sub_region;
 
 /*
 
@@ -96,21 +96,21 @@ Western Europe                 |      3952|
 
 SELECT 
 	-- upper() returns your string in uppercase.
-	upper(co.country_name) AS country_name,
+	upper(t1.country_name) AS country_name,
 	count(*) AS city_count
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 WHERE
-	co.sub_region = 'northern europe'
+	t1.sub_region = 'northern europe'
 GROUP BY 
-	co.country_name
+	t1.country_name
 ORDER BY 
 	-- length() returns the number or characters in a string including spaces.  
-	length(co.country_name), co.country_name;
+	length(t1.country_name), t1.country_name;
 
 /*
 
