@@ -248,23 +248,23 @@ Singapore        |
   ```sql
 SELECT 
 	-- Distinct will only return unique values
-	DISTINCT initcap(co.country_name) AS country_name
+	DISTINCT initcap(t1.country_name) AS country_name
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 -- Left join will return all matching values from the left table (cleaned_data.countries) and
 -- only the matching values from the right table (cleaned_tables.cities) resulting in NULLS where
 -- there are no matches in the left table.
 LEFT JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 AND
-	ci.insert_date BETWEEN '2021-06-01' AND '2021-10-01'
+	t2.insert_date BETWEEN '2021-06-01' AND '2021-10-01'
 WHERE
-	co.region = 'asia'
+	t1.region = 'asia'
 -- Only return values that did NOT have a match with the countries table.
 AND 
-	ci.country_code_2 IS NULL;
+	t2.country_code_2 IS NULL;
   ```
 </details>
 <br />
@@ -294,23 +294,23 @@ Turkey              |Tut      |  10,161  |            III     |
   ##### Answer
   ```sql
 SELECT 
-	initcap(co.country_name) AS country_name,
-	initcap(ci.city_name) AS city_name,
+	initcap(t1.country_name) AS country_name,
+	initcap(t2.city_name) AS city_name,
 	-- to_char() takes non-string data types and returns them as strings.
-	to_char(ci.population, '999G999') AS population,
-	to_char(length(ci.city_name), 'RN') AS roman_numeral_length
+	to_char(t2.population, '999G999') AS population,
+	to_char(length(t2.city_name), 'RN') AS roman_numeral_length
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 WHERE
-	ci.city_name = reverse(ci.city_name)
+	t2.city_name = reverse(t2.city_name)
 AND
-	co.sub_region = 'western asia'
+	t1.sub_region = 'western asia'
 ORDER BY 
-	length(ci.city_name) DESC, ci.city_name ASC;
+	length(t2.city_name) DESC, t2.city_name ASC;
   ```
 </details>
 <br />
@@ -342,26 +342,26 @@ Uzbekistan  |  3,035,547     |Odd        |
   ##### Answer
   ```sql
 SELECT
-	initcap(country_name) AS country_name,
-	to_char(sum(ci.population), '99G999G999') total_population,
+	initcap(t1.country_name) AS country_name,
+	to_char(sum(t2.population), '99G999G999') total_population,
 	CASE
-		WHEN (sum(ci.population) % 2) = 0
+		WHEN (sum(t2.population) % 2) = 0
 			THEN 'Even'
 		ELSE 
 			'Odd'
 	END AS odd_or_even
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 WHERE
-	co.country_name ILIKE '%stan'
+	t1.country_name ILIKE '%stan'
 AND 
-	EXTRACT('year' FROM ci.insert_date) = 2022
+	EXTRACT('year' FROM t2.insert_date) = 2022
 GROUP BY
-	co.country_name
+	t1.country_name
 ORDER BY 
 	odd_or_even, country_name;
   ```
