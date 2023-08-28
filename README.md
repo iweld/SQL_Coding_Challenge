@@ -76,11 +76,13 @@ Antartica|            1|
   ##### Answer
   ```sql
 SELECT 
+	-- initcap() capitalizes the first letter of every word in a string.
 	initcap(region) AS region,
 	count(*) AS country_count
 FROM
 	cleaned_data.countries
 GROUP BY
+	-- Aggregate functions 'count()' require you to group all column fields.
 	region
 ORDER BY 
 	country_count DESC;
@@ -125,18 +127,18 @@ Western Europe                 |      3952|
   ##### Answer
   ```sql
 SELECT 
-	initcap(co.sub_region) AS sub_region,
+	initcap(t1.sub_region) AS sub_region,
 	count(*) AS city_count
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 GROUP BY
-	sub_region
+	t1.sub_region
 ORDER BY 
-	sub_region;
+	t1.sub_region;
   ```
 </details>
 <br />
@@ -174,20 +176,22 @@ UNITED KINGDOM|      1305|
   ##### Answer
   ```sql
 SELECT 
-	upper(co.country_name) AS country_name,
+	-- upper() returns your string in uppercase.
+	upper(t1.country_name) AS country_name,
 	count(*) AS city_count
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 WHERE
-	co.sub_region = 'northern europe'
+	t1.sub_region = 'northern europe'
 GROUP BY 
-	co.country_name
+	t1.country_name
 ORDER BY 
-	length(co.country_name), co.country_name;
+	-- length() returns the number or characters in a string including spaces.  
+	length(t1.country_name), t1.country_name;
   ```
 </details>
 <br />
@@ -227,27 +231,29 @@ Italy                 |       542|
   ##### Answer
   ```sql
 SELECT 
-	initcap(co.country_name) AS country_name,
+	initcap(t1.country_name) AS country_name,
 	count(*) AS city_count
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 WHERE
-	co.sub_region = 'southern europe'
+	t1.sub_region = 'southern europe'
 AND
-	EXTRACT('year' FROM ci.insert_date) = 2021
+	-- extract() & date_part() functions allow you to breakdown dates and timestamps to individual years, month, days, hours.....
+	EXTRACT('year' FROM t2.insert_date) = 2021
 GROUP BY 
-	co.country_name
+	t1.country_name
 ORDER BY 
-	substring(co.country_name,length(co.country_name),1), city_count;
+	-- substring() function returns a specific portion of a string.
+	substring(t1.country_name,length(t1.country_name),1), city_count;
   ```
 </details>
 <br />
 
-<strong>6. Anti-Join</strong>  
+<strong>6. List Anti-Join</strong>  
 List all of the countries in the region of Asia that did **NOT** have a city with an inserted date from June 2021 through Sept 2021.
 
 <details>
@@ -271,19 +277,24 @@ Singapore        |
   ##### Answer
   ```sql
 SELECT 
-	DISTINCT initcap(co.country_name) AS country_name
+	-- Distinct will only return unique values
+	DISTINCT initcap(t1.country_name) AS country_name
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
+-- Left join will return all matching values from the left table (cleaned_data.countries) and
+-- only the matching values from the right table (cleaned_tables.cities) resulting in NULLS where
+-- there are no matches in the left table.
 LEFT JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 AND
-	ci.insert_date BETWEEN '2021-06-01' AND '2021-10-01'
+	t2.insert_date BETWEEN '2021-06-01' AND '2021-10-01'
 WHERE
-	co.region = 'asia'
+	t1.region = 'asia'
+-- Only return values that did NOT have a match with the countries table.
 AND 
-	ci.country_code_2 IS NULL;
+	t2.country_code_2 IS NULL;
   ```
 </details>
 <br />
@@ -313,22 +324,23 @@ Turkey              |Tut      |  10,161  |            III     |
   ##### Answer
   ```sql
 SELECT 
-	initcap(co.country_name) AS country_name,
-	initcap(ci.city_name) AS city_name,
-	to_char(ci.population, '999G999') AS population,
-	to_char(length(ci.city_name), 'RN') AS roman_numeral_length
+	initcap(t1.country_name) AS country_name,
+	initcap(t2.city_name) AS city_name,
+	-- to_char() takes non-string data types and returns them as strings.
+	to_char(t2.population, '999G999') AS population,
+	to_char(length(t2.city_name), 'RN') AS roman_numeral_length
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 WHERE
-	ci.city_name = reverse(ci.city_name)
+	t2.city_name = reverse(t2.city_name)
 AND
-	co.sub_region = 'western asia'
+	t1.sub_region = 'western asia'
 ORDER BY 
-	length(ci.city_name) DESC, ci.city_name ASC;
+	length(t2.city_name) DESC, t2.city_name ASC;
   ```
 </details>
 <br />
@@ -360,26 +372,26 @@ Uzbekistan  |  3,035,547     |Odd        |
   ##### Answer
   ```sql
 SELECT
-	initcap(country_name) AS country_name,
-	to_char(sum(ci.population), '99G999G999') total_population,
+	initcap(t1.country_name) AS country_name,
+	to_char(sum(t2.population), '99G999G999') total_population,
 	CASE
-		WHEN (sum(ci.population) % 2) = 0
+		WHEN (sum(t2.population) % 2) = 0
 			THEN 'Even'
 		ELSE 
 			'Odd'
 	END AS odd_or_even
 FROM
-	cleaned_data.countries AS co
+	cleaned_data.countries AS t1
 JOIN 
-	cleaned_data.cities AS ci
+	cleaned_data.cities AS t2
 ON 
-	co.country_code_2 = ci.country_code_2
+	t1.country_code_2 = t2.country_code_2
 WHERE
-	co.country_name ILIKE '%stan'
+	t1.country_name ILIKE '%stan'
 AND 
-	EXTRACT('year' FROM ci.insert_date) = 2022
+	EXTRACT('year' FROM t2.insert_date) = 2022
 GROUP BY
-	co.country_name
+	t1.country_name
 ORDER BY 
 	odd_or_even, country_name;
   ```
@@ -412,22 +424,22 @@ Oceania |Brisbane |  2,360,241      |
   ```sql
 WITH get_city_rank_cte AS (
 	SELECT
-		co.region,
-		ci.city_name,
-		ci.population AS third_largest_pop,
-		DENSE_RANK() OVER (PARTITION BY co.region ORDER BY ci.population DESC) AS rnk
+		t1.region,
+		t2.city_name,
+		t2.population AS third_largest_pop,
+		DENSE_RANK() OVER (PARTITION BY t1.region ORDER BY t2.population DESC) AS rnk
 	FROM
-		cleaned_data.countries AS co
+		cleaned_data.countries AS t1
 	JOIN 
-		cleaned_data.cities AS ci
+		cleaned_data.cities AS t2
 	ON 
-		co.country_code_2 = ci.country_code_2
+		t1.country_code_2 = t2.country_code_2
 	WHERE 
-		ci.population IS NOT NULL
+		t2.population IS NOT NULL
 	GROUP BY
-		co.region,
-		ci.city_name,
-		ci.population
+		t1.region,
+		t2.city_name,
+		t2.population
 )
 SELECT
 	initcap(region) AS region,
@@ -465,21 +477,24 @@ row_id|country_name        |
   ##### Answer
   ```sql
 WITH get_ntile_cte AS (
-	SELECT 
-		country_name,
-		NTILE(3) OVER (ORDER BY country_name) AS nt
+	SELECT
+		ROW_NUMBER() OVER (ORDER BY t1.country_name) AS rn,
+		t1.country_name,
+		-- ntile() window functions returns groups of data section into 'buckets'.
+		NTILE(3) OVER (ORDER BY t1.country_name) AS nt
 	FROM
-		cleaned_data.countries AS co
+		cleaned_data.countries AS t1
 	JOIN 
-		cleaned_data.languages AS l
+		cleaned_data.languages AS t2
 	ON
-		co.country_code_2 = l.country_code_2
+		t1.country_code_2 = t2.country_code_2
 	WHERE
-		sub_region = 'western asia'
+		t1.sub_region = 'western asia'
 	AND 
-		l.language = 'arabic'
+		t2.language = 'arabic'
 )
 SELECT
+	rn AS row_id,
 	country_name
 FROM
 	get_ntile_cte
@@ -516,35 +531,35 @@ tunisia     |tunis    |   1056247|{french,arabic}                             |t
   ```sql
 WITH get_row_values AS (
 	SELECT
-		co.country_name,
-		ci.city_name,
-		ci.population,
+		t1.country_name,
+		t2.city_name,
+		t2.population,
 		-- array_agg() aggregates multiple values and returns them in 'array' format.
-		array_agg(l.LANGUAGE) AS languages,
-		cu.currency_name AS currencies
+		array_agg(t3.LANGUAGE) AS languages,
+		t4.currency_name AS currencies
 	FROM
-		cleaned_data.countries AS co
+		cleaned_data.countries AS t1
 	JOIN
-		cleaned_data.cities AS ci
+		cleaned_data.cities AS t2
 	ON 
-		co.country_code_2 = ci.country_code_2
+		t1.country_code_2 = t2.country_code_2
 	JOIN
-		cleaned_data.languages AS l
+		cleaned_data.languages AS t3
 	ON 
-		co.country_code_2 = l.country_code_2
+		t1.country_code_2 = t3.country_code_2
 	JOIN
-		cleaned_data.currencies AS cu
+		cleaned_data.currencies AS t4
 	ON 
-		co.country_code_2 = cu.country_code_2
+		t1.country_code_2 = t4.country_code_2
 	WHERE
-		sub_region = 'northern africa'
+		t1.sub_region = 'northern africa'
 	AND
-		ci.capital = TRUE
+		t2.capital = TRUE
 	GROUP BY
-		co.country_name,
-		ci.city_name,
-		ci.population,
-		cu.currency_name
+		t1.country_name,
+		t2.city_name,
+		t2.population,
+		t4.currency_name
 )
 SELECT
 	*
@@ -586,15 +601,16 @@ jeffersonville |5 (35.71%)      |9 (64.29%)           |
   ```sql
 WITH get_letter_count AS (
 	SELECT
-		ci.city_name,
-		length(ci.city_name) string_length,
-		length(regexp_replace(ci.city_name, '[aeiou]', '', 'gi')) AS consonant_count
+		t1.city_name,
+		length(t1.city_name) string_length,
+		-- regexp_replace() returns a vlue that has been manipulated by a regular expression.
+		length(regexp_replace(t1.city_name, '[aeiou]', '', 'gi')) AS consonant_count
 	FROM
-		cleaned_data.cities AS ci
+		cleaned_data.cities AS t1
 	WHERE
-		ci.insert_date = '2022-04-28'
+		t1.insert_date = '2022-04-28'
 	AND
-		country_code_2 in ('us')
+		t1.country_code_2 in ('us')
 ),
 get_letter_diff AS (
 	SELECT
@@ -641,7 +657,8 @@ most_consecutive_dates|city_name   |
 
   ##### Answer
   ```sql
-WITH get_dates AS (
+DROP TABLE IF EXISTS get_dates;
+CREATE TEMP TABLE get_dates AS (
 	SELECT
 		DISTINCT ON (insert_date) insert_date AS insert_date,
 		city_name
@@ -653,24 +670,31 @@ WITH get_dates AS (
 		insert_date BETWEEN '2022-04-01' AND '2022-04-30'
 	ORDER BY
 		insert_date
-),
-get_diff AS (
+);
+
+DROP TABLE IF EXISTS get_diff;
+CREATE TEMP TABLE get_diff AS (
 	SELECT
 		city_name,
 		insert_date,
 		EXTRACT('day' FROM insert_date) - ROW_NUMBER() OVER (ORDER BY insert_date) AS diff
 	FROM
 		get_dates
-),
-get_diff_count AS (
+);
+
+
+DROP TABLE IF EXISTS get_diff_count;
+CREATE TEMP TABLE get_diff_count AS (
 	SELECT
 		city_name,
 		insert_date,
 		count(*) OVER (PARTITION BY diff) AS diff_count
 	FROM
 		get_diff
-),
-get_rank AS (
+);
+
+
+WITH get_rank AS (
 	SELECT
 		DENSE_RANK() OVER (ORDER BY diff_count desc) AS rnk,
 		insert_date,
@@ -729,8 +753,8 @@ Dec-2021  | 1,472         | 17,282      |+9.31%          |
 
   ##### Answer
   ```sql
-DROP VIEW IF EXISTS cleaned_data.year_2021_growth;
-CREATE VIEW cleaned_data.year_2021_growth AS (
+DROP VIEW IF EXISTS cleaned_data.view_2021_growth;
+CREATE VIEW cleaned_data.view_2021_growth AS (
 	WITH get_month_count AS (
 		SELECT
 			date_trunc('month', insert_date) as single_month,
@@ -773,7 +797,7 @@ CREATE VIEW cleaned_data.year_2021_growth AS (
 SELECT 
 	*
 FROM 
-	cleaned_data.year_2021_growth;
+	cleaned_data.view_2021_growth;
   ```
 </details>
 <br />
@@ -781,14 +805,14 @@ FROM
 <strong>15. Stored Procedure to CSV</strong>  
 Create and call a stored procedure that lists a unique row id number, insert date, county name, city name, population and languages spoken for countries in the Latin America and the Caribbean sub-region that were insert on either '2022-04-09', '2022-04-28' or '2022-08-11'.
 
- Order by the insert date and output the results (including headers) to a CSV file located in [/source_data/csv_output/](./source_data/csv_output/) . 
+ Order by the insert date and output the results (including headers) to a CSV file located in [/source_data/csv_output/](../source_data/csv_output/) . 
 
 <details>
   <summary>Click to expand expected results!</summary>
 
   ##### Expected Results:
 
-Results located in [/source_data/csv_output/output.csv](./source_data/csv_output/output.csv)
+Results located in [/source_data/csv_output/output.csv](../source_data/csv_output/output.csv)
 
 </details>
 </p>
@@ -805,33 +829,33 @@ $sproc$
 	BEGIN
 		COPY (
 			SELECT
-				ROW_NUMBER() OVER (ORDER BY ci.insert_date) AS row_id,
-				ci.insert_date,
-				co.country_name,
-				ci.city_name,
-				ci.population,
-				array_agg(la.language) AS languages
+				ROW_NUMBER() OVER (ORDER BY t1.insert_date) AS row_id,
+				t1.insert_date,
+				t2.country_name,
+				t1.city_name,
+				t1.population,
+				array_agg(t3.language) AS languages
 			FROM
-				cleaned_data.cities AS ci
+				cleaned_data.cities AS t1
 			JOIN
-				cleaned_data.countries AS co
+				cleaned_data.countries AS t2
 			ON 
-				co.country_code_2 = ci.country_code_2
+				t1.country_code_2 = t2.country_code_2
 			LEFT JOIN
-				cleaned_data.languages AS la
+				cleaned_data.languages AS t3
 			ON 
-				co.country_code_2 = la.country_code_2
+				t2.country_code_2 = t3.country_code_2
 			WHERE
-				co.sub_region = 'latin america and the caribbean'
+				t2.sub_region = 'latin america and the caribbean'
 			AND
-				ci.insert_date IN ('2022-04-09', '2022-04-28', '2022-08-11')
+				t1.insert_date IN ('2022-04-09', '2022-04-28', '2022-08-11')
 			GROUP BY 
-				ci.insert_date,
-				co.country_name,
-				ci.city_name,
-				ci.population
+				t1.insert_date,
+				t2.country_name,
+				t1.city_name,
+				t1.population
 			ORDER BY
-				ci.insert_date
+				t1.insert_date
 			)
 		TO '/var/lib/postgresql/source_data/csv_output/output.csv' DELIMITER ',' CSV HEADER;
 	END
