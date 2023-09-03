@@ -48,7 +48,7 @@ Using the CSV files located in `source_data/csv_data`, create your new SQL datab
 
 * Add a numeric, auto-incrementing Primary Key to every table.
 * In the `countries` table, add the column `created_on` with the current date.
-* Create a one-to-one relationship with the countries table as the parent table.
+* Create a one-to-one and one-to-many relationship with the countries table as the parent table.
 
 <strong>2.  List Regions and Country Count</strong>  
 List all of the regions and the total number of countries in each region.  Order by country count in descending order and capitalize the region name.

@@ -16,7 +16,7 @@ Using the CSV files located in `source_data/csv_data`, create your new SQL datab
 
 * Add a numeric, auto-incrementing Primary Key to every table.
 * In the `countries` table, add the column `created_on` with the current date.
-* Create a one-to-one relationship with the countries table as the parent table.
+* Create a one-to-one and one-to-many relationship with the countries table as the parent table.
 
 :exclamation: This question has already been completed with the ETL process. :exclamation:
 
