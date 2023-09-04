@@ -31,6 +31,7 @@ This repository contains all of the necessary files, datasets and directories fo
 * Directories and Files details:
 	* `README.md`: This is the file your are currently reading.
 	* `.gitignore`: The files and directories listed in this file will be ignored by Git/GitHub.
+	* `docker-compose.yaml`: With this yaml (**Y**et **A**nother **M**arkup **L**anguage) file you can define the services (Postgres/MySQL/Python...) and with a single command, you can spin everything up or tear it all down.
 	* `source_data/csv_data`: This is the location of the CSV files needed to copy into our database.
 	* `db`: In the current directory, create an empty directory named '`db`'.  Although this directory is ignored by Git/GitHub, PostgreSQL requires a directory to keep data persistent if you are running a Docker container.  There will be no need to alter any of the files that reside there once the container starts running.
 	* `images`: This is the location of the image files displayed in this repository.
